@@ -1,47 +1,29 @@
 package servicos.gratitude.crud_gratitude_servicos.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
-
-import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUsuario;
 
-    @NotBlank(message = "Nome Inválido")
-    @Length(min = 3,max = 255 ,message = "Nome Inválido")
     private String nome;
-
-    @NotBlank(message = "Cpf Inválido")
-    @CPF(message = "Cpf Inválido")
     private String cpf;
-
-    @NotBlank(message = "Email Inválido")
-    @Email(message = "Email Inválido")
     private String email;
-
-    @NotBlank
     private String senha;
-
-    @NotBlank
-    @Length(min = 3,max = 255)
     private String cargo;
 
-
-    public Integer getId() {
-        return id;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -83,5 +65,4 @@ public class Usuario {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-
 }
