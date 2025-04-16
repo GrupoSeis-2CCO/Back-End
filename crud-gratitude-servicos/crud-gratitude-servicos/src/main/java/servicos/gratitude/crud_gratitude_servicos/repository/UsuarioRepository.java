@@ -4,5 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    
+    Boolean existsByEmailAndCpf(String email, String cpf);
+
 }
