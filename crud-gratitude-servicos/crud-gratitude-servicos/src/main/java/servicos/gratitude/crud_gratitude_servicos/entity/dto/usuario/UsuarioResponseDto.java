@@ -1,33 +1,14 @@
-package servicos.gratitude.crud_gratitude_servicos.entity;
-
-import jakarta.persistence.*;
+package servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario;
 
 import java.time.LocalDate;
 
-@Entity
-public class Usuario {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUsuario;
-
+public class UsuarioResponseDto {
     private String nome;
     private String cpf;
     private String email;
-    private String senha;
     private LocalDate dataEntrada;
     private LocalDate ultimoAcesso;
-
-    @OneToOne
-    private Cargo fkCargo;
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    private String cargo;
 
     public String getNome() {
         return nome;
@@ -53,14 +34,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public LocalDate getDataEntrada() {
         return dataEntrada;
     }
@@ -77,11 +50,11 @@ public class Usuario {
         this.ultimoAcesso = ultimoAcesso;
     }
 
-    public Cargo getFkCargo() {
-        return fkCargo;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setFkCargo(Cargo fkCargo) {
-        this.fkCargo = fkCargo;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 }

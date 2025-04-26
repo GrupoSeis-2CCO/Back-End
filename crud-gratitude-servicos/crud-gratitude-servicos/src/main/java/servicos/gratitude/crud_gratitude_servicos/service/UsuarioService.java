@@ -2,41 +2,45 @@ package servicos.gratitude.crud_gratitude_servicos.service;
 
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.UsuarioRequestDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.UsuarioResponseDto;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateSenhaDto;
 import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
 
-    private final UsuarioRepository repository;
+    private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository repository) {
-        this.repository = repository;
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
 
-    public Boolean existsByEmailAndCpf(UsuarioRequestDto request) {
-        return repository.existsByEmailAndCpf(request.getEmail(), request.getCpf());
+    public Usuario cadastrar(Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
 
-    public List<Usuario> listarUsuarios() {
-        return repository.findAll();
+    public List<Usuario> listar(){
+        return usuarioRepository.findAll();
     }
 
-    public void cadastrarUsuario(Usuario usuario) {
-        repository.save(usuario);
+    public Optional<Usuario> findById(Integer id){
+        return usuarioRepository.findById(id);
     }
 
-    public Boolean existsById(Integer id) {
-        return repository.existsById(id);
+    public Usuario atualizarDados(Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
 
-    public void atualizarSenha(String senha, Integer idUsuario) {
-        Usuario usuarioParaAtualizar = repository.findById(idUsuario).get();
-        usuarioParaAtualizar.setSenha(senha);
-        repository.save(usuarioParaAtualizar);
+    public void deletarUsuario(Integer id){
+        usuarioRepository.deleteById(id);
     }
 
+    public Usuario atualizarAcesso(Integer id, LocalDate ultimoAcesso){
+        Optional<Usuario> usuario = findById(id);
+        usuario.get().setUltimoAcesso(ultimoAcesso);
+        return usuarioRepository.save(usuario.get());
+    }
 }
