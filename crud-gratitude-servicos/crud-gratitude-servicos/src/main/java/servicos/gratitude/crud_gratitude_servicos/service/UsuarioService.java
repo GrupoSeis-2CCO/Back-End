@@ -43,4 +43,8 @@ public class UsuarioService {
         usuario.get().setUltimoAcesso(ultimoAcesso);
         return usuarioRepository.save(usuario.get());
     }
+
+    public List<Usuario> pesquisaPorNome(String nome){
+        return usuarioRepository.findByNomeContainsIgnoreCase(nome);
+    }
 }

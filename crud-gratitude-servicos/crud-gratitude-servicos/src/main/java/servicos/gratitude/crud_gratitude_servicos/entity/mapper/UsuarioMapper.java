@@ -4,7 +4,6 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateSenhaDto;
 
 import java.time.LocalDate;
@@ -54,16 +53,6 @@ public class UsuarioMapper {
         }
 
         return responses;
-    }
-
-    static public Usuario toEntity(Integer id, UsuarioUpdateDto update){
-        Usuario usuario = new Usuario();
-
-        usuario.setNome(update.getNome());
-        usuario.setEmail(update.getEmail());
-        usuario.setIdUsuario(id);
-
-        return usuario;
     }
 
     static public Usuario toEntity(Integer id, UsuarioUpdateSenhaDto senha){

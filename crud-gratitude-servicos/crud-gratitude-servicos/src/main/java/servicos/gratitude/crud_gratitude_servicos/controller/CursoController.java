@@ -49,7 +49,7 @@ public class CursoController {
             @Valid @RequestBody CursoRequestDto request,
             @PathVariable Integer id
     ){
-        if (!cursoService.cursoExistsById(id)){
+        if (!cursoService.existsById(id)){
             return ResponseEntity.status(404).build();
         }
 
@@ -64,7 +64,7 @@ public class CursoController {
     public ResponseEntity<CursoResponseDto> atualizarOculto(
             @PathVariable Integer id
     ){
-        if (!cursoService.cursoExistsById(id)){
+        if (!cursoService.existsById(id)){
             return ResponseEntity.status(404).build();
         }
 
@@ -79,7 +79,7 @@ public class CursoController {
     public ResponseEntity deletarCurso(
         @PathVariable Integer id
     ){
-        if (!cursoService.cursoExistsById(id)){
+        if (!cursoService.existsById(id)){
             return ResponseEntity.status(404).build();
         }
 

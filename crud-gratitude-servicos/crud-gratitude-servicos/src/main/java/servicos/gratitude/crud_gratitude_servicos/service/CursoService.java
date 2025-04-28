@@ -24,7 +24,7 @@ public class CursoService {
         return cursoRepository.findAll();
     }
 
-    public Boolean cursoExistsById(Integer id){
+    public Boolean existsById(Integer id){
         return cursoRepository.existsById(id);
     }
 

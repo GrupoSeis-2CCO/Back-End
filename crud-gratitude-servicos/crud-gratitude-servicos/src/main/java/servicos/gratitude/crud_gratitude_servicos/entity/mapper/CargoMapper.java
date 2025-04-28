@@ -9,10 +9,10 @@ import java.util.List;
 
 public class CargoMapper {
 
-    static public Cargo toEntity(CargoUpdateDto request){
+    static public Cargo toEntity(CargoUpdateDto update){
         Cargo cargo = new Cargo();
 
-        cargo.setNomeCargo(request.getNomeCargo());
+        cargo.setNomeCargo(update.getNomeCargo());
 
         return cargo;
     }

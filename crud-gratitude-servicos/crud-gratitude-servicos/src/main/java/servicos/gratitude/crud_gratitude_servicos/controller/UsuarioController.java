@@ -1,22 +1,20 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
+import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateSenhaDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.mapper.UsuarioMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
+import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,10 +24,12 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final CargoService cargoService;
+    private final CursoService cursoService;
 
-    public UsuarioController(UsuarioService usuarioService, CargoService cargoService) {
+    public UsuarioController(UsuarioService usuarioService, CargoService cargoService, CursoService cursoService) {
         this.usuarioService = usuarioService;
         this.cargoService = cargoService;
+        this.cursoService = cursoService;
     }
 
     @PostMapping
@@ -51,7 +51,7 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDto>> listarUsuarios(){
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = usuarioService.listar();
 
         if (usuarios.isEmpty()){
             return ResponseEntity.status(204).build();
@@ -74,24 +74,6 @@ public class UsuarioController {
         }
 
         return ResponseEntity.status(404).build();
-    }
-
-    @PutMapping("/novosDados/{id}")
-    public ResponseEntity<UsuarioResponseDto> atualizarDadosUsuario(
-            @Valid @RequestBody UsuarioUpdateDto update,
-            @PathVariable Integer id
-    ){
-        Optional<Usuario> usuario = usuarioService.findById(id);
-
-        if(usuario.isEmpty()){
-            return ResponseEntity.status(404).build();
-        }
-
-        Usuario dadosNovos = UsuarioMapper.toEntity(id, update);
-        Usuario usuarioAtualizado = usuarioService.atualizarDados(dadosNovos);
-        UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
-
-        return ResponseEntity.status(200).body(response);
     }
 
     @PutMapping("/novaSenha/{id}")
@@ -144,5 +126,18 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(response);
     }
 
-    // TODO: CONTINUAR POR AQUI
+    @GetMapping("/pesquisa-por-nome")
+    public ResponseEntity<List<UsuarioResponseDto>> pesquisarPorNome(
+            @RequestParam String nome
+    ){
+        List<Usuario> usuarios = usuarioService.pesquisaPorNome(nome);
+
+        if (usuarios.isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+
+        List<UsuarioResponseDto> responses = UsuarioMapper.toEntity(usuarios);
+
+        return ResponseEntity.status(200).body(responses);
+    }
 }

@@ -55,4 +55,25 @@ public class FeedbackController {
 
         return ResponseEntity.status(200).body(responses);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<FeedbackResponseDto>> listarFeedbacksPorCurso(
+            @PathVariable Integer idCurso
+    ){
+        Optional<Curso> curso = cursoService.findById(idCurso);
+
+        if (curso.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+
+        List<Feedback> feedbacks = feedbackService.findByCurso(curso.get());
+
+        if (feedbacks.isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+
+        List<FeedbackResponseDto> responses = FeedbackMapper.toEntity(feedbacks);
+
+        return ResponseEntity.status(200).body(responses);
+    }
 }
