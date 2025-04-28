@@ -1,10 +1,12 @@
 package servicos.gratitude.crud_gratitude_servicos.service;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Extensao;
 import servicos.gratitude.crud_gratitude_servicos.repository.ExtensaoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExtensaoService {
@@ -27,4 +29,6 @@ public class ExtensaoService {
         extensao.setIdExtensao(id);
         return extensaoRepository.save(extensao);
     }
+
+
 }
