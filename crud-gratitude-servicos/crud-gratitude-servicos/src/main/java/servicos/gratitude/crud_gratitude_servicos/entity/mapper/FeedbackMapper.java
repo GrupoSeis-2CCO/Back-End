@@ -13,7 +13,7 @@ public class FeedbackMapper {
     static public Feedback toEntity(FeedbackRequestDto request, Curso cursoFeedback){
         Feedback feedback = new Feedback();
 
-        feedback.setFk_curso(cursoFeedback);
+        feedback.setFkCurso(cursoFeedback);
         feedback.setEstrelas(request.getEstrelas());
         feedback.setMotivo(request.getMotivo());
 
@@ -23,8 +23,8 @@ public class FeedbackMapper {
     static public FeedbackResponseDto toEntity(Feedback feedback){
         FeedbackResponseDto response = new FeedbackResponseDto();
 
-        response.setIdCurso(feedback.getFk_curso().getIdCurso());
-        response.setNomeCurso(feedback.getFk_curso().getTitulo_curso());
+        response.setIdCurso(feedback.getFkCurso().getId_curso());
+        response.setNomeCurso(feedback.getFkCurso().getTitulo_curso());
         response.setEstrelas(feedback.getEstrelas());
         response.setMotivo(feedback.getMotivo());
 
@@ -37,8 +37,8 @@ public class FeedbackMapper {
         for (Feedback feedbackDaVez : feedbacks) {
             FeedbackResponseDto response = new FeedbackResponseDto();
 
-            response.setIdCurso(feedbackDaVez.getFk_curso().getIdCurso());
-            response.setNomeCurso(feedbackDaVez.getFk_curso().getTitulo_curso());
+            response.setIdCurso(feedbackDaVez.getFkCurso().getId_curso());
+            response.setNomeCurso(feedbackDaVez.getFkCurso().getTitulo_curso());
             response.setEstrelas(feedbackDaVez.getEstrelas());
             response.setMotivo(feedbackDaVez.getMotivo());
 

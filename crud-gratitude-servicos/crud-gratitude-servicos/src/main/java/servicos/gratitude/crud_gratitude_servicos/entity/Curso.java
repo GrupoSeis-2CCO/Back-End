@@ -12,7 +12,7 @@ public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCurso;
+    private Integer id_curso;
 
     private String titulo_curso;
     private String descricao;
@@ -20,12 +20,12 @@ public class Curso implements Serializable {
     private Boolean ocultado;
     private Integer duracao_estimada;
 
-    public Integer getIdCurso() {
-        return idCurso;
+    public Integer getId_curso() {
+        return id_curso;
     }
 
-    public void setIdCurso(Integer idCurso) {
-        this.idCurso = idCurso;
+    public void setId_curso(Integer id_curso) {
+        this.id_curso = id_curso;
     }
 
     public String getTitulo_curso() {

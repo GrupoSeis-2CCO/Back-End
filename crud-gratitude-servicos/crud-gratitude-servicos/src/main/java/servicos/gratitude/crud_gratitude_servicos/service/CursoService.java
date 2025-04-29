@@ -29,7 +29,7 @@ public class CursoService {
     }
 
     public Curso atualizarCurso(Integer id, Curso curso){
-        curso.setIdCurso(id);
+        curso.setId_curso(id);
         return cursoRepository.save(curso);
     }
 

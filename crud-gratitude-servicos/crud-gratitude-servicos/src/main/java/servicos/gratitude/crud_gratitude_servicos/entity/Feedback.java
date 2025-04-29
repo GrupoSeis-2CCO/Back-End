@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -7,17 +8,18 @@ import jakarta.persistence.Id;
 public class Feedback {
 
     @Id
-    private Curso fk_curso;
+    @Column(name = "fk_curso")
+    private Curso fkCurso;
 
     private Integer estrelas;
     private String motivo;
 
-    public Curso getFk_curso() {
-        return fk_curso;
+    public Curso getFkCurso() {
+        return fkCurso;
     }
 
-    public void setFk_curso(Curso fk_curso) {
-        this.fk_curso = fk_curso;
+    public void setFkCurso(Curso fkCurso) {
+        this.fkCurso = fkCurso;
     }
 
     public Integer getEstrelas() {
