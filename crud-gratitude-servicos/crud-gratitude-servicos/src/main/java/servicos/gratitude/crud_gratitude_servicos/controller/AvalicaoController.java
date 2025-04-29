@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Avaliacao;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.avaliacao.AvaliacaoAcertosDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.avaliacao.AvaliacaoRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.avaliacao.AvaliacaoResponseDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.mapper.AvaliacaoMapper;
@@ -41,5 +42,21 @@ public class AvalicaoController {
         AvaliacaoResponseDto response = AvaliacaoMapper.toEntity(avaliacaoCadastrada);
 
         return ResponseEntity.status(201).body(response);
+    }
+
+    @PutMapping("/atualizar-acertos/{id}")
+    public ResponseEntity<AvaliacaoResponseDto> atualizarAcertosMinimos(
+            @Valid @RequestBody AvaliacaoAcertosDto novoMinimo,
+            @PathVariable Integer id
+    ){
+        if (!avaliacaoService.existsById(id)){
+            return ResponseEntity.status(404).build();
+        }
+
+        Avaliacao avaliacao = AvaliacaoMapper.toEntity(novoMinimo, id);
+        Avaliacao avaliacaoAtualizada = avaliacaoService.atualizarAcertosMinimos(avaliacao);
+        AvaliacaoResponseDto response = AvaliacaoMapper.toEntity(avaliacaoAtualizada);
+
+        return ResponseEntity.status(200).body(response);
     }
 }

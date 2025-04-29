@@ -14,7 +14,7 @@ import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,7 +119,7 @@ public class UsuarioController {
             return ResponseEntity.status(404).build();
         }
 
-        LocalDate horarioAcesso = LocalDate.now();
+        LocalDateTime horarioAcesso = LocalDateTime.now();
         Usuario usuarioAtualizado = usuarioService.atualizarAcesso(id, horarioAcesso);
         UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
 

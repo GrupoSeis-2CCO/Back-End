@@ -2,7 +2,7 @@ package servicos.gratitude.crud_gratitude_servicos.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Usuario {
@@ -15,8 +15,8 @@ public class Usuario {
     private String cpf;
     private String email;
     private String senha;
-    private LocalDate dataEntrada;
-    private LocalDate ultimoAcesso;
+    private LocalDateTime dataEntrada;
+    private LocalDateTime ultimoAcesso;
 
     @OneToOne
     private Cargo fkCargo;
@@ -61,19 +61,19 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public LocalDate getDataEntrada() {
+    public LocalDateTime getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(LocalDate dataEntrada) {
+    public void setDataEntrada(LocalDateTime dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
-    public LocalDate getUltimoAcesso() {
+    public LocalDateTime getUltimoAcesso() {
         return ultimoAcesso;
     }
 
-    public void setUltimoAcesso(LocalDate ultimoAcesso) {
+    public void setUltimoAcesso(LocalDateTime ultimoAcesso) {
         this.ultimoAcesso = ultimoAcesso;
     }
 

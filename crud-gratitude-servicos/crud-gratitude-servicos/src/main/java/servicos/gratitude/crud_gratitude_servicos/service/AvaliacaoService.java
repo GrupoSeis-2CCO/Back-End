@@ -16,4 +16,12 @@ public class AvaliacaoService {
     public Avaliacao cadastrarAvaliacao(Avaliacao avaliacao){
         return avaliacaoRepository.save(avaliacao);
     }
+
+    public Boolean existsById(Integer id){
+        return avaliacaoRepository.existsById(id);
+    }
+
+    public Avaliacao atualizarAcertosMinimos(Avaliacao avaliacao){
+        return avaliacaoRepository.save(avaliacao);
+    }
 }

@@ -10,11 +10,20 @@ import java.util.List;
 
 public class AvaliacaoMapper {
 
-    static public Avaliacao toEntity(Curso curso){
+    static public Avaliacao toEntity(Curso id){
         Avaliacao avaliacao = new Avaliacao();
 
-        avaliacao.setFkCurso(curso);
+        avaliacao.setFkCurso(id);
         avaliacao.setAcertosMinimos(0);
+
+        return avaliacao;
+    }
+
+    static public Avaliacao toEntity(AvaliacaoAcertosDto acertos, Integer id){
+        Avaliacao avaliacao = new Avaliacao();
+
+        avaliacao.setIdAvaliacao(id);
+        avaliacao.setAcertosMinimos(acertos.getAcertosMinimos());
 
         return avaliacao;
     }

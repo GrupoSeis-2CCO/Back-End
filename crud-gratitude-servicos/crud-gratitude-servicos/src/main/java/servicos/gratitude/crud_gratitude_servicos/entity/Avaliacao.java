@@ -9,11 +9,10 @@ public class Avaliacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAvaliacao;
 
-    @Id
+    private Integer acertosMinimos;
+
     @OneToOne
     private Curso fkCurso;
-
-    private Integer acertosMinimos;
 
     public Integer getIdAvaliacao() {
         return idAvaliacao;
