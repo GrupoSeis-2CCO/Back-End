@@ -33,6 +33,13 @@ public class UsuarioMapper {
         response.setNome(usuario.getNome());
         response.setEmail(usuario.getEmail());
         response.setDataEntrada(usuario.getData_entrada());
+
+        if (usuario.getUltimo_acesso() == null) {
+            response.setUltimoAcesso(usuario.getData_entrada());
+        } else {
+            response.setUltimoAcesso(usuario.getUltimo_acesso());
+        }
+
         response.setCargo(usuario.getFk_cargo().getNome_cargo());
 
         return response;
@@ -50,17 +57,29 @@ public class UsuarioMapper {
             response.setDataEntrada(usuarioDaVez.getData_entrada());
             response.setCargo(usuarioDaVez.getFk_cargo().getNome_cargo());
 
+            if (usuarioDaVez.getUltimo_acesso() == null) {
+                response.setUltimoAcesso(usuarioDaVez.getData_entrada());
+            } else {
+                response.setUltimoAcesso(usuarioDaVez.getUltimo_acesso());
+            }
+
             responses.add(response);
         }
 
         return responses;
     }
 
-    static public Usuario toEntity(Integer id, UsuarioUpdateSenhaDto senha){
+    static public Usuario toEntity(Usuario usuarioAntigo, UsuarioUpdateSenhaDto senha){
         Usuario usuario = new Usuario();
 
         usuario.setSenha(senha.getSenha());
-        usuario.setIdUsuario(id);
+        usuario.setIdUsuario(usuarioAntigo.getIdUsuario());
+        usuario.setCpf(usuarioAntigo.getCpf());
+        usuario.setEmail(usuarioAntigo.getEmail());
+        usuario.setData_entrada(usuarioAntigo.getData_entrada());
+        usuario.setNome(usuarioAntigo.getNome());
+        usuario.setFk_cargo(usuarioAntigo.getFk_cargo());
+        usuario.setUltimo_acesso(usuarioAntigo.getUltimo_acesso());
 
         return usuario;
     }
