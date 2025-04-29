@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
-import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioResponseDto;
@@ -15,6 +14,7 @@ import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,7 +119,7 @@ public class UsuarioController {
             return ResponseEntity.status(404).build();
         }
 
-        LocalDateTime horarioAcesso = LocalDateTime.now();
+        LocalDateTime horarioAcesso = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         Usuario usuarioAtualizado = usuarioService.atualizarAcesso(id, horarioAcesso);
         UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
 

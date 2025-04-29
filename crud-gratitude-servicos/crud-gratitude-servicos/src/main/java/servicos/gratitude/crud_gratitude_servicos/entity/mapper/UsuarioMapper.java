@@ -9,6 +9,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpda
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class UsuarioMapper {
         usuario.setCpf(request.getCpf());
         usuario.setEmail(request.getEmail());
         usuario.setNome(request.getNome());
-        usuario.setDataEntrada(LocalDateTime.now());
+        usuario.setDataEntrada(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         usuario.setSenha("#Gs" + request.getCpf());
         usuario.setFkCargo(cargo);
 
