@@ -11,23 +11,23 @@ import java.io.Serializable;
 public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCargo;
+    private Integer id_cargo;
 
-    private String nomeCargo;
+    private String nome_cargo;
 
-    public Integer getIdCargo() {
-        return idCargo;
+    public Integer getId_cargo() {
+        return id_cargo;
     }
 
-    public void setIdCargo(Integer idCargo) {
-        this.idCargo = idCargo;
+    public void setId_cargo(Integer id_cargo) {
+        this.id_cargo = id_cargo;
     }
 
-    public String getNomeCargo() {
-        return nomeCargo;
+    public String getNome_cargo() {
+        return nome_cargo;
     }
 
-    public void setNomeCargo(String nomeCargo) {
-        this.nomeCargo = nomeCargo;
+    public void setNome_cargo(String nome_cargo) {
+        this.nome_cargo = nome_cargo;
     }
 }

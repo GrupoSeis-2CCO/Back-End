@@ -7,17 +7,17 @@ import jakarta.persistence.Id;
 public class Feedback {
 
     @Id
-    private Curso fkCurso;
+    private Curso fk_curso;
 
     private Integer estrelas;
     private String motivo;
 
-    public Curso getFkCurso() {
-        return fkCurso;
+    public Curso getFk_curso() {
+        return fk_curso;
     }
 
-    public void setFkCurso(Curso fkCurso) {
-        this.fkCurso = fkCurso;
+    public void setFk_curso(Curso fk_curso) {
+        this.fk_curso = fk_curso;
     }
 
     public Integer getEstrelas() {

@@ -20,7 +20,7 @@ public class ExtensaoMapper {
     static public ExtensaoResponseDto toEntity(Extensao extensao){
         ExtensaoResponseDto response = new ExtensaoResponseDto();
 
-        response.setTipoExtensao(extensao.getTipoExtensao());
+        response.setTipoExtensao(extensao.getTipo_extensao());
         response.setIcone(extensao.getIcone());
 
         return response;
@@ -32,7 +32,7 @@ public class ExtensaoMapper {
         for (Extensao extensaoDaVez : extencoes) {
             ExtensaoResponseDto response = new ExtensaoResponseDto();
 
-            response.setTipoExtensao(extensaoDaVez.getTipoExtensao());
+            response.setTipoExtensao(extensaoDaVez.getTipo_extensao());
             response.setIcone(extensaoDaVez.getIcone());
 
             responses.add(response);

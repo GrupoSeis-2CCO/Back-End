@@ -6,9 +6,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioRequ
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioResponseDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateSenhaDto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +19,9 @@ public class UsuarioMapper {
         usuario.setCpf(request.getCpf());
         usuario.setEmail(request.getEmail());
         usuario.setNome(request.getNome());
-        usuario.setDataEntrada(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        usuario.setData_entrada(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         usuario.setSenha("#Gs" + request.getCpf());
-        usuario.setFkCargo(cargo);
+        usuario.setFk_cargo(cargo);
 
         return usuario;
     }
@@ -34,8 +32,8 @@ public class UsuarioMapper {
         response.setCpf(usuario.getCpf());
         response.setNome(usuario.getNome());
         response.setEmail(usuario.getEmail());
-        response.setDataEntrada(usuario.getDataEntrada());
-        response.setCargo(usuario.getFkCargo().getNomeCargo());
+        response.setDataEntrada(usuario.getData_entrada());
+        response.setCargo(usuario.getFk_cargo().getNome_cargo());
 
         return response;
     }
@@ -49,8 +47,8 @@ public class UsuarioMapper {
             response.setCpf(usuarioDaVez.getCpf());
             response.setNome(usuarioDaVez.getNome());
             response.setEmail(usuarioDaVez.getEmail());
-            response.setDataEntrada(usuarioDaVez.getDataEntrada());
-            response.setCargo(usuarioDaVez.getFkCargo().getNomeCargo());
+            response.setDataEntrada(usuarioDaVez.getData_entrada());
+            response.setCargo(usuarioDaVez.getFk_cargo().getNome_cargo());
 
             responses.add(response);
         }

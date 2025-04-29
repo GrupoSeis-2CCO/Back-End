@@ -15,11 +15,11 @@ public class Usuario {
     private String cpf;
     private String email;
     private String senha;
-    private LocalDateTime dataEntrada;
-    private LocalDateTime ultimoAcesso;
+    private LocalDateTime data_entrada;
+    private LocalDateTime ultimo_acesso;
 
-    @OneToOne
-    private Cargo fkCargo;
+    @ManyToOne
+    private Cargo fk_cargo;
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -61,27 +61,27 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public LocalDateTime getDataEntrada() {
-        return dataEntrada;
+    public LocalDateTime getData_entrada() {
+        return data_entrada;
     }
 
-    public void setDataEntrada(LocalDateTime dataEntrada) {
-        this.dataEntrada = dataEntrada;
+    public void setData_entrada(LocalDateTime data_entrada) {
+        this.data_entrada = data_entrada;
     }
 
-    public LocalDateTime getUltimoAcesso() {
-        return ultimoAcesso;
+    public LocalDateTime getUltimo_acesso() {
+        return ultimo_acesso;
     }
 
-    public void setUltimoAcesso(LocalDateTime ultimoAcesso) {
-        this.ultimoAcesso = ultimoAcesso;
+    public void setUltimo_acesso(LocalDateTime ultimo_acesso) {
+        this.ultimo_acesso = ultimo_acesso;
     }
 
-    public Cargo getFkCargo() {
-        return fkCargo;
+    public Cargo getFk_cargo() {
+        return fk_cargo;
     }
 
-    public void setFkCargo(Cargo fkCargo) {
-        this.fkCargo = fkCargo;
+    public void setFk_cargo(Cargo fk_cargo) {
+        this.fk_cargo = fk_cargo;
     }
 }

@@ -25,7 +25,7 @@ public class CargoService {
     }
 
     public Cargo atualizarNomeCargo(Integer id, Cargo cargo){
-        cargo.setIdCargo(id);
+        cargo.setId_cargo(id);
         return cargoRepository.save(cargo);
     }
 

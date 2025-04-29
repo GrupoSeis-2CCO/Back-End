@@ -13,8 +13,8 @@ public class AvaliacaoMapper {
     static public Avaliacao toEntity(Curso id){
         Avaliacao avaliacao = new Avaliacao();
 
-        avaliacao.setFkCurso(id);
-        avaliacao.setAcertosMinimos(0);
+        avaliacao.setFk_curso(id);
+        avaliacao.setAcertos_minimos(0);
 
         return avaliacao;
     }
@@ -22,8 +22,8 @@ public class AvaliacaoMapper {
     static public Avaliacao toEntity(AvaliacaoAcertosDto acertos, Integer id){
         Avaliacao avaliacao = new Avaliacao();
 
-        avaliacao.setIdAvaliacao(id);
-        avaliacao.setAcertosMinimos(acertos.getAcertosMinimos());
+        avaliacao.setId_avaliacao(id);
+        avaliacao.setAcertos_minimos(acertos.getAcertosMinimos());
 
         return avaliacao;
     }
@@ -31,8 +31,8 @@ public class AvaliacaoMapper {
     static public AvaliacaoResponseDto toEntity(Avaliacao avaliacao){
         AvaliacaoResponseDto response = new AvaliacaoResponseDto();
 
-        response.setNomeCurso(avaliacao.getFkCurso().getTituloCurso());
-        response.setAcertosMinimos(avaliacao.getAcertosMinimos());
+        response.setNomeCurso(avaliacao.getFk_curso().getTitulo_curso());
+        response.setAcertosMinimos(avaliacao.getAcertos_minimos());
 
         return response;
     }
@@ -43,8 +43,8 @@ public class AvaliacaoMapper {
         for (Avaliacao avaliacaoDaVez : avaliacoes) {
             AvaliacaoResponseDto response = new AvaliacaoResponseDto();
 
-            response.setNomeCurso(avaliacaoDaVez.getFkCurso().getTituloCurso());
-            response.setAcertosMinimos(avaliacaoDaVez.getAcertosMinimos());
+            response.setNomeCurso(avaliacaoDaVez.getFk_curso().getTitulo_curso());
+            response.setAcertosMinimos(avaliacaoDaVez.getAcertos_minimos());
 
             responses.add(response);
         }

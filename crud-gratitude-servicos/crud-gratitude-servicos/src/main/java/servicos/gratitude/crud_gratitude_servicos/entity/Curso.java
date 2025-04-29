@@ -14,11 +14,11 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCurso;
 
-    private String tituloCurso;
+    private String titulo_curso;
     private String descricao;
     private String imagem;
     private Boolean ocultado;
-    private Integer duracaoEstimada;
+    private Integer duracao_estimada;
 
     public Integer getIdCurso() {
         return idCurso;
@@ -28,12 +28,12 @@ public class Curso implements Serializable {
         this.idCurso = idCurso;
     }
 
-    public String getTituloCurso() {
-        return tituloCurso;
+    public String getTitulo_curso() {
+        return titulo_curso;
     }
 
-    public void setTituloCurso(String tituloCurso) {
-        this.tituloCurso = tituloCurso;
+    public void setTitulo_curso(String titulo_curso) {
+        this.titulo_curso = titulo_curso;
     }
 
     public String getDescricao() {
@@ -60,11 +60,11 @@ public class Curso implements Serializable {
         this.ocultado = ocultado;
     }
 
-    public Integer getDuracaoEstimada() {
-        return duracaoEstimada;
+    public Integer getDuracao_estimada() {
+        return duracao_estimada;
     }
 
-    public void setDuracaoEstimada(Integer duracaoEstimada) {
-        this.duracaoEstimada = duracaoEstimada;
+    public void setDuracao_estimada(Integer duracao_estimada) {
+        this.duracao_estimada = duracao_estimada;
     }
 }

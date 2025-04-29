@@ -39,7 +39,7 @@ public class UsuarioService {
 
     public Usuario atualizarAcesso(Integer id, LocalDateTime ultimoAcesso){
         Optional<Usuario> usuario = findById(id);
-        usuario.get().setUltimoAcesso(ultimoAcesso);
+        usuario.get().setUltimo_acesso(ultimoAcesso);
         return usuarioRepository.save(usuario.get());
     }
 

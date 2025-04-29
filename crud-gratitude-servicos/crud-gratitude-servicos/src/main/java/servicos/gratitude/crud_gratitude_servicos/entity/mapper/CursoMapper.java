@@ -12,10 +12,10 @@ public class CursoMapper {
     static public Curso toEntity(CursoRequestDto request){
         Curso curso = new Curso();
 
-        curso.setTituloCurso(request.getTituloCurso());
+        curso.setTitulo_curso(request.getTituloCurso());
         curso.setDescricao(request.getDescricao());
         curso.setImagem(request.getImagem());
-        curso.setDuracaoEstimada(request.getDuracaoEstimada());
+        curso.setDuracao_estimada(request.getDuracaoEstimada());
         curso.setOcultado(true);
 
         return curso;
@@ -24,10 +24,10 @@ public class CursoMapper {
     static public CursoResponseDto toEntity(Curso curso){
         CursoResponseDto response = new CursoResponseDto();
 
-        response.setTituloCurso(curso.getTituloCurso());
+        response.setTituloCurso(curso.getTitulo_curso());
         response.setDescricao(curso.getDescricao());
         response.setImagem(curso.getImagem());
-        response.setDuracaoEstimada(curso.getDuracaoEstimada());
+        response.setDuracaoEstimada(curso.getDuracao_estimada());
         response.setOcultado(curso.getOcultado());
 
         return response;
@@ -39,10 +39,10 @@ public class CursoMapper {
         for (Curso cursoDaVez : cursos) {
             CursoResponseDto response = new CursoResponseDto();
 
-            response.setTituloCurso(cursoDaVez.getTituloCurso());
+            response.setTituloCurso(cursoDaVez.getTitulo_curso());
             response.setDescricao(cursoDaVez.getDescricao());
             response.setImagem(cursoDaVez.getImagem());
-            response.setDuracaoEstimada(cursoDaVez.getDuracaoEstimada());
+            response.setDuracaoEstimada(cursoDaVez.getDuracao_estimada());
             response.setOcultado(cursoDaVez.getOcultado());
 
             responses.add(response);

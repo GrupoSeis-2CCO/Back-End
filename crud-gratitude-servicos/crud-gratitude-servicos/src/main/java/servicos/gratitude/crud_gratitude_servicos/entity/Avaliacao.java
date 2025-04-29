@@ -7,34 +7,34 @@ public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAvaliacao;
+    private Integer id_avaliacao;
 
-    private Integer acertosMinimos;
+    private Integer acertos_minimos;
 
     @OneToOne
-    private Curso fkCurso;
+    private Curso fk_curso;
 
-    public Integer getIdAvaliacao() {
-        return idAvaliacao;
+    public Integer getId_avaliacao() {
+        return id_avaliacao;
     }
 
-    public void setIdAvaliacao(Integer idAvaliacao) {
-        this.idAvaliacao = idAvaliacao;
+    public void setId_avaliacao(Integer id_avaliacao) {
+        this.id_avaliacao = id_avaliacao;
     }
 
-    public Curso getFkCurso() {
-        return fkCurso;
+    public Curso getFk_curso() {
+        return fk_curso;
     }
 
-    public void setFkCurso(Curso fkCurso) {
-        this.fkCurso = fkCurso;
+    public void setFk_curso(Curso fk_curso) {
+        this.fk_curso = fk_curso;
     }
 
-    public Integer getAcertosMinimos() {
-        return acertosMinimos;
+    public Integer getAcertos_minimos() {
+        return acertos_minimos;
     }
 
-    public void setAcertosMinimos(Integer acertosMinimos) {
-        this.acertosMinimos = acertosMinimos;
+    public void setAcertos_minimos(Integer acertos_minimos) {
+        this.acertos_minimos = acertos_minimos;
     }
 }

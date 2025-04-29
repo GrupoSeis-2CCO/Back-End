@@ -8,15 +8,15 @@ public class Material {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Integer idMaterial;
+    private  Integer id_material;
 
-    private String  nomeMaterial;
+    private String nome_material;
 
-    private String  descricaoMaterial;
+    private String descricao_material;
 
     private  Boolean  oculto;
 
-    private String urlMaterial;
+    private String url_material;
 
     @ManyToOne
     private Curso fkCurso;
@@ -24,29 +24,29 @@ public class Material {
     @OneToOne
     private Extensao extesao;
 
-    public Integer getIdMaterial() {
-        return idMaterial;
+    public Integer getId_material() {
+        return id_material;
     }
 
-    public void setIdMaterial(Integer idMaterial) {
-        this.idMaterial = idMaterial;
+    public void setId_material(Integer id_material) {
+        this.id_material = id_material;
     }
 
-    public String getNomeMaterial() {
-        return nomeMaterial;
+    public String getNome_material() {
+        return nome_material;
     }
 
     public String setNomeMaterial() {
-        this.nomeMaterial = nomeMaterial;
+        this.nome_material = nome_material;
         return null;
     }
 
-    public String getDescricaoMaterial() {
-        return descricaoMaterial;
+    public String getDescricao_material() {
+        return descricao_material;
     }
 
-    public void setDescricaoMaterial(String descricaoMaterial) {
-        this.descricaoMaterial = descricaoMaterial;
+    public void setDescricao_material(String descricao_material) {
+        this.descricao_material = descricao_material;
     }
 
     public Boolean getOculto() {
@@ -57,12 +57,12 @@ public class Material {
         this.oculto = oculto;
     }
 
-    public String getUrlMaterial() {
-        return urlMaterial;
+    public String getUrl_material() {
+        return url_material;
     }
 
-    public void setUrlMaterial(String urlMaterial) {
-        this.urlMaterial = urlMaterial;
+    public void setUrl_material(String url_material) {
+        this.url_material = url_material;
     }
 
     public Curso getFkCurso() {

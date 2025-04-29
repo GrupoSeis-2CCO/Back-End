@@ -10,25 +10,25 @@ public class Extensao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idExtensao;
+    private Integer id_extensao;
 
-    private String tipoExtensao;
+    private String tipo_extensao;
     private String icone;
 
-    public Integer getIdExtensao() {
-        return idExtensao;
+    public Integer getId_extensao() {
+        return id_extensao;
     }
 
-    public void setIdExtensao(Integer idExtensao) {
-        this.idExtensao = idExtensao;
+    public void setId_extensao(Integer id_extensao) {
+        this.id_extensao = id_extensao;
     }
 
-    public String getTipoExtensao() {
-        return tipoExtensao;
+    public String getTipo_extensao() {
+        return tipo_extensao;
     }
 
-    public void setTipoExtensao(String tipoExtensao) {
-        this.tipoExtensao = tipoExtensao;
+    public void setTipo_extensao(String tipo_extensao) {
+        this.tipo_extensao = tipo_extensao;
     }
 
     public String getIcone() {

@@ -12,7 +12,7 @@ public class CargoMapper {
     static public Cargo toEntity(CargoUpdateDto update){
         Cargo cargo = new Cargo();
 
-        cargo.setNomeCargo(update.getNomeCargo());
+        cargo.setNome_cargo(update.getNomeCargo());
 
         return cargo;
     }
@@ -20,7 +20,7 @@ public class CargoMapper {
     static public CargoResponseDto toEntity(Cargo cargo){
         CargoResponseDto response = new CargoResponseDto();
 
-        response.setNomeCargo(cargo.getNomeCargo());
+        response.setNomeCargo(cargo.getNome_cargo());
 
         return response;
     }
@@ -31,7 +31,7 @@ public class CargoMapper {
         for (Cargo cargoDaVez : cargos) {
             CargoResponseDto response = new CargoResponseDto();
 
-            response.setNomeCargo(cargoDaVez.getNomeCargo());
+            response.setNomeCargo(cargoDaVez.getNome_cargo());
 
             responses.add(response);
         }
