@@ -12,8 +12,7 @@ public class Avaliacao {
     private Integer acertos_minimos;
 
     @OneToOne
-    @Column(name = "fk_curso")
-    private Curso fkCurso;
+    private Curso fk_curso;
 
     public Integer getId_avaliacao() {
         return id_avaliacao;
@@ -24,11 +23,11 @@ public class Avaliacao {
     }
 
     public Curso getFk_curso() {
-        return fkCurso;
+        return fk_curso;
     }
 
-    public void setFk_curso(Curso fkCurso) {
-        this.fkCurso = Avaliacao.this.fkCurso;
+    public void setFk_curso(Curso fk_curso) {
+        this.fk_curso = fk_curso;
     }
 
     public Integer getAcertos_minimos() {
