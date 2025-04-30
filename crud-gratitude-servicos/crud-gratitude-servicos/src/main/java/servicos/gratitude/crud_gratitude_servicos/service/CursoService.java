@@ -38,8 +38,9 @@ public class CursoService {
     }
 
     public Curso atualizarOculto(Integer id, Boolean ocultado){
-        cursoRepository.findById(id).get().setOcultado(ocultado);
-        return cursoRepository.findById(id).get();
+        Curso curso = cursoRepository.findById(id).get();
+        curso.setOcultado(ocultado);
+        return cursoRepository.save(curso);
     }
 
     public void deletarCurso(Integer id){
