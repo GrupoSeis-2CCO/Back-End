@@ -87,7 +87,7 @@ public class UsuarioController {
             return ResponseEntity.status(404).build();
         }
 
-        Usuario senhaNova = UsuarioMapper.toEntity(id, senha);
+        Usuario senhaNova = UsuarioMapper.toEntity(usuario.get(), senha);
         Usuario usuarioAtualizado = usuarioService.atualizarDados(senhaNova);
         UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
 
