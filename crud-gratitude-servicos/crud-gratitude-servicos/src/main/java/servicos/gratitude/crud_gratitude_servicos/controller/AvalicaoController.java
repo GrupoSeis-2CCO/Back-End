@@ -12,7 +12,6 @@ import servicos.gratitude.crud_gratitude_servicos.entity.mapper.AvaliacaoMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.AvaliacaoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

@@ -12,7 +12,8 @@ public class Avaliacao {
     private Integer acertos_minimos;
 
     @OneToOne
-    private Curso fk_curso;
+    @Column(name = "fk_curso")
+    private Curso fkCurso;
 
     public Integer getId_avaliacao() {
         return id_avaliacao;
