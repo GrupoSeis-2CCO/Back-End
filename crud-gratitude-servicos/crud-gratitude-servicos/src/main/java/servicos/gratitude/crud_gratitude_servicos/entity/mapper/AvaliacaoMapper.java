@@ -10,23 +10,15 @@ import java.util.List;
 
 public class AvaliacaoMapper {
 
-    static public Avaliacao toEntity(Curso id){
+    static public Avaliacao toEntity(Curso curso){
         Avaliacao avaliacao = new Avaliacao();
 
-        avaliacao.setFk_curso(id);
+        avaliacao.setFk_curso(curso);
         avaliacao.setAcertos_minimos(0);
 
         return avaliacao;
     }
 
-    static public Avaliacao toEntity(AvaliacaoAcertosDto acertos, Integer id){
-        Avaliacao avaliacao = new Avaliacao();
-
-        avaliacao.setId_avaliacao(id);
-        avaliacao.setAcertos_minimos(acertos.getAcertosMinimos());
-
-        return avaliacao;
-    }
 
     static public AvaliacaoResponseDto toEntity(Avaliacao avaliacao){
         AvaliacaoResponseDto response = new AvaliacaoResponseDto();
@@ -50,5 +42,14 @@ public class AvaliacaoMapper {
         }
 
         return responses;
+    }
+
+    static public Avaliacao toEntity(Avaliacao avaliacaoAntiga, AvaliacaoAcertosDto acertosMinimos){
+        Avaliacao avaliacaoNova = new Avaliacao();
+
+        avaliacaoNova.setFk_curso(avaliacaoAntiga.getFk_curso());
+        avaliacaoNova.setAcertos_minimos(acertosMinimos.getAcertosMinimos());
+
+        return avaliacaoNova;
     }
 }

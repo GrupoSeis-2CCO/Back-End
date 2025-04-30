@@ -48,12 +48,14 @@ public class AvalicaoController {
             @Valid @RequestBody AvaliacaoAcertosDto novoMinimo,
             @PathVariable Integer id
     ){
-        if (!avaliacaoService.existsById(id)){
+        Optional<Avaliacao> avaliacao = avaliacaoService.findById(id);
+
+        if (!avaliacao.isEmpty()){
             return ResponseEntity.status(404).build();
         }
 
-        Avaliacao avaliacao = AvaliacaoMapper.toEntity(novoMinimo, id);
-        Avaliacao avaliacaoAtualizada = avaliacaoService.atualizarAcertosMinimos(avaliacao);
+        Avaliacao avaliacaoParaAtualizar = AvaliacaoMapper.toEntity(avaliacao.get(), novoMinimo);
+        Avaliacao avaliacaoAtualizada = avaliacaoService.atualizarAcertosMinimos(avaliacaoParaAtualizar, id);
         AvaliacaoResponseDto response = AvaliacaoMapper.toEntity(avaliacaoAtualizada);
 
         return ResponseEntity.status(200).body(response);
