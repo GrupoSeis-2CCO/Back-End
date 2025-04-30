@@ -24,11 +24,11 @@ public class Avaliacao {
     }
 
     public Curso getFk_curso() {
-        return fk_curso;
+        return fkCurso;
     }
 
-    public void setFk_curso(Curso fk_curso) {
-        this.fk_curso = fk_curso;
+    public void setFk_curso(Curso fkCurso) {
+        this.fkCurso = Avaliacao.this.fkCurso;
     }
 
     public Integer getAcertos_minimos() {
