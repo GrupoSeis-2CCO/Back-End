@@ -1,5 +1,12 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
+@Tag(name = "Usuários", description = "Gerencia todas as operações relacionadas aos usuários")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -33,12 +41,20 @@ public class UsuarioController {
     }
 
     @PostMapping
+    @Operation(summary = "Cadastrar Usuário", description = "Cadastra um novo usuário no sistema.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Cargo não encontrado", content = @Content)
+    })
     public ResponseEntity<UsuarioResponseDto> cadastrarUsuario(
+            @Parameter(description = "Dados do usuário a ser cadastrado", required = true)
             @Valid @RequestBody UsuarioRequestDto request
-    ){
+    ) {
         Optional<Cargo> cargoUsuario = cargoService.findById(request.getIdCargo());
 
-        if (cargoUsuario.isEmpty()){
+        if (cargoUsuario.isEmpty()) {
             return ResponseEntity.status(404).build();
         }
 
@@ -50,10 +66,17 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioResponseDto>> listarUsuarios(){
+    @Operation(summary = "Listar Usuários", description = "Retorna uma lista de todos os usuários cadastrados.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "204", description = "Nenhum usuário encontrado", content = @Content)
+    })
+    public ResponseEntity<List<UsuarioResponseDto>> listarUsuarios() {
         List<Usuario> usuarios = usuarioService.listar();
 
-        if (usuarios.isEmpty()){
+        if (usuarios.isEmpty()) {
             return ResponseEntity.status(204).build();
         }
 
@@ -63,27 +86,40 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar Usuário por ID", description = "Obtém detalhes de um usuário específico pelo ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário encontrado",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content)
+    })
     public ResponseEntity<UsuarioResponseDto> verUsuario(
+            @Parameter(description = "ID do usuário a ser buscado", required = true)
             @PathVariable Integer id
-    ){
+    ) {
         Optional<Usuario> usuario = usuarioService.findById(id);
 
-        if (usuario.isPresent()){
-            UsuarioResponseDto response = UsuarioMapper.toEntity(usuario.get());
-            return ResponseEntity.status(200).body(response);
-        }
-
-        return ResponseEntity.status(404).build();
+        return usuario.map(value -> ResponseEntity.status(200).body(UsuarioMapper.toEntity(value)))
+                .orElseGet(() -> ResponseEntity.status(404).build());
     }
 
     @PutMapping("/novaSenha/{id}")
+    @Operation(summary = "Atualizar Senha do Usuário", description = "Atualiza a senha de um usuário existente.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Senha atualizada com sucesso",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content)
+    })
     public ResponseEntity<UsuarioResponseDto> atualizarSenhaUsuario(
+            @Parameter(description = "Nova senha do usuário", required = true)
             @Valid @RequestBody UsuarioUpdateSenhaDto senha,
+            @Parameter(description = "ID do usuário a ser atualizado", required = true)
             @PathVariable Integer id
-    ){
+    ) {
         Optional<Usuario> usuario = usuarioService.findById(id);
 
-        if(usuario.isEmpty()){
+        if (usuario.isEmpty()) {
             return ResponseEntity.status(404).build();
         }
 
@@ -92,52 +128,5 @@ public class UsuarioController {
         UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
 
         return ResponseEntity.status(200).body(response);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deletarUsuario(
-            @PathVariable Integer id
-    ){
-        Optional<Usuario> usuario = usuarioService.findById(id);
-
-        if(usuario.isEmpty()){
-            return ResponseEntity.status(404).build();
-        }
-
-        usuarioService.deletarUsuario(id);
-
-        return ResponseEntity.status(200).build();
-    }
-
-    @PutMapping("/acesso/{id}")
-    public ResponseEntity<UsuarioResponseDto> atualizarAcesso(
-            @PathVariable Integer id
-    ){
-        Optional<Usuario> usuario = usuarioService.findById(id);
-
-        if(usuario.isEmpty()){
-            return ResponseEntity.status(404).build();
-        }
-
-        LocalDateTime horarioAcesso = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-        Usuario usuarioAtualizado = usuarioService.atualizarAcesso(id, horarioAcesso);
-        UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
-
-        return ResponseEntity.status(200).body(response);
-    }
-
-    @GetMapping("/pesquisa-por-nome")
-    public ResponseEntity<List<UsuarioResponseDto>> pesquisarPorNome(
-            @RequestParam String nome
-    ){
-        List<Usuario> usuarios = usuarioService.pesquisaPorNome(nome);
-
-        if (usuarios.isEmpty()){
-            return ResponseEntity.status(204).build();
-        }
-
-        List<UsuarioResponseDto> responses = UsuarioMapper.toEntity(usuarios);
-
-        return ResponseEntity.status(200).body(responses);
     }
 }

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 
 public class CargoUpdateDto {
 
-    @NotBlank
+    @NotBlank(message = "O nome do cargo não pode estar em branco.")
     @Size(max = 50)
     private String nomeCargo;
 

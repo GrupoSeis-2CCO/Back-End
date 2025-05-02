@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.curso.CursoRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.curso.CursoResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.mapper.CursoMapper;
+import servicos.gratitude.crud_gratitude_servicos.entity.mapper.CursoMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class CursoController {
         return ResponseEntity.status(200).body(responses);
     }
 
-    @PutMapping("/atualizar-dados/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<CursoResponseDto> atualizarCurso(
             @Valid @RequestBody CursoRequestDto request,
             @PathVariable Integer id
@@ -60,7 +60,7 @@ public class CursoController {
         return ResponseEntity.status(200).body(response);
     }
 
-    @PutMapping("/atualizar-oculto/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CursoResponseDto> atualizarOculto(
             @PathVariable Integer id
     ){
