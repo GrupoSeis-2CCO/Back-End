@@ -5,6 +5,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Extensao;
 import servicos.gratitude.crud_gratitude_servicos.repository.ExtensaoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExtensaoService {
@@ -28,5 +29,7 @@ public class ExtensaoService {
         return extensaoRepository.save(extensao);
     }
 
-
+    public Optional<Extensao> findById(Integer id){
+        return extensaoRepository.findById(id);
+    }
 }

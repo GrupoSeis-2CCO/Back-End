@@ -10,7 +10,7 @@ public class MaterialResponseDto {
     private String urlMaterial;
     private String tituloCurso;
     private String extensao;
-
+    private Boolean ocultado;
 
     public String getNomeMaterial() {
         return nomeMaterial;
@@ -50,5 +50,13 @@ public class MaterialResponseDto {
 
     public void setExtensao(String extensao) {
         this.extensao = extensao;
+    }
+
+    public Boolean getOcultado() {
+        return ocultado;
+    }
+
+    public void setOcultado(Boolean ocultado) {
+        this.ocultado = ocultado;
     }
 }

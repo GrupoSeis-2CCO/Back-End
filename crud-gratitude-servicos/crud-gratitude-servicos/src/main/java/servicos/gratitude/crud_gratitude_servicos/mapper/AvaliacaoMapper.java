@@ -1,4 +1,4 @@
-package servicos.gratitude.crud_gratitude_servicos.entity.mapper;
+package servicos.gratitude.crud_gratitude_servicos.mapper;
 
 import servicos.gratitude.crud_gratitude_servicos.entity.Avaliacao;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;

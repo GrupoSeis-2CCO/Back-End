@@ -8,7 +8,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioResponseDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateSenhaDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.mapper.UsuarioMapper;
+import servicos.gratitude.crud_gratitude_servicos.mapper.UsuarioMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;

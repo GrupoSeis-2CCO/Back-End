@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Extensao;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.extensao.ExtensaoUpdateDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.extensao.ExtensaoResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.mapper.ExtensaoMapper;
+import servicos.gratitude.crud_gratitude_servicos.mapper.ExtensaoMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.ExtensaoService;
 
 import java.util.List;

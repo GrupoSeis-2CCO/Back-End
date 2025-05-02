@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.cargo.CargoUpdateDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.cargo.CargoResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.mapper.CargoMapper;
+import servicos.gratitude.crud_gratitude_servicos.mapper.CargoMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
 
 import java.util.List;

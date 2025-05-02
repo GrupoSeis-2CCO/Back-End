@@ -10,9 +10,6 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Extensao;
 
 public class MaterialRequestDto {
 
-
-
-
     @NotBlank
     @Size(max = 50)
     private String  nomeMaterial;
@@ -25,29 +22,51 @@ public class MaterialRequestDto {
     @NotBlank
     private String urlMaterial;
 
+    @NotNull
+    @Min(1)
+    private Integer fk_extensao;
 
+    @NotNull
+    @Min(1)
+    private Integer fk_curso;
 
-    public String getNomeMaterial() {
+    public @NotBlank @Size(max = 50) String getNomeMaterial() {
         return nomeMaterial;
     }
 
-    public void setNomeMaterial(String nomeMaterial) {
+    public void setNomeMaterial(@NotBlank @Size(max = 50) String nomeMaterial) {
         this.nomeMaterial = nomeMaterial;
     }
 
-    public String getDescricaoMaterial() {
+    public @NotBlank @Size(max = 100) String getDescricaoMaterial() {
         return descricaoMaterial;
     }
 
-    public void setDescricaoMaterial(String descricaoMaterial) {
+    public void setDescricaoMaterial(@NotBlank @Size(max = 100) String descricaoMaterial) {
         this.descricaoMaterial = descricaoMaterial;
     }
 
-    public String getUrlMaterial() {
+    public @URL @NotBlank String getUrlMaterial() {
         return urlMaterial;
     }
 
-    public void setUrlMaterial(String urlMaterial) {
+    public void setUrlMaterial(@URL @NotBlank String urlMaterial) {
         this.urlMaterial = urlMaterial;
+    }
+
+    public @NotNull @Min(1) Integer getFk_extensao() {
+        return fk_extensao;
+    }
+
+    public void setFk_extensao(@NotNull @Min(1) Integer fk_extensao) {
+        this.fk_extensao = fk_extensao;
+    }
+
+    public @NotNull @Min(1) Integer getFk_curso() {
+        return fk_curso;
+    }
+
+    public void setFk_curso(@NotNull @Min(1) Integer fk_curso) {
+        this.fk_curso = fk_curso;
     }
 }

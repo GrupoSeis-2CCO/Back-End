@@ -19,10 +19,11 @@ public class Material {
     private String url_material;
 
     @ManyToOne
+    @Column(name = "fk_curso")
     private Curso fkCurso;
 
     @OneToOne
-    private Extensao extesao;
+    private Extensao extensao;
 
     public Integer getId_material() {
         return id_material;
@@ -36,9 +37,8 @@ public class Material {
         return nome_material;
     }
 
-    public String setNomeMaterial() {
+    public void setNome_material(String nome_material) {
         this.nome_material = nome_material;
-        return null;
     }
 
     public String getDescricao_material() {
@@ -73,11 +73,11 @@ public class Material {
         this.fkCurso = fkCurso;
     }
 
-    public Extensao getExtesao() {
-        return extesao;
+    public Extensao getExtensao() {
+        return extensao;
     }
 
-    public void setExtesao(Extensao extesao) {
-        this.extesao = extesao;
+    public void setExtensao(Extensao extensao) {
+        this.extensao = extensao;
     }
 }

@@ -7,7 +7,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.Feedback;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.feedback.FeedbackRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.feedback.FeedbackResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.mapper.FeedbackMapper;
+import servicos.gratitude.crud_gratitude_servicos.mapper.FeedbackMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import servicos.gratitude.crud_gratitude_servicos.service.FeedbackService;
 
