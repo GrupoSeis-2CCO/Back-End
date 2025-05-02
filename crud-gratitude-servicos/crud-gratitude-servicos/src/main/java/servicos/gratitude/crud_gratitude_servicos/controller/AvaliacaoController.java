@@ -16,7 +16,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.avaliacao.AvaliacaoAcertosDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.avaliacao.AvaliacaoRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.avaliacao.AvaliacaoResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.mapper.AvaliacaoMapper;
+import servicos.gratitude.crud_gratitude_servicos.mapper.AvaliacaoMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.AvaliacaoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.curso.CursoRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.curso.CursoResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.mapper.CursoMapper;
+import servicos.gratitude.crud_gratitude_servicos.mapper.CursoMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import java.util.List;
 
