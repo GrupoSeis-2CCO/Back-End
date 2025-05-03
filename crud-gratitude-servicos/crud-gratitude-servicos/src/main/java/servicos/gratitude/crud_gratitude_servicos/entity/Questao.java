@@ -8,9 +8,9 @@ public class Questao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_questao;
 
-    @Id
+
     @ManyToOne
-    @Column(name = "fk_avaliacao")
+    @JoinColumn(name = "fk_avaliacao")
     private Avaliacao fkAvaliacao;
 
     private String enunciado;

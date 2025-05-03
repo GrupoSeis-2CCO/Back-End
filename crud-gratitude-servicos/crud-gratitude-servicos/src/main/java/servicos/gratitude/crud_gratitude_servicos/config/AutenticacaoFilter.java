@@ -15,7 +15,8 @@ import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService.Autenti
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AutenticacaoFilter extends OncePerRequestFilter {
 

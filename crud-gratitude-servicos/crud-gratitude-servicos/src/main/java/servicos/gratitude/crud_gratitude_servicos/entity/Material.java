@@ -19,7 +19,7 @@ public class Material {
     private String url_material;
 
     @ManyToOne
-    @Column(name = "fk_curso")
+    @JoinColumn(name = "fk_curso")
     private Curso fkCurso;
 
     @OneToOne

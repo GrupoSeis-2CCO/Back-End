@@ -39,6 +39,7 @@ public class UsuarioController {
     }
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Cadastrar Usuário", description = "Cadastra um novo usuário no sistema.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso",
@@ -64,6 +65,7 @@ public class UsuarioController {
     }
 
     @GetMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Usuários", description = "Retorna uma lista de todos os usuários cadastrados.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso",
@@ -130,13 +132,13 @@ public class UsuarioController {
 
 //    UsuarioController JWT
 
-    @PostMapping
-    @SecurityRequirement(name = "Bearer")
-    public ResponseEntity<Void> criar (@RequestBody @Valid UsuarioCriacaoDTO usuarioCriacaoDTO){
-        final Usuario novoUsuario = UsuarioMapper.of(usuarioCriacaoDTO);
-        this.usuarioService.criar(novoUsuario);
-        return ResponseEntity.status(201).build();
-    }
+//    @PostMapping
+//    @SecurityRequirement(name = "Bearer")
+//    public ResponseEntity<Void> criar (@RequestBody @Valid UsuarioCriacaoDTO usuarioCriacaoDTO){
+//        final Usuario novoUsuario = UsuarioMapper.of(usuarioCriacaoDTO);
+//        this.usuarioService.criar(novoUsuario);
+//        return ResponseEntity.status(201).build();
+//    }
     @PostMapping("/login")
     public ResponseEntity<UsuarioTokenDTO>login(@RequestBody UsuarioLoginDTO usuarioLoginDTO){
         final Usuario usuario = UsuarioMapper.of(usuarioLoginDTO);
@@ -144,14 +146,14 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(usuarioTokenDTO);
     }
 
-    @GetMapping
-    @SecurityRequirement(name = "Bearer")
-    public ResponseEntity<List<UsuarioListarDTO>> listarTodos(){
-        List<UsuarioListarDTO> usuariosEncontrados = this.usuarioService.listarTodos();
-
-        if (usuariosEncontrados.isEmpty()){
-             return ResponseEntity.status(204).build();
-        }
-        return ResponseEntity.status(200).body(usuariosEncontrados);
-    }
+//    @GetMapping
+//    @SecurityRequirement(name = "Bearer")
+//    public ResponseEntity<List<UsuarioListarDTO>> listarTodos(){
+//        List<UsuarioListarDTO> usuariosEncontrados = this.usuarioService.listarTodos();
+//
+//        if (usuariosEncontrados.isEmpty()){
+//             return ResponseEntity.status(204).build();
+//        }
+//        return ResponseEntity.status(200).body(usuariosEncontrados);
+//    }
 }
