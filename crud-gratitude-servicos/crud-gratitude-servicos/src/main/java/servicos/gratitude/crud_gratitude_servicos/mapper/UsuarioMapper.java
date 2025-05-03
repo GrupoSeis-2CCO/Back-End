@@ -2,9 +2,7 @@ package servicos.gratitude.crud_gratitude_servicos.mapper;
 
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioRequestDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateSenhaDto;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.*;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -25,6 +23,7 @@ public class UsuarioMapper {
 
         return usuario;
     }
+
 
     static public UsuarioResponseDto toEntity(Usuario usuario){
         UsuarioResponseDto response = new UsuarioResponseDto();
@@ -81,6 +80,20 @@ public class UsuarioMapper {
         usuario.setFk_cargo(usuarioAntigo.getFk_cargo());
         usuario.setUltimo_acesso(usuarioAntigo.getUltimo_acesso());
 
+        return usuario;
+    }
+    public static Usuario of(UsuarioCriacaoDTO dto) {
+        Usuario usuario = new Usuario();
+        usuario.setNome(dto.getNome());
+        usuario.setEmail(dto.getEmail());
+        usuario.setSenha(dto.getSenha());
+        return usuario;
+    }
+
+    public static Usuario of(UsuarioLoginDTO dto) {
+        Usuario usuario = new Usuario();
+        usuario.setEmail(dto.getEmail());
+        usuario.setSenha(dto.getSenha());
         return usuario;
     }
 }
