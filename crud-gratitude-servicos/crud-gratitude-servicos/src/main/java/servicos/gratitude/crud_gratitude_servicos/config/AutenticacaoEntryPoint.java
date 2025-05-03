@@ -15,16 +15,13 @@ import java.io.IOException;
 public class AutenticacaoEntryPoint implements AuthenticationEntryPoint {
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response , AuthenticationException authException) throws IOException, ServletException{
-        if (authException.getClass().equals(BadCredentialsException.class)|| authException.getClass().equals(InsufficientAuthenticationException.class)) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-        }else {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+    public void commence(HttpServletRequest request, HttpServletResponse response, org.springframework.security.core.AuthenticationException authException) throws IOException, ServletException {
+        if (authException.getClass().equals(BadCredentialsException.class) || authException.getClass().equals(InsufficientAuthenticationException.class)) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Credenciais inválidas");
+        } else {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Acesso negado");
         }
     }
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, org.springframework.security.core.AuthenticationException authException) throws IOException, ServletException {
 
-    }
 }

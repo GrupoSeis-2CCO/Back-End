@@ -35,11 +35,18 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfiguracao {
 
-    @Autowired
-    private AutenticacaoService autenticacaoService;
 
     @Autowired
     private AutenticacaoEntryPoint autenticacaoEntryPoint;
+
+    private final AutenticacaoService autenticacaoService;
+
+    public SecurityConfiguracao(AutenticacaoService autenticacaoService) {
+        this.autenticacaoService = autenticacaoService;
+    }
+
+
+
 
     private static final AntPathRequestMatcher[] URLS_PERMITIDAS = {
             new AntPathRequestMatcher("/swagger-ui/**"),
@@ -81,12 +88,16 @@ public class SecurityConfiguracao {
 
     }
     @Bean
-    public AuthenticationManager authManager (HttpSecurity http) throws Exception {
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(new AutenticacaoProvider(autenticacaoService, passwordEncoder()));
+        authenticationManagerBuilder.authenticationProvider(
+                new AutenticacaoProvider(autenticacaoService, passwordEncoder())
+        );
+
         return authenticationManagerBuilder.build();
     }
+
 
     @Bean
     public AutenticacaoEntryPoint jwtAuthenticationEntryPointBean( ){
@@ -98,11 +109,16 @@ public class SecurityConfiguracao {
     public AutenticacaoFilter jwtAuthenticationFilterBean() {
         return new AutenticacaoFilter(autenticacaoService,jwtAuthenticationUtilBean());
     }
+//    @Bean
+//    public GerenciadorTokenJwt gerenciadorTokenJwt() {
+//        return new GerenciadorTokenJwt();
+//    }
     @Bean
     public GerenciadorTokenJwt jwtAuthenticationUtilBean(){return new GerenciadorTokenJwt();}
 
     @Bean
-    public PasswordEncoder passwordEncoder( ){return new BCryptPasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

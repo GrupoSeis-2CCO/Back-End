@@ -9,9 +9,9 @@ public class Alternativa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_alternativa;
 
-    @Id
+
     @ManyToOne
-    @Column(name = "fk_questao")
+    @JoinColumn(name = "fk_questao")
     private Questao fkQuestao;
 
     private String texto;
