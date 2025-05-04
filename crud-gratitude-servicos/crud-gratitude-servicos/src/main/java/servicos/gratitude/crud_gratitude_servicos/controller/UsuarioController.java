@@ -145,6 +145,18 @@ public class UsuarioController {
         UsuarioTokenDTO usuarioTokenDTO = this.usuarioService.autenticar(usuario);
         return ResponseEntity.status(200).body(usuarioTokenDTO);
     }
+    public static class UsuarioRespostaLogin {
+        private final String token;
+
+        public UsuarioRespostaLogin(String token) {
+            this.token = token;
+        }
+
+        // Getters
+        public String getToken() {
+            return token;
+        }
+    }
 
 //    @GetMapping
 //    @SecurityRequirement(name = "Bearer")

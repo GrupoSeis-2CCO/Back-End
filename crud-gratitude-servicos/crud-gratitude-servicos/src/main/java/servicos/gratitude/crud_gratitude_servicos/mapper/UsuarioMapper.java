@@ -1,8 +1,10 @@
 package servicos.gratitude.crud_gratitude_servicos.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.*;
+import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioMapper {
+
 
     static public Usuario toEntity(UsuarioRequestDto request, Cargo cargo){
         Usuario usuario = new Usuario();
@@ -82,18 +85,52 @@ public class UsuarioMapper {
 
         return usuario;
     }
-    public static Usuario of(UsuarioCriacaoDTO dto) {
+//    public static Usuario of(UsuarioCriacaoDTO dto) {
+//        Usuario usuario = new Usuario();
+//        usuario.setNome(dto.getNome());
+//        usuario.setEmail(dto.getEmail());
+//        usuario.setSenha(dto.getSenha());
+//        return usuario;
+//    }
+
+    public static Usuario of(UsuarioCriacaoDTO usuarioCriacaoDTO){
         Usuario usuario = new Usuario();
-        usuario.setNome(dto.getNome());
-        usuario.setEmail(dto.getEmail());
-        usuario.setSenha(dto.getSenha());
+
+        usuario.setEmail(usuarioCriacaoDTO.getEmail());
+        usuario.setNome(usuarioCriacaoDTO.getNome());
+        usuario.setSenha(usuarioCriacaoDTO.getSenha());
+
         return usuario;
     }
 
-    public static Usuario of(UsuarioLoginDTO dto) {
+    public static Usuario of(UsuarioLoginDTO usuarioLoginDTO){
         Usuario usuario = new Usuario();
-        usuario.setEmail(dto.getEmail());
-        usuario.setSenha(dto.getSenha());
+
+        usuario.setEmail(usuarioLoginDTO.getEmail());
+        usuario.setSenha(usuarioLoginDTO.getSenha());
+
         return usuario;
     }
+
+    public static UsuarioTokenDTO  of(Usuario usuario, String token){
+        UsuarioTokenDTO  usuarioTokenDTO = new UsuarioTokenDTO();
+
+        usuarioTokenDTO.setIdUsuario(usuarioTokenDTO.getIdUsuario());
+        usuarioTokenDTO.setEmail(usuarioTokenDTO.getEmail());
+        usuarioTokenDTO.setNome(usuarioTokenDTO.getNome());
+        usuarioTokenDTO.setToken(token);
+
+        return usuarioTokenDTO;
+    }
+
+    public static UsuarioListarDTO of(Usuario usuario){
+        UsuarioListarDTO usuarioListarDTO = new UsuarioListarDTO();
+
+        usuarioListarDTO.setIdUsuario(usuarioListarDTO.getIdUsuario());
+        usuarioListarDTO.setEmail(usuarioListarDTO.getEmail());
+        usuarioListarDTO.setNome(usuarioListarDTO.getNome());
+
+        return usuarioListarDTO;
+    }
+
 }

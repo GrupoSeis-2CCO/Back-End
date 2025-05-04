@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
                 contact = @Contact(
                         name = "Diego",
                         url = "https://github.com/BandTec/spring-security-jwt-exemplo",
-                        email = "diego.lima@sptevh.school"
+                        email = "diego.lima@sptech.school"
                 ),
                 license = @License(name = "UNLICENSED"),
                 version = "1.0.0"

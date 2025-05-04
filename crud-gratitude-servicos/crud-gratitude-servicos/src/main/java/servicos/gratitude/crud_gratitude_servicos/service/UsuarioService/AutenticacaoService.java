@@ -9,6 +9,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioDetalhesDTO;
 import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,15 +19,26 @@ public class AutenticacaoService implements UserDetailsService {
 
 
 
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(username);
+//
+//        if (usuarioOpt.isEmpty()){
+//            throw new UsernameNotFoundException(String.format("usuario: %s nao encontado",username));
+//
+//        }
+//        return new UsuarioDetalhesDTO(usuarioOpt.get());
+//    }
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        if (usuarioOpt.isEmpty()){
-            throw new UsernameNotFoundException(String.format("usuario: %s nao encontado",username));
-
-        }
-        return new UsuarioDetalhesDTO(usuarioOpt.get());
+        return new org.springframework.security.core.userdetails.User(
+                usuario.getEmail(),
+                usuario.getSenha(),
+                List.of()
+        );
     }
 
 

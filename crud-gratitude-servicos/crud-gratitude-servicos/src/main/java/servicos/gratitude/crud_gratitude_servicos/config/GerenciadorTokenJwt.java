@@ -19,11 +19,10 @@ import java.util.stream.Collectors;
 
 public class GerenciadorTokenJwt {
 
-    @Value("${jwt.secret}")
-    private String secret;
+    private String secret = "RXhpc3RlIHVtYSB0ZW9yaWEgcXVlIGRpeiBxdWUsIHNlIHVtIGRpYSBhbGd16W0gZGVzY29icmlyIGV4YXRhbWVudGUgcGFyYSBxdWUgc2VydmUgbyBVbml2ZXJzbyBlIHBvciBxdWUgZWxlIGVzdOEgYXF1aSwgZWxlIGRlc2FwYXJlY2Vy4SBpbnN0YW50YW5lYW1lbnRlIGUgc2Vy4SBzdWJzdGl0de1kbyBwb3IgYWxnbyBhaW5kYSBtYWlzIGVzdHJhbmhvIGUgaW5leHBsaWPhdmVsLiBFeGlzdGUgdW1hIHNlZ3VuZGEgdGVvcmlhIHF1ZSBkaXogcXVlIGlzc28gauEgYWNvbnRlY2V1Li4u";
+    private long validity = 3600000;
 
-    @Value("${jwt.validity}")
-    private long validity;
+
 
     public String getUsernameFromToken(String token){return getClaimForToken(token, Claims::getSubject);}
 
