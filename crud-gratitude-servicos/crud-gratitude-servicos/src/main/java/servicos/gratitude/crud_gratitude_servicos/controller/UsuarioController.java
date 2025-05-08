@@ -130,6 +130,47 @@ public class UsuarioController {
 
         return ResponseEntity.status(200).body(UsuarioMapper.toEntity(usuarios));
     }
+    @GetMapping
+    @SecurityRequirement(name = "Bearer")
+    @Operation(summary = "Listar Usuários", description = "Retorna uma lista de todos os usuários cadastrados.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "204", description = "Nenhum usuário encontrado", content = @Content)
+    })
+    public ResponseEntity<List<UsuarioResponseDto>> listarUsuarios() {
+        List<Usuario> usuarios = usuarioService.listar();
+
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+
+        List<UsuarioResponseDto> responses = UsuarioMapper.toEntity(usuarios);
+
+        return ResponseEntity.status(200).body(responses);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Buscar Usuário por ID", description = "Obtém detalhes de um usuário específico pelo ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário encontrado",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content)
+    })
+    public ResponseEntity<UsuarioResponseDto> verUsuario(
+            @Parameter(description = "ID do usuário a ser buscado", required = true)
+            @PathVariable Integer id
+    ) {
+        Optional<Usuario> usuario = usuarioService.findById(id);
+
+        return usuario.map(value -> ResponseEntity.status(200).body(UsuarioMapper.toEntity(value)))
+                .orElseGet(() -> ResponseEntity.status(404).build());
+    }
+
+//    @PutMapping("/novaSenha/{id}")
+//    @Operation(summary = "Atualizar Senha do Usuário", description = "Atualiza a senha de um usuário existente.")
 
     @PostMapping("/login")
     @Operation(summary = "Autenticação de Usuário", description = "Autentica um usuário e retorna um token de acesso.")
