@@ -46,7 +46,7 @@ public class MaterialMapper {
 
             response.setExtensao(materialdavez.getExtensao().getTipo_extensao());
             response.setDescricaoMaterial(materialdavez.getDescricao_material());
-            response.setNomeMaterial(materialdavez.setNomeMaterial());
+            response.setNomeMaterial(materialdavez.getNome_material());
             response.setUrlMaterial(materialdavez.getUrl_material());
 
 

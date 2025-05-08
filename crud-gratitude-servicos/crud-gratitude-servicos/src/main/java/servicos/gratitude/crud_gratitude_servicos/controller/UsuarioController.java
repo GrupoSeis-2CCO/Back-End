@@ -6,22 +6,20 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.PreUpdate;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioRequestDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioResponseDto;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioUpdateSenhaDto;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.*;
 import servicos.gratitude.crud_gratitude_servicos.mapper.UsuarioMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
-import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
+import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService.UsuarioService;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +39,7 @@ public class UsuarioController {
     }
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Cadastrar Usuário", description = "Cadastra um novo usuário no sistema.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso",
@@ -66,6 +65,7 @@ public class UsuarioController {
     }
 
     @GetMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Usuários", description = "Retorna uma lista de todos os usuários cadastrados.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso",
@@ -129,4 +129,43 @@ public class UsuarioController {
 
         return ResponseEntity.status(200).body(response);
     }
+
+//    UsuarioController JWT
+
+//    @PostMapping
+//    @SecurityRequirement(name = "Bearer")
+//    public ResponseEntity<Void> criar (@RequestBody @Valid UsuarioCriacaoDTO usuarioCriacaoDTO){
+//        final Usuario novoUsuario = UsuarioMapper.of(usuarioCriacaoDTO);
+//        this.usuarioService.criar(novoUsuario);
+//        return ResponseEntity.status(201).build();
+//    }
+    @PostMapping("/login")
+    public ResponseEntity<UsuarioTokenDTO>login(@RequestBody UsuarioLoginDTO usuarioLoginDTO){
+        final Usuario usuario = UsuarioMapper.of(usuarioLoginDTO);
+        UsuarioTokenDTO usuarioTokenDTO = this.usuarioService.autenticar(usuario);
+        return ResponseEntity.status(200).body(usuarioTokenDTO);
+    }
+    public static class UsuarioRespostaLogin {
+        private final String token;
+
+        public UsuarioRespostaLogin(String token) {
+            this.token = token;
+        }
+
+        // Getters
+        public String getToken() {
+            return token;
+        }
+    }
+
+//    @GetMapping
+//    @SecurityRequirement(name = "Bearer")
+//    public ResponseEntity<List<UsuarioListarDTO>> listarTodos(){
+//        List<UsuarioListarDTO> usuariosEncontrados = this.usuarioService.listarTodos();
+//
+//        if (usuariosEncontrados.isEmpty()){
+//             return ResponseEntity.status(204).build();
+//        }
+//        return ResponseEntity.status(200).body(usuariosEncontrados);
+//    }
 }
