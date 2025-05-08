@@ -66,6 +66,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Deletar Usuário", description = "Remove um usuário do sistema.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso", content = @Content),
@@ -86,6 +87,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/acesso/{id}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Atualizar Último Acesso", description = "Atualiza o último acesso do usuário.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Acesso atualizado com sucesso",
@@ -111,6 +113,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/pesquisa-por-nome")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Pesquisar Usuários por Nome", description = "Retorna usuários cujo nome corresponda ao parâmetro.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuários encontrados",
@@ -130,6 +133,7 @@ public class UsuarioController {
 
         return ResponseEntity.status(200).body(UsuarioMapper.toEntity(usuarios));
     }
+
     @GetMapping
     @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Usuários", description = "Retorna uma lista de todos os usuários cadastrados.")
@@ -152,6 +156,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Buscar Usuário por ID", description = "Obtém detalhes de um usuário específico pelo ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário encontrado",
@@ -169,8 +174,33 @@ public class UsuarioController {
                 .orElseGet(() -> ResponseEntity.status(404).build());
     }
 
-//    @PutMapping("/novaSenha/{id}")
-//    @Operation(summary = "Atualizar Senha do Usuário", description = "Atualiza a senha de um usuário existente.")
+    @PutMapping("/novaSenha/{id}")
+    @SecurityRequirement(name = "Bearer")
+    @Operation(summary = "Atualizar Senha do Usuário", description = "Atualiza a senha de um usuário existente.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Senha atualizada com sucesso",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content)
+    })
+    public ResponseEntity<UsuarioResponseDto> atualizarSenhaUsuario(
+            @Parameter(description = "Nova senha do usuário", required = true)
+            @Valid @RequestBody UsuarioUpdateSenhaDto senha,
+            @Parameter(description = "ID do usuário a ser atualizado", required = true)
+            @PathVariable Integer id
+    ){
+        Optional<Usuario> usuario = usuarioService.findById(id);
+
+        if (usuario.isEmpty()) {
+            return ResponseEntity.status(404).build();
+        }
+
+        Usuario senhaNova = UsuarioMapper.toEntity(usuario.get(), senha);
+        Usuario usuarioAtualizado = usuarioService.atualizarDados(senhaNova);
+        UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
+
+        return ResponseEntity.status(200).body(response);
+    }
 
     @PostMapping("/login")
     @Operation(summary = "Autenticação de Usuário", description = "Autentica um usuário e retorna um token de acesso.")
@@ -213,13 +243,3 @@ public class UsuarioController {
 //        return ResponseEntity.status(201).build();
 //    }
 
-//    @GetMapping
-//    @SecurityRequirement(name = "Bearer")
-//    public ResponseEntity<List<UsuarioListarDTO>> listarTodos(){
-//        List<UsuarioListarDTO> usuariosEncontrados = this.usuarioService.listarTodos();
-//
-//        if (usuariosEncontrados.isEmpty()){
-//             return ResponseEntity.status(204).build();
-//        }
-//        return ResponseEntity.status(200).body(usuariosEncontrados);
-//    }

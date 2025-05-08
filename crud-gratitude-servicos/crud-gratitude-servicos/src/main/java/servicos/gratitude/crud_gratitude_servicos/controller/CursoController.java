@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ public class CursoController {
     }
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Cadastrar Curso", description = "Cadastra um novo curso no sistema.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Curso cadastrado com sucesso",
@@ -48,6 +50,7 @@ public class CursoController {
     }
 
     @GetMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Cursos", description = "Retorna a lista de todos os cursos disponíveis.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de cursos retornada com sucesso",
@@ -66,6 +69,7 @@ public class CursoController {
     }
 
     @PutMapping("/atualizar/{id}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Atualizar Curso", description = "Atualiza os dados de um curso existente.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Curso atualizado com sucesso",
@@ -91,6 +95,7 @@ public class CursoController {
     }
 
     @PutMapping("/{id}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<CursoResponseDto> atualizarOculto(
             @PathVariable Integer id
     ){
@@ -106,6 +111,7 @@ public class CursoController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Deletar Curso", description = "Remove um curso do sistema.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Curso deletado com sucesso", content = @Content),
