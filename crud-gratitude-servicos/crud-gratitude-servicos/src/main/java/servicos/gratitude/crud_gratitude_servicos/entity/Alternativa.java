@@ -9,12 +9,13 @@ public class Alternativa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_alternativa;
 
-
     @ManyToOne
     @JoinColumn(name = "fk_questao")
     private Questao fkQuestao;
 
     private String texto;
+
+    private Integer ordem_alternativa;
 
     public Integer getId_alternativa() {
         return id_alternativa;
@@ -38,5 +39,13 @@ public class Alternativa {
 
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    public Integer getOrdem_alternativa() {
+        return ordem_alternativa;
+    }
+
+    public void setOrdem_alternativa(Integer ordem_alternativa) {
+        this.ordem_alternativa = ordem_alternativa;
     }
 }

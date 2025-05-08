@@ -5,16 +5,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 public class AlternativaResponseDto {
 
     private String enunciadoQuestao;
-    private String letraAlternativa;
+    private Integer ordem;
     private String texto;
-
-    public String getLetraAlternativa() {
-        return letraAlternativa;
-    }
-
-    public void setLetraAlternativa(String letraAlternativa) {
-        this.letraAlternativa = letraAlternativa;
-    }
 
     public String getEnunciadoQuestao() {
         return enunciadoQuestao;
@@ -30,5 +22,13 @@ public class AlternativaResponseDto {
 
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    public Integer getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(Integer ordem) {
+        this.ordem = ordem;
     }
 }

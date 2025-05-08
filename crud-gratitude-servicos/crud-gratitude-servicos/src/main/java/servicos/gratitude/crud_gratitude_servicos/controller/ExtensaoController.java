@@ -48,31 +48,4 @@ public class ExtensaoController {
 
         return ResponseEntity.status(200).body(responses);
     }
-
-    @PutMapping("/{id}")
-    @Operation(summary = "Atualizar Ícone da Extensão", description = "Atualiza o ícone de uma extensão existente.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Ícone atualizado com sucesso",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ExtensaoResponseDto.class))),
-            @ApiResponse(responseCode = "404", description = "Extensão não encontrada", content = @Content)
-    })
-    public ResponseEntity<ExtensaoResponseDto> atualizarIconeExtensao(
-            @Parameter(description = "Novo ícone da extensão", required = true)
-            @Valid @RequestBody ExtensaoUpdateDto novoIcone,
-            @Parameter(description = "ID da extensão a ser atualizada", required = true)
-            @PathVariable Integer id
-    ) {
-        if (!extensaoService.extensaoExistById(id)) {
-            return ResponseEntity.status(404).build();
-        }
-
-        Extensao extensao = ExtensaoMapper.toEntity(novoIcone);
-
-        Extensao iconeAtualizado = extensaoService.atualizarIcone(id, extensao);
-
-        ExtensaoResponseDto response = ExtensaoMapper.toEntity(iconeAtualizado);
-
-        return ResponseEntity.status(200).body(response);
-    }
 }

@@ -11,6 +11,7 @@ public class MaterialResponseDto {
     private String tituloCurso;
     private String extensao;
     private Boolean ocultado;
+    private Integer ordem;
 
     public String getNomeMaterial() {
         return nomeMaterial;
@@ -58,5 +59,13 @@ public class MaterialResponseDto {
 
     public void setOcultado(Boolean ocultado) {
         this.ocultado = ocultado;
+    }
+
+    public Integer getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(Integer ordem) {
+        this.ordem = ordem;
     }
 }

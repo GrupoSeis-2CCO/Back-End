@@ -30,6 +30,10 @@ public class MaterialRequestDto {
     @Min(1)
     private Integer fk_curso;
 
+    @NotNull
+    @Min(1)
+    private Integer ordem;
+
     public @NotBlank @Size(max = 50) String getNomeMaterial() {
         return nomeMaterial;
     }
@@ -68,5 +72,13 @@ public class MaterialRequestDto {
 
     public void setFk_curso(@NotNull @Min(1) Integer fk_curso) {
         this.fk_curso = fk_curso;
+    }
+
+    public @NotNull @Min(1) Integer getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(@NotNull @Min(1) Integer ordem) {
+        this.ordem = ordem;
     }
 }

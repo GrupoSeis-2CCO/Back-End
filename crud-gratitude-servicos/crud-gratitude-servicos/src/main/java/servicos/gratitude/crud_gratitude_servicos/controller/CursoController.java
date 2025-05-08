@@ -90,6 +90,21 @@ public class CursoController {
         return ResponseEntity.status(200).body(response);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CursoResponseDto> atualizarOculto(
+            @PathVariable Integer id
+    ){
+        if (!cursoService.existsById(id)){
+            return ResponseEntity.status(404).build();
+        }
+
+        Boolean cursoIsOculto = cursoService.cursoIsOculto(id);
+        Curso ocultoAtualizado = cursoService.atualizarOculto(id, !cursoIsOculto);
+        CursoResponseDto response = CursoMapper.toEntity(ocultoAtualizado);
+
+        return ResponseEntity.status(200).body(response);
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar Curso", description = "Remove um curso do sistema.")
     @ApiResponses(value = {

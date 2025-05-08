@@ -18,12 +18,14 @@ public class Material {
 
     private String url_material;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_curso")
-    private Curso fkCurso;
+    private Integer ordem_material;
 
     @OneToOne
     private Extensao extensao;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_curso")
+    private Curso fkCurso;
 
     public Integer getId_material() {
         return id_material;
@@ -79,5 +81,13 @@ public class Material {
 
     public void setExtensao(Extensao extensao) {
         this.extensao = extensao;
+    }
+
+    public Integer getOrdem_material() {
+        return ordem_material;
+    }
+
+    public void setOrdem_material(Integer ordem_material) {
+        this.ordem_material = ordem_material;
     }
 }

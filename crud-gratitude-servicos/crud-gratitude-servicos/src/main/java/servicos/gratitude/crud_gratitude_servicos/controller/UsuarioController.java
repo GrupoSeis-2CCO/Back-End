@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.PreUpdate;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,8 @@ import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService.UsuarioService;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -130,15 +131,53 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(response);
     }
 
-//    UsuarioController JWT
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarUsuario(
+            @PathVariable Integer id
+    ){
+        Optional<Usuario> usuario = usuarioService.findById(id);
 
-//    @PostMapping
-//    @SecurityRequirement(name = "Bearer")
-//    public ResponseEntity<Void> criar (@RequestBody @Valid UsuarioCriacaoDTO usuarioCriacaoDTO){
-//        final Usuario novoUsuario = UsuarioMapper.of(usuarioCriacaoDTO);
-//        this.usuarioService.criar(novoUsuario);
-//        return ResponseEntity.status(201).build();
-//    }
+        if(usuario.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+
+        usuarioService.deletarUsuario(id);
+
+        return ResponseEntity.status(200).build();
+    }
+
+    @PutMapping("/acesso/{id}")
+    public ResponseEntity<UsuarioResponseDto> atualizarAcesso(
+            @PathVariable Integer id
+    ){
+        Optional<Usuario> usuario = usuarioService.findById(id);
+
+        if(usuario.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+
+        LocalDateTime horarioAcesso = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        Usuario usuarioAtualizado = usuarioService.atualizarAcesso(id, horarioAcesso);
+        UsuarioResponseDto response = UsuarioMapper.toEntity(usuarioAtualizado);
+
+        return ResponseEntity.status(200).body(response);
+    }
+
+    @GetMapping("/pesquisa-por-nome")
+    public ResponseEntity<List<UsuarioResponseDto>> pesquisarPorNome(
+            @RequestParam String nome
+    ){
+        List<Usuario> usuarios = usuarioService.pesquisaPorNome(nome);
+
+        if (usuarios.isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+
+        List<UsuarioResponseDto> responses = UsuarioMapper.toEntity(usuarios);
+
+        return ResponseEntity.status(200).body(responses);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<UsuarioTokenDTO>login(@RequestBody UsuarioLoginDTO usuarioLoginDTO){
         final Usuario usuario = UsuarioMapper.of(usuarioLoginDTO);
@@ -157,6 +196,17 @@ public class UsuarioController {
             return token;
         }
     }
+}
+
+//    UsuarioController JWT
+
+//    @PostMapping
+//    @SecurityRequirement(name = "Bearer")
+//    public ResponseEntity<Void> criar (@RequestBody @Valid UsuarioCriacaoDTO usuarioCriacaoDTO){
+//        final Usuario novoUsuario = UsuarioMapper.of(usuarioCriacaoDTO);
+//        this.usuarioService.criar(novoUsuario);
+//        return ResponseEntity.status(201).build();
+//    }
 
 //    @GetMapping
 //    @SecurityRequirement(name = "Bearer")
@@ -168,4 +218,3 @@ public class UsuarioController {
 //        }
 //        return ResponseEntity.status(200).body(usuariosEncontrados);
 //    }
-}

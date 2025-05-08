@@ -82,4 +82,50 @@ public class MaterialController {
 
         return ResponseEntity.status(200).body(MaterialMapper.toEntity(materiais));
     }
+
+    @PutMapping("/atualizar-dados/{id}")
+    public ResponseEntity<MaterialResponseDto> atualizarDadosMaterial(
+            @Valid @RequestBody MaterialUpdateDto update,
+            @PathVariable Integer idMaterial
+    ){
+        Optional<Material> material = materialService.findById(idMaterial);
+
+        if (material.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+
+        Material materialParaAtualizar = MaterialMapper.toEntity(update, material.get());
+        Material materialAtualizado = materialService.atualizarmaterial(materialParaAtualizar, idMaterial);
+        MaterialResponseDto response = MaterialMapper.toEntity(materialAtualizado);
+
+        return ResponseEntity.status(200).body(response);
+    }
+
+    @PutMapping("/atualizar-oculto/{id}")
+    public ResponseEntity<MaterialResponseDto> atualizarOcultoMaterial(
+            @PathVariable Integer idMaterial
+    ){
+        if (!materialService.existsById(idMaterial)){
+            return ResponseEntity.status(404).build();
+        }
+
+        Boolean materialIsOculto = materialService.isOculto(idMaterial);
+        Material ocultoAtualizado = materialService.atualizarOculto(idMaterial, !materialIsOculto);
+        MaterialResponseDto response = MaterialMapper.toEntity(ocultoAtualizado);
+
+        return ResponseEntity.status(200).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarMaterial(
+            @PathVariable Integer idMaterial
+    ){
+        if (!materialService.existsById(idMaterial)){
+            return ResponseEntity.status(404).build();
+        }
+
+        materialService.deletarMaterial(idMaterial);
+
+        return ResponseEntity.status(200).build();
+    }
 }
