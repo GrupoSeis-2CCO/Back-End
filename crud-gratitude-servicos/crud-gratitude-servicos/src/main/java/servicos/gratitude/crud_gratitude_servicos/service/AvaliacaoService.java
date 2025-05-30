@@ -28,7 +28,7 @@ public class AvaliacaoService {
     }
 
     public Avaliacao atualizarAcertosMinimos(Avaliacao avaliacao, Integer id){
-        avaliacao.setId_avaliacao(id);
+        avaliacao.setIdAvaliacao(id);
         return avaliacaoRepository.save(avaliacao);
     }
 }

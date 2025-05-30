@@ -1,38 +1,35 @@
 package servicos.gratitude.crud_gratitude_servicos.entity;
 
 import jakarta.persistence.*;
+import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.QuestaoCompoundKey;
 
 @Entity
 public class Questao {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_questao;
-
-
-    @ManyToOne
-    @JoinColumn(name = "fk_avaliacao")
-    private Avaliacao fkAvaliacao;
+    @EmbeddedId
+    private QuestaoCompoundKey idQuestaoComposto;
 
     private String enunciado;
-    private Integer numero_questao;
+    private Integer numeroQuestao;
 
-    @OneToOne
-    private Alternativa fk_resposta;
+    @ManyToOne(optional = false)
+    @MapsId("fkAvaliacao")
+    @JoinColumn(referencedColumnName = "idAvaliacao", insertable = false, updatable = false)
+    private Avaliacao avaliacao;
 
-    public Integer getId_questao() {
-        return id_questao;
+    public QuestaoCompoundKey getIdQuestaoComposto() {
+        return idQuestaoComposto;
     }
 
-    public void setId_questao(Integer id_questao) {
-        this.id_questao = id_questao;
+    public void setIdQuestaoComposto(QuestaoCompoundKey idQuestaoComposto) {
+        this.idQuestaoComposto = idQuestaoComposto;
     }
 
-    public Avaliacao getFkAvaliacao() {
-        return fkAvaliacao;
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
     }
 
-    public void setFkAvaliacao(Avaliacao fkAvaliacao) {
-        this.fkAvaliacao = fkAvaliacao;
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public String getEnunciado() {
@@ -43,19 +40,11 @@ public class Questao {
         this.enunciado = enunciado;
     }
 
-    public Integer getNumero_questao() {
-        return numero_questao;
+    public Integer getNumeroQuestao() {
+        return numeroQuestao;
     }
 
-    public void setNumero_questao(Integer numero_questao) {
-        this.numero_questao = numero_questao;
-    }
-
-    public Alternativa getFk_resposta() {
-        return fk_resposta;
-    }
-
-    public void setFk_resposta(Alternativa fk_resposta) {
-        this.fk_resposta = fk_resposta;
+    public void setNumeroQuestao(Integer numeroQuestao) {
+        this.numeroQuestao = numeroQuestao;
     }
 }

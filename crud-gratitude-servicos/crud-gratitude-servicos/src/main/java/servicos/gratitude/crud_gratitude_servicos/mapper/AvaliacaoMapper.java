@@ -14,7 +14,7 @@ public class AvaliacaoMapper {
         Avaliacao avaliacao = new Avaliacao();
 
         avaliacao.setFk_curso(curso);
-        avaliacao.setAcertos_minimos(0);
+        avaliacao.setAcertosMinimos(0);
 
         return avaliacao;
     }
@@ -24,7 +24,7 @@ public class AvaliacaoMapper {
         AvaliacaoResponseDto response = new AvaliacaoResponseDto();
 
         response.setNomeCurso(avaliacao.getFk_curso().getTitulo_curso());
-        response.setAcertosMinimos(avaliacao.getAcertos_minimos());
+        response.setAcertosMinimos(avaliacao.getAcertosMinimos());
 
         return response;
     }
@@ -36,7 +36,7 @@ public class AvaliacaoMapper {
             AvaliacaoResponseDto response = new AvaliacaoResponseDto();
 
             response.setNomeCurso(avaliacaoDaVez.getFk_curso().getTitulo_curso());
-            response.setAcertosMinimos(avaliacaoDaVez.getAcertos_minimos());
+            response.setAcertosMinimos(avaliacaoDaVez.getAcertosMinimos());
 
             responses.add(response);
         }
@@ -48,7 +48,7 @@ public class AvaliacaoMapper {
         Avaliacao avaliacaoNova = new Avaliacao();
 
         avaliacaoNova.setFk_curso(avaliacaoAntiga.getFk_curso());
-        avaliacaoNova.setAcertos_minimos(acertosMinimos.getAcertosMinimos());
+        avaliacaoNova.setAcertosMinimos(acertosMinimos.getAcertosMinimos());
 
         return avaliacaoNova;
     }

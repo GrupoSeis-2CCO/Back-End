@@ -3,6 +3,7 @@ package servicos.gratitude.crud_gratitude_servicos.service;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Questao;
 import servicos.gratitude.crud_gratitude_servicos.entity.Avaliacao;
+import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.QuestaoCompoundKey;
 import servicos.gratitude.crud_gratitude_servicos.repository.QuestaoRepository;
 
 import java.util.List;
@@ -22,23 +23,18 @@ public class QuestaoService {
     }
 
     public List<Questao> listarQuestoesPorAvaliacao(Avaliacao fkAvaliacao){
-        return questaoRepository.findAllByFkAvaliacao(fkAvaliacao);
+        return questaoRepository.findAllByAvaliacao(fkAvaliacao);
     }
 
-    public Optional<Questao> findById(Integer id){
+    public Optional<Questao> findById(QuestaoCompoundKey id){
         return questaoRepository.findById(id);
     }
 
-    public Questao atualizarQuestao(Questao questao, Integer id){
-        questao.setId_questao(id);
-        return questaoRepository.save(questao);
-    }
-
-    public Boolean existsById(Integer id){
+    public Boolean existsById(QuestaoCompoundKey id){
         return questaoRepository.existsById(id);
     }
 
-    public void deletarQuestao(Integer id){
+    public void deletarQuestao(QuestaoCompoundKey id){
         questaoRepository.deleteById(id);
     }
 }
