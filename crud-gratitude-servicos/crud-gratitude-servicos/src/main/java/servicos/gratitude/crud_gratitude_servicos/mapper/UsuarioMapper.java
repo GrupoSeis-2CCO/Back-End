@@ -1,10 +1,12 @@
 package servicos.gratitude.crud_gratitude_servicos.mapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao.UsuarioCriacaoDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.*;
-import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao.UsuarioListarDto;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao.UsuarioLoginDto;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao.UsuarioTokenDto;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -85,7 +87,7 @@ public class UsuarioMapper {
 
         return usuario;
     }
-//    public static Usuario of(UsuarioCriacaoDTO dto) {
+//    public static Usuario of(UsuarioCriacaoDto dto) {
 //        Usuario usuario = new Usuario();
 //        usuario.setNome(dto.getNome());
 //        usuario.setEmail(dto.getEmail());
@@ -93,7 +95,7 @@ public class UsuarioMapper {
 //        return usuario;
 //    }
 
-    public static Usuario of(UsuarioCriacaoDTO usuarioCriacaoDTO){
+    public static Usuario of(UsuarioCriacaoDto usuarioCriacaoDTO){
         Usuario usuario = new Usuario();
 
         usuario.setEmail(usuarioCriacaoDTO.getEmail());
@@ -103,7 +105,7 @@ public class UsuarioMapper {
         return usuario;
     }
 
-    public static Usuario of(UsuarioLoginDTO usuarioLoginDTO){
+    public static Usuario of(UsuarioLoginDto usuarioLoginDTO){
         Usuario usuario = new Usuario();
 
         usuario.setEmail(usuarioLoginDTO.getEmail());
@@ -112,8 +114,8 @@ public class UsuarioMapper {
         return usuario;
     }
 
-    public static UsuarioTokenDTO  of(Usuario usuario, String token){
-        UsuarioTokenDTO  usuarioTokenDTO = new UsuarioTokenDTO();
+    public static UsuarioTokenDto of(Usuario usuario, String token){
+        UsuarioTokenDto usuarioTokenDTO = new UsuarioTokenDto();
 
         usuarioTokenDTO.setIdUsuario(usuarioTokenDTO.getIdUsuario());
         usuarioTokenDTO.setEmail(usuarioTokenDTO.getEmail());
@@ -123,8 +125,8 @@ public class UsuarioMapper {
         return usuarioTokenDTO;
     }
 
-    public static UsuarioListarDTO of(Usuario usuario){
-        UsuarioListarDTO usuarioListarDTO = new UsuarioListarDTO();
+    public static UsuarioListarDto of(Usuario usuario){
+        UsuarioListarDto usuarioListarDTO = new UsuarioListarDto();
 
         usuarioListarDTO.setIdUsuario(usuarioListarDTO.getIdUsuario());
         usuarioListarDTO.setEmail(usuarioListarDTO.getEmail());

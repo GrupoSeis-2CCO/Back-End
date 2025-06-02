@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +25,12 @@ import java.util.Optional;
 import java.util.Map;
 
 @Tag(name = "Avaliação", description = "Gerencia todas as operações relacionadas às avaliações")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/avaliacoes")
 public class AvaliacaoController {
-
     private final AvaliacaoService avaliacaoService;
     private final CursoService cursoService;
-
-    public AvaliacaoController(AvaliacaoService avaliacaoService, CursoService cursoService) {
-        this.avaliacaoService = avaliacaoService;
-        this.cursoService = cursoService;
-    }
 
     @PostMapping
     @Operation(summary = "Cadastrar Avaliação", description = "Método responsável por cadastrar novas avaliações")

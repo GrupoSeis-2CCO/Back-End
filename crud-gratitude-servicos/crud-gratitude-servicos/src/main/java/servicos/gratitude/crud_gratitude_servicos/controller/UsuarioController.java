@@ -9,15 +9,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.*;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao.UsuarioLoginDto;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao.UsuarioTokenDto;
 import servicos.gratitude.crud_gratitude_servicos.mapper.UsuarioMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
-import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService.UsuarioService;
+import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -25,19 +28,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "Usuários", description = "Gerencia todas as operações relacionadas aos usuários")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-
     private final UsuarioService usuarioService;
     private final CargoService cargoService;
     private final CursoService cursoService;
-
-    public UsuarioController(UsuarioService usuarioService, CargoService cargoService, CursoService cursoService) {
-        this.usuarioService = usuarioService;
-        this.cargoService = cargoService;
-        this.cursoService = cursoService;
-    }
 
     @PostMapping
     @SecurityRequirement(name = "Bearer")
@@ -207,15 +204,15 @@ public class UsuarioController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário autenticado com sucesso",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioTokenDTO.class))),
+                            schema = @Schema(implementation = UsuarioTokenDto.class))),
             @ApiResponse(responseCode = "401", description = "Credenciais inválidas", content = @Content)
     })
-    public ResponseEntity<UsuarioTokenDTO> login(
+    public ResponseEntity<UsuarioTokenDto> login(
             @Parameter(description = "Credenciais do usuário", required = true)
-            @RequestBody UsuarioLoginDTO usuarioLoginDTO
+            @RequestBody UsuarioLoginDto usuarioLoginDTO
     ) {
         final Usuario usuario = UsuarioMapper.of(usuarioLoginDTO);
-        UsuarioTokenDTO usuarioTokenDTO = usuarioService.autenticar(usuario);
+        UsuarioTokenDto usuarioTokenDTO = usuarioService.autenticar(usuario);
         return ResponseEntity.status(200).body(usuarioTokenDTO);
     }
 
@@ -237,7 +234,7 @@ public class UsuarioController {
 
 //    @PostMapping
 //    @SecurityRequirement(name = "Bearer")
-//    public ResponseEntity<Void> criar (@RequestBody @Valid UsuarioCriacaoDTO usuarioCriacaoDTO){
+//    public ResponseEntity<Void> criar (@RequestBody @Valid UsuarioCriacaoDto usuarioCriacaoDTO){
 //        final Usuario novoUsuario = UsuarioMapper.of(usuarioCriacaoDTO);
 //        this.usuarioService.criar(novoUsuario);
 //        return ResponseEntity.status(201).build();

@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Extensao;
 import servicos.gratitude.crud_gratitude_servicos.repository.ExtensaoRepository;
@@ -8,13 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ExtensaoService {
-
     private final ExtensaoRepository extensaoRepository;
-
-    public ExtensaoService(ExtensaoRepository extensaoRepository) {
-        this.extensaoRepository = extensaoRepository;
-    }
 
     public List<Extensao> listarExtensaos(){
         return extensaoRepository.findAll();

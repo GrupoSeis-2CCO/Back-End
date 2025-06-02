@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Questao;
 import servicos.gratitude.crud_gratitude_servicos.entity.Avaliacao;
@@ -10,14 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class QuestaoService {
-
     private final QuestaoRepository questaoRepository;
-
-    public QuestaoService(QuestaoRepository questaoRepository) {
-        this.questaoRepository = questaoRepository;
-    }
-
+    
     public Questao cadastrarQuestao(Questao questao){
         return questaoRepository.save(questao);
     }

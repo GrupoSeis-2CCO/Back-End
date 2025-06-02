@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Extensao;
@@ -19,15 +20,11 @@ import servicos.gratitude.crud_gratitude_servicos.service.ExtensaoService;
 import java.util.List;
 
 @Tag(name = "Extensões", description = "Gerencia todas as operações relacionadas às extensões")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/extensoes")
 public class ExtensaoController {
-
     private final ExtensaoService extensaoService;
-
-    public ExtensaoController(ExtensaoService extensaoService) {
-        this.extensaoService = extensaoService;
-    }
 
     @GetMapping
     @Operation(summary = "Listar Extensões", description = "Retorna a lista de todas as extensões disponíveis.")

@@ -4,30 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 @Entity
+@Getter
+@Setter
 public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_cargo;
 
     private String nome_cargo;
-
-    public Integer getId_cargo() {
-        return id_cargo;
-    }
-
-    public void setId_cargo(Integer id_cargo) {
-        this.id_cargo = id_cargo;
-    }
-
-    public String getNome_cargo() {
-        return nome_cargo;
-    }
-
-    public void setNome_cargo(String nome_cargo) {
-        this.nome_cargo = nome_cargo;
-    }
 }

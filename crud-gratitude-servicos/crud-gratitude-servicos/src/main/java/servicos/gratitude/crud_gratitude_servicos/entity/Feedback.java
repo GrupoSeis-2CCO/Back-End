@@ -3,8 +3,12 @@ package servicos.gratitude.crud_gratitude_servicos.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Feedback {
 
     @Id
@@ -13,28 +17,4 @@ public class Feedback {
 
     private Integer estrelas;
     private String motivo;
-
-    public Curso getFkCurso() {
-        return fkCurso;
-    }
-
-    public void setFkCurso(Curso fkCurso) {
-        this.fkCurso = fkCurso;
-    }
-
-    public Integer getEstrelas() {
-        return estrelas;
-    }
-
-    public void setEstrelas(Integer estrelas) {
-        this.estrelas = estrelas;
-    }
-
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
 }

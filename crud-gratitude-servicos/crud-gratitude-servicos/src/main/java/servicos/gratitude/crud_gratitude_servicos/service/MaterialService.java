@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.service;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.el.parser.BooleanNode;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
@@ -10,12 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MaterialService {
-
-
     private final MaterialRepository materialRepository;
-
-    public MaterialService(MaterialRepository materialRepository) {this.materialRepository = materialRepository;}
 
     public Material cadastrarMaterial(Material material){
         return materialRepository.save(material);

@@ -1,19 +1,13 @@
 package servicos.gratitude.crud_gratitude_servicos.entity.dto.extensao;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
+@Data
 public class ExtensaoUpdateDto {
 
-    @NotBlank
     @URL
+    @NotBlank
     private String icone;
-
-    public @NotBlank @URL String getIcone() {
-        return icone;
-    }
-
-    public void setIcone(@NotBlank @URL String icone) {
-        this.icone = icone;
-    }
 }

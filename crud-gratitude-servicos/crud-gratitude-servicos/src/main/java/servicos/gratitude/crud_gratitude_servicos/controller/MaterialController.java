@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
@@ -25,19 +26,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "Materiais", description = "Gerencia todas as operações relacionadas aos materiais")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/materiais")
 public class MaterialController {
-
     private final ExtensaoService extensaoService;
     private final MaterialService materialService;
     private final CursoService cursoService;
-
-    public MaterialController(ExtensaoService extensaoService, MaterialService materialService, CursoService cursoService) {
-        this.extensaoService = extensaoService;
-        this.materialService = materialService;
-        this.cursoService = cursoService;
-    }
 
     @PostMapping
     @Operation(summary = "Cadastrar Material", description = "Cadastra um novo material para um curso.")

@@ -1,19 +1,14 @@
 package servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.util.ReflectionTestUtils;
-import servicos.gratitude.crud_gratitude_servicos.config.GerenciadorTokenJwt;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
+import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
 import java.time.LocalDateTime;
 import java.util.*;

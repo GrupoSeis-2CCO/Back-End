@@ -4,8 +4,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
+@Data
 public class CursoRequestDto {
 
     @NotBlank
@@ -23,36 +25,4 @@ public class CursoRequestDto {
     @Min(1)
     @NotNull
     private Integer duracaoEstimada;
-
-    public @NotBlank @Size(max = 50) String getTituloCurso() {
-        return tituloCurso;
-    }
-
-    public void setTituloCurso(@NotBlank @Size(max = 50) String tituloCurso) {
-        this.tituloCurso = tituloCurso;
-    }
-
-    public @NotBlank @Size(max = 100) String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(@NotBlank @Size(max = 100) String descricao) {
-        this.descricao = descricao;
-    }
-
-    public @URL @NotBlank String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(@URL @NotBlank String imagem) {
-        this.imagem = imagem;
-    }
-
-    public @Min(1) @NotNull Integer getDuracaoEstimada() {
-        return duracaoEstimada;
-    }
-
-    public void setDuracaoEstimada(@Min(1) @NotNull Integer duracaoEstimada) {
-        this.duracaoEstimada = duracaoEstimada;
-    }
 }

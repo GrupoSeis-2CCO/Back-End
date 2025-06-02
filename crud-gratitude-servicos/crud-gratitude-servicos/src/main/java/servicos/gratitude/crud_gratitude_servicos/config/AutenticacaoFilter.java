@@ -11,12 +11,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
-import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService.AutenticacaoService;
+import servicos.gratitude.crud_gratitude_servicos.service.AutenticacaoService;
 
 import java.io.IOException;
 import java.util.Objects;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class AutenticacaoFilter extends OncePerRequestFilter {
 

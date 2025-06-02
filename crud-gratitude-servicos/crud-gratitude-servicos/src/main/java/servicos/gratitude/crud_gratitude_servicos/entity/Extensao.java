@@ -4,8 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Extensao {
 
     @Id
@@ -14,28 +18,4 @@ public class Extensao {
 
     private String tipo_extensao;
     private String icone;
-
-    public Integer getId_extensao() {
-        return id_extensao;
-    }
-
-    public void setId_extensao(Integer id_extensao) {
-        this.id_extensao = id_extensao;
-    }
-
-    public String getTipo_extensao() {
-        return tipo_extensao;
-    }
-
-    public void setTipo_extensao(String tipo_extensao) {
-        this.tipo_extensao = tipo_extensao;
-    }
-
-    public String getIcone() {
-        return icone;
-    }
-
-    public void setIcone(String icone) {
-        this.icone = icone;
-    }
 }

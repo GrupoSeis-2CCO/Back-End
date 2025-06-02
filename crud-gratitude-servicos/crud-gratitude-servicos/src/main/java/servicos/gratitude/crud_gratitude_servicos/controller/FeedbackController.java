@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
@@ -22,17 +23,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "Feedbacks", description = "Gerencia todas as operações relacionadas aos feedbacks")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/feedbacks")
 public class FeedbackController {
-
     private final FeedbackService feedbackService;
     private final CursoService cursoService;
-
-    public FeedbackController(FeedbackService feedbackService, CursoService cursoService) {
-        this.feedbackService = feedbackService;
-        this.cursoService = cursoService;
-    }
 
     @PostMapping
     @Operation(summary = "Cadastrar Feedback", description = "Cadastra um novo feedback para um curso.")

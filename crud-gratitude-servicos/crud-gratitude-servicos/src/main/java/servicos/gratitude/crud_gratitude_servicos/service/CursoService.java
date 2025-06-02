@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.repository.CursoRepository;
@@ -8,13 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CursoService {
-
     private final CursoRepository cursoRepository;
-
-    public CursoService(CursoRepository cursoRepository) {
-        this.cursoRepository = cursoRepository;
-    }
 
     public Curso cadastrarCurso(Curso curso){
         return cursoRepository.save(curso);

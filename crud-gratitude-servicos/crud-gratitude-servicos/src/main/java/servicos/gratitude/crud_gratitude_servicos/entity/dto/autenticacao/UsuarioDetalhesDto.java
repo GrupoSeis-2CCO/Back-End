@@ -1,24 +1,18 @@
-package servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario;
+package servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao;
 
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 
 import java.util.Collection;
 
-
-public class UsuarioDetalhesDTO implements UserDetails {
-
+@Data
+@AllArgsConstructor
+public class UsuarioDetalhesDto implements UserDetails {
     private final String nome;
     private final String email;
     private final String senha;
-
-    public UsuarioDetalhesDTO(Usuario usuario){
-        this.nome = usuario.getNome();
-        this.email = usuario.getEmail();
-        this.senha = usuario.getSenha();
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -42,18 +36,4 @@ public class UsuarioDetalhesDTO implements UserDetails {
 
     @Override
     public boolean isEnabled() {return true;}
-
-
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
 }

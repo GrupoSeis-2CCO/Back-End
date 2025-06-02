@@ -1,23 +1,19 @@
-package servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
+package servicos.gratitude.crud_gratitude_servicos.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
-import servicos.gratitude.crud_gratitude_servicos.entity.dto.usuario.UsuarioDetalhesDTO;
 import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AutenticacaoService implements UserDetailsService {
-    @Autowired
     private UsuarioRepository usuarioRepository;
-
-
 
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -27,8 +23,9 @@ public class AutenticacaoService implements UserDetailsService {
 //            throw new UsernameNotFoundException(String.format("usuario: %s nao encontado",username));
 //
 //        }
-//        return new UsuarioDetalhesDTO(usuarioOpt.get());
+//        return new UsuarioDetalhesDto(usuarioOpt.get());
 //    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(email)
@@ -40,6 +37,4 @@ public class AutenticacaoService implements UserDetailsService {
                 List.of()
         );
     }
-
-
 }

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
@@ -20,15 +21,11 @@ import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import java.util.List;
 
 @Tag(name = "Cursos", description = "Gerencia todas as operações relacionadas aos cursos")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/cursos")
 public class CursoController {
-
     private final CursoService cursoService;
-
-    public CursoController(CursoService cursoService) {
-        this.cursoService = cursoService;
-    }
 
     @PostMapping
     @SecurityRequirement(name = "Bearer")

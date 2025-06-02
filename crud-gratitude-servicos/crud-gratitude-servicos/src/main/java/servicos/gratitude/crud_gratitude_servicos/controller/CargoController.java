@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -24,15 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 
 @Tag(name = "Cargos", description = "Gerencia todas as operações relacionadas aos cargos")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/cargos")
 public class CargoController {
-
     private final CargoService cargoService;
-
-    public CargoController(CargoService cargoService) {
-        this.cargoService = cargoService;
-    }
 
     @GetMapping
     @Operation(summary = "Listar Cargos", description = "Retorna a lista de todos os cargos disponíveis.")
