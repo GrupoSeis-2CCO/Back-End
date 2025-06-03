@@ -16,11 +16,11 @@ public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_curso;
+    private Integer idCurso;
 
-    private String titulo_curso;
+    private String tituloCurso;
     private String descricao;
     private String imagem;
     private Boolean ocultado;
-    private Integer duracao_estimada;
+    private Integer duracaoEstimada;
 }

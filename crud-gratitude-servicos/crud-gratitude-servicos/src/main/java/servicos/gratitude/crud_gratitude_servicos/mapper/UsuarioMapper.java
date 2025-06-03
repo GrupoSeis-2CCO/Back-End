@@ -22,9 +22,9 @@ public class UsuarioMapper {
         usuario.setCpf(request.getCpf());
         usuario.setEmail(request.getEmail());
         usuario.setNome(request.getNome());
-        usuario.setData_entrada(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        usuario.setDataEntrada(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         usuario.setSenha("#Gs" + request.getCpf());
-        usuario.setFk_cargo(cargo);
+        usuario.setFkCargo(cargo);
 
         return usuario;
     }
@@ -36,15 +36,15 @@ public class UsuarioMapper {
         response.setCpf(usuario.getCpf());
         response.setNome(usuario.getNome());
         response.setEmail(usuario.getEmail());
-        response.setDataEntrada(usuario.getData_entrada());
+        response.setDataEntrada(usuario.getDataEntrada());
 
-        if (usuario.getUltimo_acesso() == null) {
-            response.setUltimoAcesso(usuario.getData_entrada());
+        if (usuario.getUltimoAcesso() == null) {
+            response.setUltimoAcesso(usuario.getDataEntrada());
         } else {
-            response.setUltimoAcesso(usuario.getUltimo_acesso());
+            response.setUltimoAcesso(usuario.getUltimoAcesso());
         }
 
-        response.setCargo(usuario.getFk_cargo().getNome_cargo());
+        response.setCargo(usuario.getFkCargo().getNomeCargo());
 
         return response;
     }
@@ -58,13 +58,13 @@ public class UsuarioMapper {
             response.setCpf(usuarioDaVez.getCpf());
             response.setNome(usuarioDaVez.getNome());
             response.setEmail(usuarioDaVez.getEmail());
-            response.setDataEntrada(usuarioDaVez.getData_entrada());
-            response.setCargo(usuarioDaVez.getFk_cargo().getNome_cargo());
+            response.setDataEntrada(usuarioDaVez.getDataEntrada());
+            response.setCargo(usuarioDaVez.getFkCargo().getNomeCargo());
 
-            if (usuarioDaVez.getUltimo_acesso() == null) {
-                response.setUltimoAcesso(usuarioDaVez.getData_entrada());
+            if (usuarioDaVez.getUltimoAcesso() == null) {
+                response.setUltimoAcesso(usuarioDaVez.getDataEntrada());
             } else {
-                response.setUltimoAcesso(usuarioDaVez.getUltimo_acesso());
+                response.setUltimoAcesso(usuarioDaVez.getUltimoAcesso());
             }
 
             responses.add(response);
@@ -80,10 +80,10 @@ public class UsuarioMapper {
         usuario.setIdUsuario(usuarioAntigo.getIdUsuario());
         usuario.setCpf(usuarioAntigo.getCpf());
         usuario.setEmail(usuarioAntigo.getEmail());
-        usuario.setData_entrada(usuarioAntigo.getData_entrada());
+        usuario.setDataEntrada(usuarioAntigo.getDataEntrada());
         usuario.setNome(usuarioAntigo.getNome());
-        usuario.setFk_cargo(usuarioAntigo.getFk_cargo());
-        usuario.setUltimo_acesso(usuarioAntigo.getUltimo_acesso());
+        usuario.setFkCargo(usuarioAntigo.getFkCargo());
+        usuario.setUltimoAcesso(usuarioAntigo.getUltimoAcesso());
 
         return usuario;
     }

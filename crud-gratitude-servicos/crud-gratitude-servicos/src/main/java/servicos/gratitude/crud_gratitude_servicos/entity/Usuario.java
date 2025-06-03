@@ -19,9 +19,9 @@ public class Usuario {
     private String cpf;
     private String email;
     private String senha;
-    private LocalDateTime data_entrada;
-    private LocalDateTime ultimo_acesso;
+    private LocalDateTime dataEntrada;
+    private LocalDateTime ultimoAcesso;
 
     @ManyToOne
-    private Cargo fk_cargo;
+    private Cargo fkCargo;
 }

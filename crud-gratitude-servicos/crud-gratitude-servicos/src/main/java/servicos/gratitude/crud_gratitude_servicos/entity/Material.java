@@ -12,22 +12,21 @@ public class Material {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Integer id_material;
+    private  Integer idMaterial;
 
-    private String nome_material;
+    private String nomeMaterial;
 
-    private String descricao_material;
+    private String descricaoMaterial;
 
     private  Boolean  oculto;
 
-    private String url_material;
+    private String urlMaterial;
 
-    private Integer ordem_material;
+    private Integer ordemMaterial;
 
     @OneToOne
     private Extensao extensao;
 
     @ManyToOne
-    @JoinColumn(name = "fk_curso")
     private Curso fkCurso;
 }

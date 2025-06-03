@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Questao;
 import servicos.gratitude.crud_gratitude_servicos.entity.Avaliacao;
 import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.QuestaoCompoundKey;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.questao.QuestaoAtualizacaoDto;
 import servicos.gratitude.crud_gratitude_servicos.repository.QuestaoRepository;
 
 import java.util.List;
@@ -29,6 +30,10 @@ public class QuestaoService {
 
     public Boolean existsById(QuestaoCompoundKey id){
         return questaoRepository.existsById(id);
+    }
+
+    public Questao atualizarQuestao(Questao questao){
+        return questaoRepository.save(questao);
     }
 
     public void deletarQuestao(QuestaoCompoundKey id){

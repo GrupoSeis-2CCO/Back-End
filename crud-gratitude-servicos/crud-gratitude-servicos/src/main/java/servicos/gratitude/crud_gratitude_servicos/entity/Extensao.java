@@ -14,8 +14,8 @@ public class Extensao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_extensao;
+    private Integer idExtensao;
 
-    private String tipo_extensao;
+    private String tipoExtensao;
     private String icone;
 }

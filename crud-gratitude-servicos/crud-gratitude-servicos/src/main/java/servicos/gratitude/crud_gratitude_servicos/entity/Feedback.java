@@ -12,7 +12,6 @@ import lombok.Setter;
 public class Feedback {
 
     @Id
-    @Column(name = "fk_curso")
     private Curso fkCurso;
 
     private Integer estrelas;

@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_cargo;
+    private Integer idCargo;
 
-    private String nome_cargo;
+    private String nomeCargo;
 }

@@ -22,7 +22,7 @@ public class ExtensaoService {
     }
 
     public Extensao atualizarIcone(Integer id, Extensao extensao){
-        extensao.setId_extensao(id);
+        extensao.setIdExtensao(id);
         return extensaoRepository.save(extensao);
     }
 

@@ -15,9 +15,9 @@ public class MaterialMapper {
     static public Material toEntity(MaterialRequestDto request, Curso curso, Extensao extensao){
         Material material = new Material();
 
-        material.setDescricao_material(request.getDescricaoMaterial());
-        material.setUrl_material(request.getUrlMaterial());
-        material.setNome_material(request.getNomeMaterial());
+        material.setDescricaoMaterial(request.getDescricaoMaterial());
+        material.setUrlMaterial(request.getUrlMaterial());
+        material.setNomeMaterial(request.getNomeMaterial());
         material.setExtensao(extensao);
         material.setFkCurso(curso);
         material.setOculto(true);
@@ -28,11 +28,11 @@ public class MaterialMapper {
     static public MaterialResponseDto toEntity(Material material){
         MaterialResponseDto response = new MaterialResponseDto();
 
-        response.setDescricaoMaterial(material.getDescricao_material());
-        response.setNomeMaterial(material.getNome_material());
-        response.setUrlMaterial(material.getUrl_material());
-        response.setTituloCurso(material.getFkCurso().getTitulo_curso());
-        response.setExtensao(material.getExtensao().getTipo_extensao());
+        response.setDescricaoMaterial(material.getDescricaoMaterial());
+        response.setNomeMaterial(material.getNomeMaterial());
+        response.setUrlMaterial(material.getUrlMaterial());
+        response.setTituloCurso(material.getFkCurso().getTituloCurso());
+        response.setExtensao(material.getExtensao().getTipoExtensao());
         response.setOcultado(material.getOculto());
 
         return response;
@@ -44,10 +44,10 @@ public class MaterialMapper {
         for (Material materialdavez : materiais) {
             MaterialResponseDto response = new MaterialResponseDto();
 
-            response.setExtensao(materialdavez.getExtensao().getTipo_extensao());
-            response.setDescricaoMaterial(materialdavez.getDescricao_material());
-            response.setNomeMaterial(materialdavez.getNome_material());
-            response.setUrlMaterial(materialdavez.getUrl_material());
+            response.setExtensao(materialdavez.getExtensao().getTipoExtensao());
+            response.setDescricaoMaterial(materialdavez.getDescricaoMaterial());
+            response.setNomeMaterial(materialdavez.getNomeMaterial());
+            response.setUrlMaterial(materialdavez.getUrlMaterial());
 
 
             responses.add(response);
@@ -59,10 +59,10 @@ public class MaterialMapper {
     static public Material toEntity(MaterialUpdateDto update, Material material){
        Material materialAtualizado = new Material();
 
-        materialAtualizado.setNome_material(update.getNomeMaterial());
-        materialAtualizado.setDescricao_material(update.getDescricaoMaterial());
+        materialAtualizado.setNomeMaterial(update.getNomeMaterial());
+        materialAtualizado.setDescricaoMaterial(update.getDescricaoMaterial());
 
-        materialAtualizado.setUrl_material(material.getUrl_material());
+        materialAtualizado.setUrlMaterial(material.getUrlMaterial());
         materialAtualizado.setExtensao(material.getExtensao());
         materialAtualizado.setFkCurso(material.getFkCurso());
         materialAtualizado.setOculto(material.getOculto());

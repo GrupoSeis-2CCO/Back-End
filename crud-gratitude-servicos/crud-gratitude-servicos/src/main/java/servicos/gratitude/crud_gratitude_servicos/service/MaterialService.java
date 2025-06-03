@@ -32,7 +32,7 @@ public class MaterialService {
     }
 
     public Material atualizarmaterial(Material material, Integer id){
-        material.setId_material(id);
+        material.setIdMaterial(id);
         return materialRepository.save(material);
     }
 
