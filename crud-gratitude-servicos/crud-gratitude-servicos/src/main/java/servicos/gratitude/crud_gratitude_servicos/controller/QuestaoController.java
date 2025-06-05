@@ -81,7 +81,7 @@ public class QuestaoController {
         return ResponseEntity.status(200).body(response);
     }
 
-    @PutMapping("/{idAvaliacao/{idQuestao}}")
+    @PutMapping("/{idAvaliacao}/{idQuestao}")
     public ResponseEntity<QuestaoResponseDto> atualizarQuestao(
             @PathVariable Integer idAvaliacao,
             @PathVariable Integer idQuestao,
@@ -111,7 +111,7 @@ public class QuestaoController {
         if (!questaoService.existsById(idComposto)){
             return ResponseEntity.status(404).build();
         }
-        
+
         questaoService.deletarQuestao(idComposto);
 
         return ResponseEntity.status(200).build();

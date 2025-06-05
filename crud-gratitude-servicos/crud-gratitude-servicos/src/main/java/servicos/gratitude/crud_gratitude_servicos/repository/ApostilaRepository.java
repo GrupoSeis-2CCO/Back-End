@@ -1,11 +1,10 @@
 package servicos.gratitude.crud_gratitude_servicos.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import servicos.gratitude.crud_gratitude_servicos.entity.Apostila;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
-import servicos.gratitude.crud_gratitude_servicos.entity.Material;
-
 import java.util.List;
 
-public interface MaterialRepository  extends JpaRepository<Material, Integer> {
-    List<Material> findByFkCurso(Curso fkCurso);
+public interface ApostilaRepository extends JpaRepository<Apostila, Integer> {
+    List<Apostila> findByFkCurso(Curso fkCurso);
 }
