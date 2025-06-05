@@ -6,12 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
 @Getter
 @Setter
-public class QuestaoCompoundKey implements Serializable {
-    private Integer idQuestao;
-    private Integer fkAvaliacao;
+public class MatriculaCompoundKey implements Serializable {
+    private Integer fkUsuario;
+    private Integer fkCurso;
 }
