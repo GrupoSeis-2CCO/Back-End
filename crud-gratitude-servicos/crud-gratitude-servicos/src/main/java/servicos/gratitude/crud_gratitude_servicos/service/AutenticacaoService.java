@@ -10,6 +10,7 @@ import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
 
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 public class AutenticacaoService implements UserDetailsService {

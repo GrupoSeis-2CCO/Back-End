@@ -24,4 +24,6 @@ public class Usuario {
 
     @ManyToOne
     private Cargo fkCargo;
+
+
 }

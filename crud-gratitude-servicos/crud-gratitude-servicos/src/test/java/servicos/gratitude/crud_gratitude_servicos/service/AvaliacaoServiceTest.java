@@ -170,7 +170,7 @@ class AvaliacaoServiceTest {
         when(avaliacaoRepository.save(any(Avaliacao.class))).thenReturn(avaliacaoSalvaEsperada);
 
         // Act
-.
+
         Avaliacao resultado = avaliacaoService.atualizarAcertosMinimos(avaliacaoPayload, idAvaliacao);
 
         // Assert
