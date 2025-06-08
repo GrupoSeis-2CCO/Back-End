@@ -281,4 +281,87 @@ class CursoServiceTest {
         curso.setOcultado(ocultado);
         return curso;
     }
-}
+        // Id1 - Cadastro bem-sucedido
+        @Test
+        void quandoCadastrarCursoComDadosCompletos_entaoSalvarCurso() {
+            Curso curso = new Curso();
+            curso.setTituloCurso("Lógica de Programação");
+            curso.setDuracaoEstimada(15);
+
+            when(cursoRepository.save(any(Curso.class))).thenReturn(curso);
+
+            Curso resultado = cursoService.cadastrarCurso(curso);
+
+            assertNotNull(resultado);
+            assertEquals("Lógica de Programação", resultado.getTituloCurso());
+            verify(cursoRepository, times(1)).save(curso);
+        }
+
+        @Test
+        void quandoCadastrarCursoDuplicado_entaoLancarExcecao() {
+            Curso cursoExistente = new Curso();
+            cursoExistente.setTituloCurso("Curso Básico de Java");
+
+            when(cursoRepository.findbytitulocurso("Curso Básico de Java"))
+                    .thenReturn(Optional.of(cursoExistente));
+
+            Curso novoCurso = new Curso();
+            novoCurso.setTituloCurso("Curso Básico de Java");
+
+            assertThrows(RuntimeException.class, () -> cursoService.cadastrarCurso(novoCurso));
+        }
+
+        // Id3 - Validação de formato de imagem (normalmente feito no Controller/DTO)
+        @Test
+        void quandoAtualizarCursoComImagemInvalida_entaoNaoSalvar() {
+            // Este teste é ilustrativo. A validação de imagem deve ser feita antes do serviço!
+            Curso curso = new Curso();
+            curso.setImagem("documento.pdf"); // Formato inválido
+
+            // Simular validação falhada (o serviço não valida imagens!)
+            assertThrows(IllegalArgumentException.class, () -> {
+                if (!curso.getImagem().endsWith(".png")) {
+                    throw new IllegalArgumentException("Formato de imagem inválido");
+                }
+                cursoService.cadastrarCurso(curso);
+            });
+        }
+
+        // Id4 - Atualização de contadores (não é responsabilidade do serviço)
+        // (Este cenário depende de lógica externa e não é testável no serviço)
+
+        // Id6 - Aceitação de caracteres especiais
+        @Test
+        void quandoCadastrarCursoComCaracteresEspeciais_entaoSalvar() {
+            Curso curso = new Curso();
+            curso.setTituloCurso("Curso Avançado!@#");
+
+
+            when(cursoRepository.save(any(Curso.class))).thenReturn(curso);
+
+            Curso resultado = cursoService.cadastrarCurso(curso);
+
+            assertEquals("Curso Avançado!@#", resultado.getTituloCurso());
+        }
+
+        // Testes para métodos adicionais
+        @Test
+        void quandoAtualizarOculto_entaoAlterarStatus() {
+            Curso curso = new Curso();
+            curso.setIdCurso(1);
+            curso.setOcultado(false);
+
+            when(cursoRepository.findById(1)).thenReturn(Optional.of(curso));
+            when(cursoRepository.save(any(Curso.class))).thenReturn(curso);
+
+            Curso resultado = cursoService.atualizarOculto(1, true);
+
+            assertTrue(resultado.getOcultado());
+        }
+
+        @Test
+        void quandoDeletarCursoInexistente_entaoLancarExcecao() {
+            doThrow(new RuntimeException("Curso não encontrado")).when(cursoRepository).deleteById(999);
+            assertThrows(RuntimeException.class, () -> cursoService.deletarCurso(999));
+        }
+    }

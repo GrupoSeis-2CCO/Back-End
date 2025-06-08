@@ -16,19 +16,19 @@ import java.util.List;
 public class AutenticacaoService implements UserDetailsService {
     private final UsuarioRepository usuarioRepository;
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(username);
-//
-//        if (usuarioOpt.isEmpty()){
-//            throw new UsernameNotFoundException(String.format("usuario: %s nao encontado",username));
-//
-//        }
-//        return new UsuarioDetalhesDto(usuarioOpt.get());
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Preencha o campo de e-mail");
+        }
+        email = email.trim();
+
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+            throw new IllegalArgumentException("Formato de e-mail inválido");
+        }
+
+
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
@@ -37,5 +37,17 @@ public class AutenticacaoService implements UserDetailsService {
                 usuario.getSenha(),
                 List.of()
         );
+
+
+
+    }
+    public void validarSenha(String senha) {
+        if (senha == null || senha.isBlank()) {
+            throw new IllegalArgumentException("Preencha a senha");
+        }
+
+        if (senha.length() < 4) {
+            throw new IllegalArgumentException("A senha deve ter pelo menos 4 caracteres");
+        }
     }
 }
