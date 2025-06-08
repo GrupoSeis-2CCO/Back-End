@@ -20,7 +20,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.dto.autenticacao.Usuari
 import servicos.gratitude.crud_gratitude_servicos.mapper.UsuarioMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CargoService;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
-import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
+import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService.UsuarioService;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

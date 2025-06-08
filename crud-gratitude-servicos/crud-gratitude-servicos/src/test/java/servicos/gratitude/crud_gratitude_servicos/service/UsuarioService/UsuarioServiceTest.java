@@ -8,7 +8,6 @@ import org.mockito.MockitoAnnotations;
 import servicos.gratitude.crud_gratitude_servicos.entity.Cargo;
 import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.repository.UsuarioRepository;
-import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -121,10 +120,10 @@ class UsuarioServiceTest {
         usuario.setEmail("joana@email.com");
         usuario.setSenha("senha123");
         usuario.setCpf("12345678900");
-        usuario.setFk_cargo(null); // Cargo nulo
+        usuario.setFkCargo(null); // Cargo nulo
 
         assertThrows(IllegalArgumentException.class, () -> {
-            if (usuario.getFk_cargo() == null) {
+            if (usuario.getFkCargo() == null) {
                 throw new IllegalArgumentException("Cargo é obrigatório");
             }
             usuarioService.cadastrar(usuario);
@@ -138,11 +137,11 @@ class UsuarioServiceTest {
         usuario.setEmail("lucas@email.com");
         usuario.setSenha("senhaSegura123");
         usuario.setCpf("12345678901");
-        usuario.setData_entrada(LocalDateTime.now());
-        usuario.setUltimo_acesso(LocalDateTime.now());
+        usuario.setDataEntrada(LocalDateTime.now());
+        usuario.setUltimoAcesso(LocalDateTime.now());
 
         Cargo cargo = new Cargo();
-        usuario.setFk_cargo(cargo);
+        usuario.setFkCargo(cargo);
 
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(usuario);
 
@@ -343,7 +342,7 @@ class UsuarioServiceTest {
         LocalDateTime novoAcesso = LocalDateTime.now();
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(idUsuario);
-        usuario.setUltimo_acesso(LocalDateTime.now().minusDays(1));
+        usuario.setUltimoAcesso(LocalDateTime.now().minusDays(1));
 
         when(usuarioRepository.findById(idUsuario)).thenReturn(Optional.of(usuario));
         when(usuarioRepository.save(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -351,7 +350,7 @@ class UsuarioServiceTest {
         Usuario usuarioAtualizado = usuarioService.atualizarAcesso(idUsuario, novoAcesso);
 
         assertNotNull(usuarioAtualizado);
-        assertEquals(novoAcesso, usuarioAtualizado.getUltimo_acesso());
+        assertEquals(novoAcesso, usuarioAtualizado.getUltimoAcesso());
         verify(usuarioRepository).findById(idUsuario);
         verify(usuarioRepository).save(usuario);
     }
@@ -376,7 +375,7 @@ class UsuarioServiceTest {
         LocalDateTime novoAcesso = LocalDateTime.now();
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(idUsuario);
-        usuario.setUltimo_acesso(LocalDateTime.now().minusDays(1));
+        usuario.setUltimoAcesso(LocalDateTime.now().minusDays(1));
 
         when(usuarioRepository.findById(idUsuario)).thenReturn(Optional.of(usuario));
         when(usuarioRepository.save(any(Usuario.class))).thenThrow(new RuntimeException("Erro ao salvar"));

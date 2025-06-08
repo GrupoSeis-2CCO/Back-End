@@ -17,10 +17,10 @@ public class Alternativa {
     private boolean correta;
 
     @ManyToOne(optional = false)
-    @MapsId("questaoKey")
+    @MapsId("questaoKey") // deve bater com o nome do atributo na classe AlternativaCompoundKey
     @JoinColumns({
-        @JoinColumn(name = "questao_id_questao", referencedColumnName = "idQuestao"),
-        @JoinColumn(name = "questao_fk_avaliacao", referencedColumnName = "fkAvaliacao")
+            @JoinColumn(name = "questao_id_questao", referencedColumnName = "idQuestao"),
+            @JoinColumn(name = "questao_fk_avaliacao", referencedColumnName = "fkAvaliacao")
     })
     private Questao questao;
 } 

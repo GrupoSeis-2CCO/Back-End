@@ -34,7 +34,7 @@ class CursoServiceTest {
         Curso resultado = cursoService.cadastrarCurso(curso);
 
         assertNotNull(resultado);
-        assertEquals("Java Avançado", resultado.getTitulo_curso());
+        assertEquals("Java Avançado", resultado.getTituloCurso());
         verify(cursoRepository, times(1)).save(curso);
     }
 
@@ -52,7 +52,7 @@ class CursoServiceTest {
     @Test
     void cadastrarCurso_DeveSalvarComSucesso_QuandoCamposObrigatoriosPresentes() {
         Curso curso = new Curso();
-        curso.setTitulo_curso("Curso Essencial");
+        curso.setTituloCurso("Curso Essencial");
         curso.setOcultado(true);
 
         when(cursoRepository.save(any(Curso.class))).thenReturn(curso);
@@ -60,7 +60,7 @@ class CursoServiceTest {
         Curso resultado = cursoService.cadastrarCurso(curso);
 
         assertNotNull(resultado);
-        assertEquals("Curso Essencial", resultado.getTitulo_curso());
+        assertEquals("Curso Essencial", resultado.getTituloCurso());
     }
 
     // ============== listarCursos ==============
@@ -94,8 +94,8 @@ class CursoServiceTest {
 
         List<Curso> resultado = cursoService.listarCursos();
 
-        assertEquals("Primeiro", resultado.get(0).getTitulo_curso());
-        assertEquals("Segundo", resultado.get(1).getTitulo_curso());
+        assertEquals("Primeiro", resultado.get(0).getTituloCurso());
+        assertEquals("Segundo", resultado.get(1).getTituloCurso());
     }
 
     // ============== existsById ==============
@@ -129,7 +129,7 @@ class CursoServiceTest {
 
         Curso resultado = cursoService.atualizarCurso(1, novosDados);
 
-        assertEquals("Novo Título", resultado.getTitulo_curso());
+        assertEquals("Novo Título", resultado.getTituloCurso());
         assertFalse(resultado.getOcultado());
     }
 
@@ -142,7 +142,7 @@ class CursoServiceTest {
 
         Curso resultado = cursoService.atualizarCurso(1, novosDados);
 
-        assertEquals(1, resultado.getId_curso().intValue());
+        assertEquals(1, resultado.getIdCurso().intValue());
     }
 
     @Test
@@ -251,7 +251,7 @@ class CursoServiceTest {
         Optional<Curso> resultado = cursoService.findById(1);
 
         assertTrue(resultado.isPresent());
-        assertEquals("Encontrado", resultado.get().getTitulo_curso());
+        assertEquals("Encontrado", resultado.get().getTituloCurso());
     }
 
     @Test
@@ -274,10 +274,10 @@ class CursoServiceTest {
     // Método auxiliar para criar cursos válidos
     private Curso criarCursoValido(String titulo, boolean ocultado) {
         Curso curso = new Curso();
-        curso.setTitulo_curso(titulo);
+        curso.setTituloCurso(titulo);
         curso.setDescricao("Descrição do curso");
         curso.setImagem("imagem.jpg");
-        curso.setDuracao_estimada(10);
+        curso.setDuracaoEstimada(10);
         curso.setOcultado(ocultado);
         return curso;
     }

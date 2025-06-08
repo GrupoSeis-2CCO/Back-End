@@ -27,9 +27,8 @@ class QuestaoServiceTest {
     @InjectMocks
     private QuestaoService questaoService;
 
-    private Avaliacao criarAvaliacaoValida(Long id) {
+    private Avaliacao criarAvaliacaoValida(Integer id) {
         Avaliacao mockAvaliacao = mock(Avaliacao.class);
-        when(mockAvaliacao.getIdAvaliacao()).thenReturn(id);
         return mockAvaliacao;
     }
 
@@ -37,7 +36,7 @@ class QuestaoServiceTest {
         Questao questao = new Questao();
         QuestaoCompoundKey key = new QuestaoCompoundKey();
         key.setFkAvaliacao(avaliacao.getIdAvaliacao());
-        key.setNumeroQuestao(numeroQuestao);
+        key.setIdQuestao(numeroQuestao);
 
         questao.setIdQuestaoComposto(key);
         questao.setAvaliacao(avaliacao);
@@ -50,7 +49,7 @@ class QuestaoServiceTest {
     @Test
     void cadastrarQuestao_DeveRetornarQuestaoSalva_QuandoDadosValidos() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
         Questao questaoParaSalvar = criarQuestaoValida(avaliacao, 1, "Qual é a capital da França?");
         when(questaoRepository.save(any(Questao.class))).thenReturn(questaoParaSalvar);
 
@@ -67,7 +66,7 @@ class QuestaoServiceTest {
     @Test
     void cadastrarQuestao_DeveLancarExcecao_QuandoRepositorioFalhar() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
         Questao questao = criarQuestaoValida(avaliacao, 1, "Enunciado Falha");
         when(questaoRepository.save(any(Questao.class))).thenThrow(new RuntimeException("Erro ao salvar no banco"));
 
@@ -84,7 +83,7 @@ class QuestaoServiceTest {
     @Test
     void listarQuestoesPorAvaliacao_DeveRetornarListaDeQuestoes_QuandoExistirem() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
         Questao questao1 = criarQuestaoValida(avaliacao, 1, "Pergunta 1");
         Questao questao2 = criarQuestaoValida(avaliacao, 2, "Pergunta 2");
         List<Questao> listaEsperada = List.of(questao1, questao2);
@@ -104,7 +103,7 @@ class QuestaoServiceTest {
     @Test
     void listarQuestoesPorAvaliacao_DeveRetornarListaVazia_QuandoNaoExistirem() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
         when(questaoRepository.findAllByAvaliacao(avaliacao)).thenReturn(Collections.emptyList());
 
         // Act
@@ -119,7 +118,7 @@ class QuestaoServiceTest {
     @Test
     void listarQuestoesPorAvaliacao_DeveLancarExcecao_QuandoRepositorioFalhar() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
         when(questaoRepository.findAllByAvaliacao(avaliacao)).thenThrow(new RuntimeException("Erro ao listar por avaliacao"));
 
         // Act & Assert
@@ -135,8 +134,10 @@ class QuestaoServiceTest {
     @Test
     void findById_DeveRetornarQuestao_QuandoIdExistente() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 1);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(1);
         Questao questaoEsperada = criarQuestaoValida(avaliacao, 1, "Existe?");
         when(questaoRepository.findById(key)).thenReturn(Optional.of(questaoEsperada));
 
@@ -152,8 +153,10 @@ class QuestaoServiceTest {
     @Test
     void findById_DeveRetornarOptionalVazio_QuandoIdInexistente() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 999);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(999);
         when(questaoRepository.findById(key)).thenReturn(Optional.empty());
 
         // Act
@@ -167,8 +170,10 @@ class QuestaoServiceTest {
     @Test
     void findById_DeveLancarExcecao_QuandoRepositorioFalhar() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 1);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(1);
         when(questaoRepository.findById(key)).thenThrow(new RuntimeException("Erro ao buscar por ID"));
 
         // Act & Assert
@@ -184,8 +189,10 @@ class QuestaoServiceTest {
     @Test
     void existsById_DeveRetornarTrue_QuandoQuestaoExistente() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 1);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(1);
         when(questaoRepository.existsById(key)).thenReturn(true);
 
         // Act
@@ -199,8 +206,10 @@ class QuestaoServiceTest {
     @Test
     void existsById_DeveRetornarFalse_QuandoQuestaoInexistente() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 999);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(999);
         when(questaoRepository.existsById(key)).thenReturn(false);
 
         // Act
@@ -214,8 +223,10 @@ class QuestaoServiceTest {
     @Test
     void existsById_DeveLancarExcecao_QuandoRepositorioFalhar() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 1);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(1);
         when(questaoRepository.existsById(key)).thenThrow(new RuntimeException("Erro ao verificar existencia"));
 
         // Act & Assert
@@ -230,8 +241,10 @@ class QuestaoServiceTest {
     // ============== deletarQuestao ==============
     @Test
     void deletarQuestao_DeveChamarDeleteByIdDoRepositorio() {
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 1);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(1);
 
         doNothing().when(questaoRepository).deleteById(key);
 
@@ -243,8 +256,10 @@ class QuestaoServiceTest {
     @Test
     void deletarQuestao_DeveExecutarSemErro_QuandoQuestaoInexistente() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 999);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(999);
         doNothing().when(questaoRepository).deleteById(key);
 
         // Act & Assert
@@ -259,8 +274,10 @@ class QuestaoServiceTest {
     @Test
     void deletarQuestao_DeveLancarExcecao_QuandoRepositorioFalhar() {
         // Arrange
-        Avaliacao avaliacao = criarAvaliacaoValida(1L);
-        QuestaoCompoundKey key = new QuestaoCompoundKey(avaliacao.getIdAvaliacao(), 1);
+        Avaliacao avaliacao = criarAvaliacaoValida(1);
+        QuestaoCompoundKey key = new QuestaoCompoundKey();
+        key.setFkAvaliacao(avaliacao.getIdAvaliacao());
+        key.setIdQuestao(1);
         doThrow(new RuntimeException("Erro ao deletar")).when(questaoRepository).deleteById(key);
 
         // Act & Assert
