@@ -1,3 +1,3 @@
 # Back-End
 
-# Tudo envolvendo o backend do projeto estará nesse repositori, para uma melhor organização do sistema. 
+# Tudo envolvendo o backend do projeto "Gratitude Capacita" estará nesse repositorio, focando em uma melhor organização do sistema. 
