@@ -11,4 +11,5 @@ import java.util.List;
 public interface MatriculaRepository extends JpaRepository <Matricula, MatriculaCompoundKey> {
     List<Matricula> findMatriculaByUsuario(Usuario usuario);
     List<Matricula> findMatriculaByCurso(Curso curso);
+    List<Matricula> findMatriculaByIsCompleto(Boolean isFinalizada);
 }

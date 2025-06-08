@@ -17,6 +17,5 @@ public class Questao {
 
     @ManyToOne(optional = false)
     @MapsId("fkAvaliacao")
-    @JoinColumn(name = "avaliacao_id_avaliacao", referencedColumnName = "idAvaliacao", insertable = false, updatable = false)
     private Avaliacao avaliacao;
 }

@@ -11,10 +11,10 @@ import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.Alternativ
 public class Alternativa {
 
     @EmbeddedId
-    private AlternativaCompoundKey idAlternativaComposto;
+    private AlternativaCompoundKey alternativaChaveComposta;
 
-    private String descricao;
-    private boolean correta;
+    private String texto;
+    private Integer ordem;
 
     @ManyToOne(optional = false)
     @MapsId("questaoKey")

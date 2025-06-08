@@ -22,11 +22,9 @@ public class Matricula {
 
     @ManyToOne(optional = false)
     @MapsId("fkUsuario")
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "idUsuario", insertable = false, updatable = false)
     private Usuario usuario;
 
     @ManyToOne
     @MapsId("fkCurso")
-    @JoinColumn(name = "fk_curso", referencedColumnName = "idCurso", insertable = false, updatable = false)
     private Curso curso;
 }

@@ -1,6 +1,5 @@
 package servicos.gratitude.crud_gratitude_servicos.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
@@ -12,6 +11,7 @@ import servicos.gratitude.crud_gratitude_servicos.repository.MatriculaRepository
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,20 +22,32 @@ public class MatriculaService {
         return matriculaRepository.save(matricula);
     }
 
-    public List<Matricula> listarMatriculaPorUsuario(Usuario usuario){
+    public List<Matricula> listarMatriculas(){
+        return matriculaRepository.findAll();
+    }
+
+    public List<Matricula> listarMatriculasPorUsuario(Usuario usuario){
         return matriculaRepository.findMatriculaByUsuario(usuario);
     }
 
-    public List<Matricula> listarMatriculaPorCurso(Curso curso){
+    public List<Matricula> listarMatriculasPorCurso(Curso curso){
         return matriculaRepository.findMatriculaByCurso(curso);
     }
 
-    public Matricula AtualizarUltimoAcesso (Matricula matricula){
+    public List<Matricula> listarMatriculasPorCompletude(Boolean isCompleta){
+        return matriculaRepository.findMatriculaByIsCompleto(isCompleta);
+    }
+
+    public Optional<Matricula> findById(MatriculaCompoundKey idMatricula){
+        return matriculaRepository.findById(idMatricula);
+    }
+
+    public Matricula atualizarUltimoAcesso (Matricula matricula){
         matricula.setUltimoAcesso(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         return matriculaRepository.save(matricula);
     }
 
-    public Matricula finalizarMatricula (Matricula matricula){
+    public Matricula completarMatricula (Matricula matricula){
         matricula.setIsCompleto(true);
         matricula.setDataFinalizacao(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         return matriculaRepository.save(matricula);
