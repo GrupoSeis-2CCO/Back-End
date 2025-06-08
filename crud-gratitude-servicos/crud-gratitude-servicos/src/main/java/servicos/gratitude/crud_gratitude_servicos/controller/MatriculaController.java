@@ -183,7 +183,7 @@ public class MatriculaController {
         if (matricula.isEmpty()){
             return ResponseEntity.status(404).build();
         }
-        
+
         matriculaService.deletarMatricula(idComposto);
         return ResponseEntity.status(200).build();
     }
