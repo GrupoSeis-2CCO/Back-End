@@ -24,7 +24,7 @@ public class ApostilaService {
     }
 
     public List<Apostila> listarApostilaPorCurso(Curso fkCurso){
-        return apostilaRepository.findByFkCurso(fkCurso);
+        return apostilaRepository.findAllByFkCurso(fkCurso);
     }
 
     public Optional<Apostila> findById(Integer id){

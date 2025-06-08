@@ -22,6 +22,6 @@ public class FeedbackService {
     }
 
     public List<Feedback> findByCurso(Curso fkCurso){
-        return feedbackRepository.findByFkCurso(fkCurso);
+        return feedbackRepository.findAllByFkCurso(fkCurso);
     }
 }

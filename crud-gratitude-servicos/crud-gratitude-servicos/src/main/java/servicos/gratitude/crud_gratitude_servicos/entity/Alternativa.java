@@ -17,6 +17,6 @@ public class Alternativa {
     private Integer ordem;
 
     @ManyToOne(optional = false)
-    @MapsId("questaoKey")
+    @MapsId("idQuestaoComposto")
     private Questao questao;
 }

@@ -13,5 +13,5 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class AlternativaCompoundKey implements Serializable {
     private Integer idAlternativa;
-    private QuestaoCompoundKey questaoKey;
+    private QuestaoCompoundKey idQuestaoComposto;
 }

@@ -27,15 +27,15 @@ public class MatriculaService {
     }
 
     public List<Matricula> listarMatriculasPorUsuario(Usuario usuario){
-        return matriculaRepository.findMatriculaByUsuario(usuario);
+        return matriculaRepository.findAllByUsuario(usuario);
     }
 
     public List<Matricula> listarMatriculasPorCurso(Curso curso){
-        return matriculaRepository.findMatriculaByCurso(curso);
+        return matriculaRepository.findAllByCurso(curso);
     }
 
     public List<Matricula> listarMatriculasPorCompletude(Boolean isCompleta){
-        return matriculaRepository.findMatriculaByIsCompleto(isCompleta);
+        return matriculaRepository.findAllByIsCompleto(isCompleta);
     }
 
     public Optional<Matricula> findById(MatriculaCompoundKey idMatricula){

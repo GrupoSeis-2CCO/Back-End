@@ -24,7 +24,7 @@ public class VideoService {
     }
 
     public List<Video> listarVideoPorCurso(Curso fkCurso){
-        return videoRepository.findByFkCurso(fkCurso);
+        return videoRepository.findAllByFkCurso(fkCurso);
     }
 
     public Optional<Video> findById(Integer id){

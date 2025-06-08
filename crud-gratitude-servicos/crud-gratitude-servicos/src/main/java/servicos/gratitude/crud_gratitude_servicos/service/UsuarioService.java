@@ -54,7 +54,7 @@ public class UsuarioService {
     }
 
     public List<Usuario> pesquisaPorNome(String nome){
-        return usuarioRepository.findByNomeContainsIgnoreCase(nome);
+        return usuarioRepository.findAllByNomeContainsIgnoreCase(nome);
     }
 
 

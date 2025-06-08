@@ -7,5 +7,5 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Video;
 import java.util.List;
 
 public interface VideoRepository extends JpaRepository<Video, Integer> {
-    List<Video> findByFkCurso(Curso fkCurso);
+    List<Video> findAllByFkCurso(Curso fkCurso);
 }

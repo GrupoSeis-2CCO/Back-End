@@ -6,5 +6,5 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import java.util.List;
 
 public interface ApostilaRepository extends JpaRepository<Apostila, Integer> {
-    List<Apostila> findByFkCurso(Curso fkCurso);
+    List<Apostila> findAllByFkCurso(Curso fkCurso);
 }

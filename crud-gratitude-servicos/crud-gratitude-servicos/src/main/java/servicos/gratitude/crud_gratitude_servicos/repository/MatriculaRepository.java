@@ -9,7 +9,7 @@ import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.MatriculaC
 import java.util.List;
 
 public interface MatriculaRepository extends JpaRepository <Matricula, MatriculaCompoundKey> {
-    List<Matricula> findMatriculaByUsuario(Usuario usuario);
-    List<Matricula> findMatriculaByCurso(Curso curso);
-    List<Matricula> findMatriculaByIsCompleto(Boolean isFinalizada);
+    List<Matricula> findAllByUsuario(Usuario usuario);
+    List<Matricula> findAllByCurso(Curso curso);
+    List<Matricula> findAllByIsCompleto(Boolean isFinalizada);
 }

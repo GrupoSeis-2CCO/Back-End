@@ -395,12 +395,12 @@ class UsuarioServiceTest {
     void pesquisaPorNome_retornaListaVazia_quandoNomeNaoExiste() {
         String nome = "inexistente";
 
-        when(usuarioRepository.findByNomeContainsIgnoreCase(nome)).thenReturn(Collections.emptyList());
+        when(usuarioRepository.findAllByNomeContainsIgnoreCase(nome)).thenReturn(Collections.emptyList());
 
         List<Usuario> resultado = usuarioService.pesquisaPorNome(nome);
 
         assertTrue(resultado.isEmpty());
-        verify(usuarioRepository).findByNomeContainsIgnoreCase(nome);
+        verify(usuarioRepository).findAllByNomeContainsIgnoreCase(nome);
     }
 
     @Test
@@ -408,8 +408,8 @@ class UsuarioServiceTest {
         String nomeNulo = null;
         String nomeVazio = "";
 
-        when(usuarioRepository.findByNomeContainsIgnoreCase(nomeNulo)).thenReturn(Collections.emptyList());
-        when(usuarioRepository.findByNomeContainsIgnoreCase(nomeVazio)).thenReturn(Collections.emptyList());
+        when(usuarioRepository.findAllByNomeContainsIgnoreCase(nomeNulo)).thenReturn(Collections.emptyList());
+        when(usuarioRepository.findAllByNomeContainsIgnoreCase(nomeVazio)).thenReturn(Collections.emptyList());
 
         List<Usuario> resultadoNulo = usuarioService.pesquisaPorNome(nomeNulo);
         List<Usuario> resultadoVazio = usuarioService.pesquisaPorNome(nomeVazio);
@@ -417,8 +417,8 @@ class UsuarioServiceTest {
         assertTrue(resultadoNulo.isEmpty());
         assertTrue(resultadoVazio.isEmpty());
 
-        verify(usuarioRepository).findByNomeContainsIgnoreCase(nomeNulo);
-        verify(usuarioRepository).findByNomeContainsIgnoreCase(nomeVazio);
+        verify(usuarioRepository).findAllByNomeContainsIgnoreCase(nomeNulo);
+        verify(usuarioRepository).findAllByNomeContainsIgnoreCase(nomeVazio);
     }
 
     @Test
@@ -439,7 +439,7 @@ class UsuarioServiceTest {
 
         String nomeBusca = "joao";
 
-        when(usuarioRepository.findByNomeContainsIgnoreCase(nomeBusca)).thenReturn(usuarios);
+        when(usuarioRepository.findAllByNomeContainsIgnoreCase(nomeBusca)).thenReturn(usuarios);
 
         // Act
         List<Usuario> resultado = usuarioService.pesquisaPorNome(nomeBusca);
