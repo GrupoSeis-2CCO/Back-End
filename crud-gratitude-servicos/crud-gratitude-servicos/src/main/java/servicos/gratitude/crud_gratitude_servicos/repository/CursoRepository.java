@@ -6,7 +6,5 @@ import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import java.util.Optional;
 
 public interface CursoRepository extends JpaRepository <Curso, Integer>{
-    Optional findbynome(String titulocurso);
-
-    Optional findbytitulocurso(String tituloCurso);
+    Optional<Curso> findByTituloCurso(String tituloCurso);
 }

@@ -39,6 +39,10 @@ public class CursoController {
             @Parameter(description = "Dados do curso", required = true)
             @Valid @RequestBody CursoRequestDto request
     ) {
+        if (cursoService.findByTitulo(request.getTituloCurso()).isPresent()){
+            return ResponseEntity.status(409).build();
+        }
+
         Curso curso = CursoMapper.toEntity(request);
         Curso cursoCadastrado = cursoService.cadastrarCurso(curso);
         CursoResponseDto response = CursoMapper.toEntity(cursoCadastrado);

@@ -13,10 +13,11 @@ import java.util.Optional;
 public class CursoService {
     private final CursoRepository cursoRepository;
 
+    public Optional<Curso> findByTitulo(String titulo){
+        return cursoRepository.findByTituloCurso(titulo);
+    }
+
     public Curso cadastrarCurso(Curso curso){
-        if (cursoRepository.findbytitulocurso(curso.getTituloCurso()).isPresent()) {
-            throw new IllegalArgumentException("Já existe um curso com este nome");
-        }
         return cursoRepository.save(curso);
     }
 
