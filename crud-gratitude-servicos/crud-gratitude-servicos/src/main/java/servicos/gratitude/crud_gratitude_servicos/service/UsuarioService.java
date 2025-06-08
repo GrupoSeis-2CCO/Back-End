@@ -1,4 +1,4 @@
-package servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
+package servicos.gratitude.crud_gratitude_servicos.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
