@@ -103,7 +103,7 @@ public class MatriculaController {
         return ResponseEntity.status(200).body(responses);
     }
 
-    @GetMapping("/listar-por-completude/{fkUsuario}")
+    @GetMapping("/listar-por-completude/{isCompleto}")
     public ResponseEntity<List<MatriculaResponseDto>> listarMatriculasPorUsuario(
             @PathVariable Boolean isCompleto
     ){
