@@ -15,6 +15,6 @@ public class Avaliacao {
 
     private Integer acertosMinimos;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Curso fkCurso;
 }

@@ -17,4 +17,6 @@ public class FeedbackRequestDto {
     @NotBlank
     @Size(max = 280)
     private String motivo;
+
+    private Integer fkUsuario;
 }

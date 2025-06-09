@@ -5,13 +5,18 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import servicos.gratitude.crud_gratitude_servicos.entity.Alternativa;
 import servicos.gratitude.crud_gratitude_servicos.entity.Avaliacao;
 import servicos.gratitude.crud_gratitude_servicos.entity.Questao;
+import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.AlternativaCompoundKey;
 import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.QuestaoCompoundKey;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.questao.QuestaoAtualizacaoDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.questao.QuestaoRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.questao.QuestaoResponseDto;
+import servicos.gratitude.crud_gratitude_servicos.entity.dto.questao.QuestaoRespostaDto;
+import servicos.gratitude.crud_gratitude_servicos.mapper.AlternativaMapper;
 import servicos.gratitude.crud_gratitude_servicos.mapper.QuestaoMapper;
+import servicos.gratitude.crud_gratitude_servicos.service.AlternativaService;
 import servicos.gratitude.crud_gratitude_servicos.service.AvaliacaoService;
 import servicos.gratitude.crud_gratitude_servicos.service.QuestaoService;
 
@@ -24,6 +29,7 @@ import java.util.Optional;
 public class QuestaoController {
     private final QuestaoService questaoService;
     private final AvaliacaoService avaliacaoService;
+    private final AlternativaService alternativaService;
 
     @GetMapping
     public ResponseEntity<QuestaoResponseDto> cadastrarQuestao(
@@ -35,24 +41,38 @@ public class QuestaoController {
             return ResponseEntity.status(404).build();
         }
 
-        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(request.getIdQuestao(), request.getFkAvaliacao());
+        List<Questao> questoes = questaoService.listarQuestoesPorAvaliacao(avaliacao.get());
+        Integer maiorId = 0;
+        Integer maiorNumeroQuestao = 0;
+        for (Questao questaoDaVez : questoes) {
+            if (questaoDaVez.getIdQuestaoComposto().getIdQuestao() > maiorId){
+                maiorId = questaoDaVez.getIdQuestaoComposto().getIdQuestao();
+            }
+            if (questaoDaVez.getNumeroQuestao() > maiorNumeroQuestao){
+                maiorNumeroQuestao = questaoDaVez.getNumeroQuestao();
+            }
+        }
+        Integer idQuestao = maiorId + 1;
+        Integer numeroQuestao = maiorNumeroQuestao + 1;
+
+        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(idQuestao, request.getFkAvaliacao());
 
         if (questaoService.existsById(idComposto)){
             return ResponseEntity.status(409).build();
         }
 
-        Questao questao = QuestaoMapper.toEntity(idComposto, request, avaliacao.get());
+        Questao questao = QuestaoMapper.toEntity(idComposto, maiorNumeroQuestao, request, avaliacao.get());
         Questao questaoCadastrada = questaoService.cadastrarQuestao(questao);
         QuestaoResponseDto response = QuestaoMapper.toEntity(questaoCadastrada);
 
         return ResponseEntity.status(201).body(response);
     }
 
-    @PostMapping("/{idAvaliacao}")
+    @PostMapping("/{fkAvaliacao}")
     public ResponseEntity<List<QuestaoResponseDto>> listarTodasPorAvaliacao(
-            @PathVariable Integer idAvaliacao
+            @PathVariable Integer fkAvaliacao
     ){
-        Optional<Avaliacao> avaliacao = avaliacaoService.findById(idAvaliacao);
+        Optional<Avaliacao> avaliacao = avaliacaoService.findById(fkAvaliacao);
 
         if (avaliacao.isEmpty()){
             return ResponseEntity.status(404).build();
@@ -64,12 +84,12 @@ public class QuestaoController {
         return ResponseEntity.status(200).body(responses);
     }
 
-    @PostMapping("/{idAvaliacao}/{idQuestao}")
+    @PostMapping("/{fkAvaliacao}/{idQuestao}")
     public ResponseEntity<QuestaoResponseDto> listarPorId(
-            @PathVariable Integer idAvaliacao,
+            @PathVariable Integer fkAvaliacao,
             @PathVariable Integer idQuestao
     ){
-        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(idQuestao, idAvaliacao);
+        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(idQuestao, fkAvaliacao);
         Optional<Questao> questao = questaoService.findById(idComposto);
 
         if (questao.isEmpty()){
@@ -81,13 +101,13 @@ public class QuestaoController {
         return ResponseEntity.status(200).body(response);
     }
 
-    @PutMapping("/{idAvaliacao}/{idQuestao}")
+    @PutMapping("/{fkAvaliacao}/{idQuestao}")
     public ResponseEntity<QuestaoResponseDto> atualizarQuestao(
-            @PathVariable Integer idAvaliacao,
+            @PathVariable Integer fkAvaliacao,
             @PathVariable Integer idQuestao,
             @Valid @RequestBody QuestaoAtualizacaoDto request
     ){
-        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(idQuestao, idAvaliacao);
+        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(idQuestao, fkAvaliacao);
         Optional<Questao> questaoParaAtualizar = questaoService.findById(idComposto);
 
         if (questaoParaAtualizar.isEmpty()){
@@ -101,12 +121,39 @@ public class QuestaoController {
         return ResponseEntity.status(200).body(response);
     }
 
-    @DeleteMapping("/{idAvaliacao}/{idQuestao}")
-    public ResponseEntity deletarQuestao(
-            @PathVariable Integer idAvaliacao,
+    @PutMapping("definir-resposta/{fkAvaliacao}/{idQuestao}")
+    public ResponseEntity<QuestaoResponseDto> definirResposta(
+            @Valid @RequestBody QuestaoRespostaDto update,
+            @PathVariable Integer fkAvaliacao,
             @PathVariable Integer idQuestao
     ){
-        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(idQuestao, idAvaliacao);
+        QuestaoCompoundKey idQuestaoComposto = QuestaoMapper.toEntity(idQuestao, fkAvaliacao);
+        Optional<Questao> questao = questaoService.findById(idQuestaoComposto);
+
+        if (questao.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+
+        AlternativaCompoundKey idAlternativaComposto = AlternativaMapper.toEntity(update.getFkAlternativa(), idQuestaoComposto);
+        Optional<Alternativa> alternativa = alternativaService.findById(idAlternativaComposto);
+
+        if (alternativa.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+
+        questao.get().setFkAlternativaCorreta(alternativa.get());
+        Questao questaoAtualizada = questaoService.atualizarQuestao(questao.get());
+        QuestaoResponseDto response = QuestaoMapper.toEntity(questaoAtualizada);
+
+        return ResponseEntity.status(200).body(response);
+    }
+
+    @DeleteMapping("/{fkAvaliacao}/{idQuestao}")
+    public ResponseEntity deletarQuestao(
+            @PathVariable Integer fkAvaliacao,
+            @PathVariable Integer idQuestao
+    ){
+        QuestaoCompoundKey idComposto = QuestaoMapper.toEntity(idQuestao, fkAvaliacao);
 
         if (!questaoService.existsById(idComposto)){
             return ResponseEntity.status(404).build();

@@ -9,7 +9,6 @@ import servicos.gratitude.crud_gratitude_servicos.entity.compoundKeys.QuestaoCom
 
 @Data
 public class QuestaoRequestDto {
-    private Integer idQuestao;
     private Integer fkAvaliacao;
     private String enunciado;
     private Integer numeroQuestao;

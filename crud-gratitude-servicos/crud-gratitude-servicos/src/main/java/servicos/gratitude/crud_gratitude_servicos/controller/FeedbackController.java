@@ -13,11 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.Feedback;
+import servicos.gratitude.crud_gratitude_servicos.entity.Usuario;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.feedback.FeedbackRequestDto;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.feedback.FeedbackResponseDto;
 import servicos.gratitude.crud_gratitude_servicos.mapper.FeedbackMapper;
 import servicos.gratitude.crud_gratitude_servicos.service.CursoService;
 import servicos.gratitude.crud_gratitude_servicos.service.FeedbackService;
+import servicos.gratitude.crud_gratitude_servicos.service.UsuarioService;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +31,7 @@ import java.util.Optional;
 public class FeedbackController {
     private final FeedbackService feedbackService;
     private final CursoService cursoService;
+    private final UsuarioService usuarioService;
 
     @PostMapping
     @Operation(summary = "Cadastrar Feedback", description = "Cadastra um novo feedback para um curso.")
@@ -48,7 +51,21 @@ public class FeedbackController {
             return ResponseEntity.status(404).build();
         }
 
-        Feedback feedback = FeedbackMapper.toEntity(request, cursoFeedback.get());
+        Feedback feedback = new Feedback();
+
+        if (request.getFkUsuario() != null){
+
+            Optional<Usuario> usuarioOptional = usuarioService.findById(request.getFkUsuario());
+            if (usuarioOptional.isEmpty()){
+                return ResponseEntity.status(404).build();
+            }
+            Usuario usuario = usuarioOptional.orElse(null);
+
+            feedback = FeedbackMapper.toEntity(request, cursoFeedback.get(), usuario);
+        } else {
+            feedback = FeedbackMapper.toEntity(request, cursoFeedback.get(), null);
+        }
+
         Feedback feedbackCadastrado = feedbackService.cadastrarFeedback(feedback);
         FeedbackResponseDto response = FeedbackMapper.toEntity(feedbackCadastrado);
 

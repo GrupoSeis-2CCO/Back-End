@@ -30,7 +30,7 @@ public class AlternativaController {
     public ResponseEntity<AlternativaResponseDto> cadastrarAlternativa(
             @Valid @RequestBody AlternativaRequestDto request
     ) {
-       QuestaoCompoundKey idQuestaoComposto = QuestaoMapper.toEntity(request.getFkQuestao(), request.getFkAvaliacao());
+        QuestaoCompoundKey idQuestaoComposto = QuestaoMapper.toEntity(request.getFkQuestao(), request.getFkAvaliacao());
         Optional<Questao> questao = questaoService.findById(idQuestaoComposto);
 
         if (questao.isEmpty()) {
@@ -55,6 +55,10 @@ public class AlternativaController {
 
         AlternativaCompoundKey idAlternativaComposto = AlternativaMapper.toEntity(idAlternativa, idQuestaoComposto);
 
+        if (alternativaService.existsById(idAlternativaComposto)){
+            return ResponseEntity.status(409).build();
+        }
+
         Alternativa alternativa = AlternativaMapper.toEntity(request, idAlternativaComposto, ordem, questao.get());
         Alternativa alternativaCadastrada = alternativaService.cadastrarAlternativa(alternativa);
         AlternativaResponseDto response = AlternativaMapper.toEntity(alternativaCadastrada);
@@ -63,7 +67,7 @@ public class AlternativaController {
     }
 
     @GetMapping("/{fkQuestao}/{fkAvaliacao}")
-    public ResponseEntity<List<AlternativaResponseDto>> listarPorQuestao(
+    public ResponseEntity<List<AlternativaResponseDto>> listarAlternativasPorQuestao(
             @PathVariable Integer fkQuestao,
             @PathVariable Integer fkAvaliacao
     ) {

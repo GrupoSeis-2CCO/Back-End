@@ -3,6 +3,7 @@ package servicos.gratitude.crud_gratitude_servicos.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +17,7 @@ public class Feedback {
 
     private Integer estrelas;
     private String motivo;
+
+    @ManyToOne
+    private Usuario fkUsuario;
 }

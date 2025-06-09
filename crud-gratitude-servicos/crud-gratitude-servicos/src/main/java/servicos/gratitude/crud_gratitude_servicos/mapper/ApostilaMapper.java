@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ApostilaMapper {
 
-    static public Apostila toEntity(ApostilaRequestDto request, Curso curso){
+    static public Apostila toEntity(ApostilaRequestDto request, Integer ordem, Curso curso){
         Apostila apostila = new Apostila();
         LocalDateTime dataCriacao = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 
@@ -24,6 +24,7 @@ public class ApostilaMapper {
         apostila.setDescricaoApostila(request.getDescricaoApostila());
         apostila.setTamanhoBytes(request.getTamanhoBytes());
         apostila.setDataPostadoApostila(dataCriacao);
+        apostila.setOrdemApostila(ordem);
         apostila.setIsApostilaOculto(true);
         apostila.setFkCurso(curso);
 

@@ -38,8 +38,8 @@ public class MatriculaService {
         return matriculaRepository.findAllByIsCompleto(isCompleta);
     }
 
-    public Optional<Matricula> findById(MatriculaCompoundKey idMatricula){
-        return matriculaRepository.findById(idMatricula);
+    public Optional<Matricula> findById(MatriculaCompoundKey idMatriculaComposto){
+        return matriculaRepository.findById(idMatriculaComposto);
     }
 
     public Matricula atualizarUltimoAcesso (Matricula matricula){
@@ -53,7 +53,11 @@ public class MatriculaService {
         return matriculaRepository.save(matricula);
     }
 
-    public void deletarMatricula (MatriculaCompoundKey idMatricula){
-        matriculaRepository.deleteById(idMatricula);
+    public void deletarMatricula (MatriculaCompoundKey idMatriculaComposto){
+        matriculaRepository.deleteById(idMatriculaComposto);
+    }
+
+    public Boolean existsById(MatriculaCompoundKey idMatriculaComposto){
+        return matriculaRepository.existsById(idMatriculaComposto);
     }
 }

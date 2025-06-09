@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import servicos.gratitude.crud_gratitude_servicos.entity.Apostila;
 import servicos.gratitude.crud_gratitude_servicos.entity.Curso;
 import servicos.gratitude.crud_gratitude_servicos.entity.Video;
 import servicos.gratitude.crud_gratitude_servicos.entity.dto.video.VideoRequestDto;
@@ -48,7 +49,16 @@ public class VideoController {
             return ResponseEntity.status(404).build();
         }
 
-        Video video = VideoMapper.toEntity(request, curso.get());
+        List<Video> videos = videoService.listarVideoPorCurso(curso.get());
+        Integer maiorOrdem = 0;
+        for (Video videoDaVez : videos) {
+            if (videoDaVez.getOrdemVideo() > maiorOrdem){
+                maiorOrdem = videoDaVez.getOrdemVideo();
+            }
+        }
+        Integer ordem = maiorOrdem + 1;
+
+        Video video = VideoMapper.toEntity(request, ordem, curso.get());
         Video videoCadastrado = videoService.cadastrarVideo(video);
         VideoResponseDto response = VideoMapper.toEntity(videoCadastrado, curso.get().getTituloCurso());
 

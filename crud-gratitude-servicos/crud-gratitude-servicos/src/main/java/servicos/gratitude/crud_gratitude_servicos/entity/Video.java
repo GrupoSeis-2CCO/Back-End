@@ -23,6 +23,6 @@ public class Video {
     private Integer ordemVideo;
     private Boolean isVideoOculto;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Curso fkCurso;
 }

@@ -48,7 +48,16 @@ public class ApostilaController {
             return ResponseEntity.status(404).build();
         }
 
-        Apostila apostila = ApostilaMapper.toEntity(request, curso.get());
+        List<Apostila> apostilas = apostilaService.listarApostilaPorCurso(curso.get());
+        Integer maiorOrdem = 0;
+        for (Apostila apostilaDaVez : apostilas) {
+            if (apostilaDaVez.getOrdemApostila() > maiorOrdem){
+                maiorOrdem = apostilaDaVez.getOrdemApostila();
+            }
+        }
+        Integer ordem = maiorOrdem + 1;
+
+        Apostila apostila = ApostilaMapper.toEntity(request, ordem,  curso.get());
         Apostila apostilaCadastrado = apostilaService.cadastrarApostila(apostila);
         ApostilaResponseDto response = ApostilaMapper.toEntity(apostilaCadastrado, curso.get().getTituloCurso());
 

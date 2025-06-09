@@ -31,7 +31,11 @@ public class AlternativaService {
         return alternativaRepository.save(update);
     }
 
-    public void deletarAlternativa(AlternativaCompoundKey idComposto){
-        alternativaRepository.deleteById(idComposto);
+    public void deletarAlternativa(AlternativaCompoundKey idAlternativaComposto){
+        alternativaRepository.deleteById(idAlternativaComposto);
+    }
+
+    public Boolean existsById(AlternativaCompoundKey idAlternativaComposto){
+        return alternativaRepository.existsById(idAlternativaComposto);
     }
 }

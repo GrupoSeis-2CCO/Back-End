@@ -1,4 +1,4 @@
- Drop database Capacita;
+-- Drop database Capacita;
 create database capacita;
 use Capacita;
 -- Tabela cargo

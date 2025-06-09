@@ -22,6 +22,6 @@ public class Usuario {
     private LocalDateTime dataEntrada;
     private LocalDateTime ultimoAcesso;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Cargo fkCargo;
 }

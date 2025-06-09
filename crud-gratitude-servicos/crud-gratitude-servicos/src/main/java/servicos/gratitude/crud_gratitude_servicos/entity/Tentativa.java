@@ -12,15 +12,14 @@ import java.time.LocalDateTime;
 public class Tentativa {
 
     @EmbeddedId
-    private TentativaCompoundKey id;
+    private TentativaCompoundKey idTentativaComposto;
 
     private LocalDateTime dtTentativa;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @MapsId("matriculaId")
+    @ManyToOne(optional = false)
+    @MapsId("idMatriculaComposto")
     private Matricula matricula;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "avaliacao_id")
     private Avaliacao avaliacao;
 }

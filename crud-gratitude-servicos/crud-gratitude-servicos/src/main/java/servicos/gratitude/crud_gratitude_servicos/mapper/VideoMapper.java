@@ -13,13 +13,14 @@ import java.util.List;
 
 public class VideoMapper {
 
-    static public Video toEntity(VideoRequestDto request, Curso curso){
+    static public Video toEntity(VideoRequestDto request, Integer ordem, Curso curso){
         Video video = new Video();
 
         video.setNomeVideo(request.getNomeVideo());
         video.setDescricaoVideo(request.getDescricaoVideo());
         video.setUrlVideo(request.getUrlVideo());
         video.setDataPostadoVideo(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        video.setOrdemVideo(ordem);
         video.setIsVideoOculto(true);
         video.setFkCurso(curso);
 

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class FeedbackResponseDto {
-    private Integer idCurso;
+    private String usuario;
     private String nomeCurso;
     private Integer estrelas;
     private String motivo;

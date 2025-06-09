@@ -38,8 +38,13 @@ public class MatriculaController {
             return ResponseEntity.status(404).build();
         }
 
-        MatriculaCompoundKey idComposto = MatriculaMapper.toEntity(usuario.get().getIdUsuario(), curso.get().getIdCurso());
-        Matricula matricula = MatriculaMapper.toEntity(request, idComposto, usuario.get(), curso.get());
+        MatriculaCompoundKey idMatriculaComposto = MatriculaMapper.toEntity(usuario.get().getIdUsuario(), curso.get().getIdCurso());
+
+        if (matriculaService.existsById(idMatriculaComposto)){
+            return ResponseEntity.status(409).build();
+        }
+
+        Matricula matricula = MatriculaMapper.toEntity(request, idMatriculaComposto, usuario.get(), curso.get());
         Matricula matriculaCadastrada = matriculaService.cadastrarMatricula(matricula);
         MatriculaResponseDto response = MatriculaMapper.toEntity(matriculaCadastrada);
 
@@ -124,9 +129,9 @@ public class MatriculaController {
             return ResponseEntity.status(404).build();
         }
 
-        MatriculaCompoundKey idComposto = MatriculaMapper.toEntity(fkUsuario, fkCurso);
+        MatriculaCompoundKey idMatriculaComposto = MatriculaMapper.toEntity(fkUsuario, fkCurso);
 
-        Optional<Matricula> matricula = matriculaService.findById(idComposto);
+        Optional<Matricula> matricula = matriculaService.findById(idMatriculaComposto);
 
         if (matricula.isEmpty()){
             return ResponseEntity.status(404).build();
@@ -150,9 +155,9 @@ public class MatriculaController {
             return ResponseEntity.status(404).build();
         }
 
-        MatriculaCompoundKey idComposto = MatriculaMapper.toEntity(fkUsuario, fkCurso);
+        MatriculaCompoundKey idMatriculaComposto = MatriculaMapper.toEntity(fkUsuario, fkCurso);
 
-        Optional<Matricula> matricula = matriculaService.findById(idComposto);
+        Optional<Matricula> matricula = matriculaService.findById(idMatriculaComposto);
 
         if (matricula.isEmpty()){
             return ResponseEntity.status(404).build();
@@ -176,15 +181,15 @@ public class MatriculaController {
             return ResponseEntity.status(404).build();
         }
 
-        MatriculaCompoundKey idComposto = MatriculaMapper.toEntity(fkUsuario, fkCurso);
+        MatriculaCompoundKey idMatriculaComposto = MatriculaMapper.toEntity(fkUsuario, fkCurso);
 
-        Optional<Matricula> matricula = matriculaService.findById(idComposto);
+        Optional<Matricula> matricula = matriculaService.findById(idMatriculaComposto);
 
         if (matricula.isEmpty()){
             return ResponseEntity.status(404).build();
         }
 
-        matriculaService.deletarMatricula(idComposto);
+        matriculaService.deletarMatricula(idMatriculaComposto);
         return ResponseEntity.status(200).build();
     }
 

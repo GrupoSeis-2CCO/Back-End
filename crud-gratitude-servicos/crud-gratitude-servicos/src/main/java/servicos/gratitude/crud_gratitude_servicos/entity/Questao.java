@@ -18,4 +18,7 @@ public class Questao {
     @ManyToOne(optional = false)
     @MapsId("fkAvaliacao")
     private Avaliacao avaliacao;
+
+    @OneToOne
+    private Alternativa fkAlternativaCorreta;
 }

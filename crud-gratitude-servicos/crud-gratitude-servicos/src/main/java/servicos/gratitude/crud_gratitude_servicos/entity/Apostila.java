@@ -24,6 +24,6 @@ public class Apostila {
     private Boolean isApostilaOculto;
     private Integer ordemApostila;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Curso fkCurso;
 }
