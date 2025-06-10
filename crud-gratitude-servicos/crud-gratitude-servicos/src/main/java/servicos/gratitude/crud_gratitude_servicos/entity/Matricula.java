@@ -15,16 +15,27 @@ public class Matricula {
     @EmbeddedId
     private MatriculaCompoundKey idMatriculaComposto;
 
+
+    @Column(name = "duracao_estimada")
     private LocalDateTime dtInscricao;
+
+    @Column(name = "ultimo_acesso")
     private LocalDateTime ultimoAcesso;
+
+    @Column(name = "completo")
     private Boolean isCompleto;
+
+
+    @Column(name = "data_finalizado")
     private LocalDateTime dataFinalizacao;
 
     @ManyToOne(optional = false)
     @MapsId("fkUsuario")
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @MapsId("fkCurso")
+    @JoinColumn(name = "fk_curso", referencedColumnName = "id_curso")
     private Curso curso;
 }

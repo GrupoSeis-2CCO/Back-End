@@ -15,12 +15,16 @@ import java.util.List;
 public class RespostaDoUsuarioMapper {
 
     static public RespostaDoUsuarioCompoundKey toEntity(TentativaCompoundKey idTentativaComposto,
-                                                        AlternativaCompoundKey idAlternativaComposto
-    ){
+                                                        AlternativaCompoundKey idAlternativaComposto) {
         RespostaDoUsuarioCompoundKey idRespostaDoUsuarioComposto = new RespostaDoUsuarioCompoundKey();
 
-        idRespostaDoUsuarioComposto.setIdTentativaComposto(idTentativaComposto);
-        idRespostaDoUsuarioComposto.setIdAlternativaComposto(idAlternativaComposto);
+        idRespostaDoUsuarioComposto.setFkUsuario(idTentativaComposto.getIdMatriculaComposto().getFkUsuario());
+        idRespostaDoUsuarioComposto.setFkCurso(idTentativaComposto.getIdMatriculaComposto().getFkCurso());
+        idRespostaDoUsuarioComposto.setFkTentativa(idTentativaComposto.getIdTentativa());
+
+        idRespostaDoUsuarioComposto.setFkAvaliacao(idAlternativaComposto.getIdQuestaoComposto().getFkAvaliacao());
+        idRespostaDoUsuarioComposto.setFkQuestao(idAlternativaComposto.getIdQuestaoComposto().getFkQuestao());
+        idRespostaDoUsuarioComposto.setFkAlternativa(idAlternativaComposto.getIdAlternativa());
 
         return idRespostaDoUsuarioComposto;
     }

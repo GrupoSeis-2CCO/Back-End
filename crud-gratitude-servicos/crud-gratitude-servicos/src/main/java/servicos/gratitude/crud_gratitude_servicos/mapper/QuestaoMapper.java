@@ -17,7 +17,7 @@ public class QuestaoMapper {
     static public QuestaoCompoundKey toEntity(Integer idQuestao, Integer fkAvaliacao){
         QuestaoCompoundKey compoundKey = new QuestaoCompoundKey();
 
-        compoundKey.setIdQuestao(idQuestao);
+        compoundKey.setFkQuestao(idQuestao);
         compoundKey.setFkAvaliacao(fkAvaliacao);
 
         return compoundKey;

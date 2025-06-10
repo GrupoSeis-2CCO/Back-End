@@ -13,10 +13,14 @@ public class Alternativa {
     @EmbeddedId
     private AlternativaCompoundKey alternativaChaveComposta;
 
+    @Column(name = "texto")
     private String texto;
+
+    @Column(name = "ordem_alternativa")
     private Integer ordem;
 
     @ManyToOne(optional = false)
     @MapsId("idQuestaoComposto")
+    @JoinColumn(name = "FK_questao")
     private Questao questao;
 }

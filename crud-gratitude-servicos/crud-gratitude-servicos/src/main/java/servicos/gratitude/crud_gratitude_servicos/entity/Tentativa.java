@@ -14,12 +14,19 @@ public class Tentativa {
     @EmbeddedId
     private TentativaCompoundKey idTentativaComposto;
 
+    @Column(name = "dt_tentativa")
     private LocalDateTime dtTentativa;
 
     @ManyToOne(optional = false)
-    @MapsId("idMatriculaComposto")
+    @MapsId("idMatriculaComposto") // nome do campo em TentativaCompoundKey
     private Matricula matricula;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id_tentativa")
     private Avaliacao avaliacao;
+
+    // Adicione manualmente se necessário
+    public TentativaCompoundKey getIdTentativaComposto() {
+        return idTentativaComposto;
+    }
 }

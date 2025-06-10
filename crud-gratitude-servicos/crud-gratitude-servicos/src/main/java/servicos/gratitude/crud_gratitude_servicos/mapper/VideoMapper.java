@@ -22,7 +22,7 @@ public class VideoMapper {
         video.setDataPostadoVideo(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         video.setOrdemVideo(ordem);
         video.setIsVideoOculto(true);
-        video.setFkCurso(curso);
+        video.setCurso(curso);
 
         return video;
     }
@@ -73,7 +73,7 @@ public class VideoMapper {
         videoAtualizado.setDataPostadoVideo(video.getDataPostadoVideo());
         videoAtualizado.setDataAtualizacaoVideo(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         videoAtualizado.setIsVideoOculto(video.getIsVideoOculto());
-        videoAtualizado.setFkCurso(videoAtualizado.getFkCurso());
+        videoAtualizado.setCurso(videoAtualizado.getCurso());
 
         return videoAtualizado;
     }

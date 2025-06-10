@@ -104,7 +104,7 @@ public class VideoController {
 
         Video videoParaAtualizar = VideoMapper.toEntity(update, video.get());
         Video videoAtualizado = videoService.atualizarvideo(videoParaAtualizar, idVideo);
-        VideoResponseDto response = VideoMapper.toEntity(videoAtualizado, video.get().getFkCurso().getTituloCurso());
+        VideoResponseDto response = VideoMapper.toEntity(videoAtualizado, video.get().getCurso().getTituloCurso());
 
         return ResponseEntity.status(200).body(response);
     }
@@ -119,7 +119,7 @@ public class VideoController {
 
         Boolean videoIsOculto = videoService.isOculto(idVideo);
         Video ocultoAtualizado = videoService.atualizarOculto(idVideo, !videoIsOculto);
-        VideoResponseDto response = VideoMapper.toEntity(ocultoAtualizado, ocultoAtualizado.getFkCurso().getTituloCurso());
+        VideoResponseDto response = VideoMapper.toEntity(ocultoAtualizado, ocultoAtualizado.getCurso().getTituloCurso());
 
         return ResponseEntity.status(200).body(response);
     }

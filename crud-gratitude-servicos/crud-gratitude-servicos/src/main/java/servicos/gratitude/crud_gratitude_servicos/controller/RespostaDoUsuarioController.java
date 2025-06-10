@@ -66,12 +66,12 @@ public class RespostaDoUsuarioController {
     ){
         List<RespostaDoUsuario> respostasDosUsuarios = respostaDoUsuarioService.listarRespostasDosUsuarios();
         List<RespostaDoUsuario> respostasDoUsuario = new ArrayList<>();
-        for (RespostaDoUsuario respostasDosUsuarioDaVez : respostasDosUsuarios) {
-            if (respostasDosUsuarioDaVez.getRespostaDoUsuarioCompoundKey().
-                    getIdTentativaComposto().getIdMatriculaComposto()
-                    .getFkUsuario().equals(fkUsuario))
-            {
-                respostasDoUsuario.add(respostasDosUsuarioDaVez);
+        for (RespostaDoUsuario resposta : respostasDosUsuarios) {
+            RespostaDoUsuarioCompoundKey chave = resposta.getRespostaDoUsuarioCompoundKey();
+
+
+            if (chave.getFkUsuario().equals(fkUsuario)) {
+                respostasDoUsuario.add(resposta);
             }
         }
 

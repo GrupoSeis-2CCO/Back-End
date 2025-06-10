@@ -45,8 +45,8 @@ public class QuestaoController {
         Integer maiorId = 0;
         Integer maiorNumeroQuestao = 0;
         for (Questao questaoDaVez : questoes) {
-            if (questaoDaVez.getIdQuestaoComposto().getIdQuestao() > maiorId){
-                maiorId = questaoDaVez.getIdQuestaoComposto().getIdQuestao();
+            if (questaoDaVez.getIdQuestaoComposto().getFkQuestao() > maiorId){
+                maiorId = questaoDaVez.getIdQuestaoComposto().getFkQuestao();
             }
             if (questaoDaVez.getNumeroQuestao() > maiorNumeroQuestao){
                 maiorNumeroQuestao = questaoDaVez.getNumeroQuestao();

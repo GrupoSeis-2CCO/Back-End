@@ -1,9 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +10,17 @@ import lombok.Setter;
 public class Feedback {
 
     @Id
+
+    @Column(name = "FK_curso")
     private Curso fkCurso;
 
+    @Column(name = "estrelas")
     private Integer estrelas;
+
+    @Column(name = "motivo")
     private String motivo;
 
     @ManyToOne
+    @JoinColumn(name = "FK_usuario")
     private Usuario fkUsuario;
 }
