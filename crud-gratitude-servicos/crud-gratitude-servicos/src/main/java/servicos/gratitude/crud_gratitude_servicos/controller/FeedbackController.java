@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class FeedbackController {
     private final UsuarioService usuarioService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Cadastrar Feedback", description = "Cadastra um novo feedback para um curso.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Feedback cadastrado com sucesso",
@@ -73,6 +75,7 @@ public class FeedbackController {
     }
 
     @GetMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Feedbacks", description = "Retorna a lista de todos os feedbacks disponíveis.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de feedbacks retornada com sucesso",
@@ -93,6 +96,7 @@ public class FeedbackController {
     }
 
     @GetMapping("/{idCurso}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Feedbacks por Curso", description = "Retorna os feedbacks de um curso específico.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de feedbacks retornada com sucesso",

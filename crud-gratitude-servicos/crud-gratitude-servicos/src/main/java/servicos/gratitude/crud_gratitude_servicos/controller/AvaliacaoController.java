@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,7 @@ public class AvaliacaoController {
     private final CursoService cursoService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Cadastrar Avaliação", description = "Método responsável por cadastrar novas avaliações")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Avaliação cadastrada com sucesso",
@@ -62,6 +64,7 @@ public class AvaliacaoController {
     }
 
     @PutMapping("/atualizar-acertos/{id}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Atualizar Acertos Mínimos", description = "Atualiza o número mínimo de acertos para uma avaliação específica")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Acertos mínimos atualizados com sucesso",

@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class RespostaDoUsuarioController {
     private final AlternativaService alternativaService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<RespostaDoUsuarioResponseDto> cadastrarRespostaDoUsuario(
             @Valid RespostaDoUsuarioRequestDto request
     ){
@@ -61,6 +63,7 @@ public class RespostaDoUsuarioController {
     }
 
     @GetMapping("/listar-respostas-do-usuario/{fkUsuario}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<RespostaDoUsuarioResponseDto>> listarRespostasDoUsuario(
             @PathVariable Integer fkUsuario
     ){

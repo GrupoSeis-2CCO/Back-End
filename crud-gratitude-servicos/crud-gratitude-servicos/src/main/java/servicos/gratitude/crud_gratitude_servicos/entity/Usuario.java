@@ -23,5 +23,6 @@ public class Usuario {
     private LocalDateTime ultimoAcesso;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "fk_cargo")
     private Cargo fkCargo;
 }

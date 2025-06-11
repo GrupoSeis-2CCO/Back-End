@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class AlternativaController {
     private final QuestaoService questaoService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<AlternativaResponseDto> cadastrarAlternativa(
             @Valid @RequestBody AlternativaRequestDto request
     ) {
@@ -67,6 +69,7 @@ public class AlternativaController {
     }
 
     @GetMapping("/{fkQuestao}/{fkAvaliacao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<AlternativaResponseDto>> listarAlternativasPorQuestao(
             @PathVariable Integer fkQuestao,
             @PathVariable Integer fkAvaliacao
@@ -90,6 +93,7 @@ public class AlternativaController {
     }
 
     @PutMapping("/{idAlternativa}/{fkQuestao}/{fkAvaliacao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<AlternativaResponseDto> atualizarAlternativa(
             @Valid @RequestBody AlternativaUpdateDto update,
             @PathVariable Integer idAlternativa,
@@ -117,6 +121,7 @@ public class AlternativaController {
     }
 
     @DeleteMapping("/{idAlternativa}/{fkQuestao}/{fkAvaliacao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity deletarAlternativa(
             @PathVariable Integer idAlternativa,
             @PathVariable Integer fkQuestao,

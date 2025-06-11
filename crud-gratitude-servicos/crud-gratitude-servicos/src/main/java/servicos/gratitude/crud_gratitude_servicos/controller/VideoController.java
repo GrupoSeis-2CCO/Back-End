@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ public class VideoController {
     private final CursoService cursoService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Cadastrar Video", description = "Cadastra um novo video para um curso.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Video cadastrado com sucesso",
@@ -66,6 +68,7 @@ public class VideoController {
     }
 
     @GetMapping("/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Videos por Curso", description = "Retorna a lista de todos os videos de um curso.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de videos retornada com sucesso",
@@ -92,6 +95,7 @@ public class VideoController {
     }
 
     @PutMapping("/atualizar-dados/{id}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<VideoResponseDto> atualizarDadosVideo(
             @Valid @RequestBody VideoUpdateDto update,
             @PathVariable Integer idVideo
@@ -110,6 +114,7 @@ public class VideoController {
     }
 
     @PutMapping("/atualizar-oculto/{id}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<VideoResponseDto> atualizarOcultoVideo(
             @PathVariable Integer idVideo
     ){
@@ -125,6 +130,7 @@ public class VideoController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity deletarVideo(
             @PathVariable Integer idVideo
     ){

@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class MatriculaController {
     private final CursoService cursoService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<MatriculaResponseDto> cadastrarMatricula(
             @Valid @RequestBody MatriculaRequestDto request
     ){
@@ -52,6 +54,7 @@ public class MatriculaController {
     }
 
     @GetMapping
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<MatriculaResponseDto>> listarMatriculas(){
         List<Matricula> matriculas = matriculaService.listarMatriculas();
 
@@ -64,6 +67,7 @@ public class MatriculaController {
     }
 
     @GetMapping("/listar-por-usuario/{fkUsuario}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<MatriculaResponseDto>> listarMatriculasPorUsuario(
             @PathVariable Integer fkUsuario
     ){
@@ -84,6 +88,7 @@ public class MatriculaController {
     }
 
     @GetMapping("/listar-por-curso/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<MatriculaResponseDto>> listarMatriculasPorCurso(
             @PathVariable Integer fkCurso
     ){
@@ -104,6 +109,7 @@ public class MatriculaController {
     }
 
     @GetMapping("/listar-por-completude/{isCompleto}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<MatriculaResponseDto>> listarMatriculasPorUsuario(
             @PathVariable Boolean isCompleto
     ){
@@ -118,6 +124,7 @@ public class MatriculaController {
     }
 
     @PutMapping("atualizar-ultimo-acesso/{fkUsuario}/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<MatriculaResponseDto> atualizarUltimoAcesso(
             @PathVariable Integer fkUsuario,
             @PathVariable Integer fkCurso
@@ -144,6 +151,7 @@ public class MatriculaController {
     }
 
     @PutMapping("completar-matricula/{fkUsuario}/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<MatriculaResponseDto> completarMatricula(
             @PathVariable Integer fkUsuario,
             @PathVariable Integer fkCurso
@@ -170,6 +178,7 @@ public class MatriculaController {
     }
 
     @DeleteMapping("/{fkUsuario}/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity deletarMatricula(
             @PathVariable Integer fkUsuario,
             @PathVariable Integer fkCurso

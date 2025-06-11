@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ public class TentativaController {
     private final AvaliacaoService avaliacaoService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<TentativaResponseDto> cadastrarTentativa(
             @Valid @RequestBody TentativaRequestDto request
     ){
@@ -69,6 +71,7 @@ public class TentativaController {
     }
 
     @PostMapping("listar-por-usuario/{fkUsuario}/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<TentativaResponseDto>> listarTentativasPorUsuario(
             @PathVariable Integer fkUsuario,
             @PathVariable Integer fkCurso
@@ -99,6 +102,7 @@ public class TentativaController {
     }
 
     @PostMapping("listar-por-curso/{fkUsuario}/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<TentativaResponseDto>> listarTentativasPorCurso(
             @PathVariable Integer fkUsuario,
             @PathVariable Integer fkCurso

@@ -200,6 +200,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Autenticação de Usuário", description = "Autentica um usuário e retorna um token de acesso.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário autenticado com sucesso",

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ public class CargoController {
     private final CargoService cargoService;
 
     @GetMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Cargos", description = "Retorna a lista de todos os cargos disponíveis.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de cargos retornada com sucesso",
@@ -51,6 +53,7 @@ public class CargoController {
     }
 
     @PutMapping("/{id}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Atualizar Nome do Cargo", description = "Atualiza o nome de um cargo existente.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Nome do cargo atualizado com sucesso",

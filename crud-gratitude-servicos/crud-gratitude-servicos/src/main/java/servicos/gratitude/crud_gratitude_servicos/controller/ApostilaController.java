@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,7 @@ public class ApostilaController {
     private final CursoService cursoService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Cadastrar Apostila", description = "Cadastra uma nova apostila para um curso.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Apostila cadastrada com sucesso",
@@ -65,6 +67,7 @@ public class ApostilaController {
     }
 
     @GetMapping("/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     @Operation(summary = "Listar Apostilas por Curso", description = "Retorna a lista de todas as apostilas de um curso.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de apostilas retornada com sucesso",
@@ -91,6 +94,7 @@ public class ApostilaController {
     }
 
     @PutMapping("/atualizar-dados/{id}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<ApostilaResponseDto> atualizarDadosApostila(
             @Valid @RequestBody ApostilaUpdateDto update,
             @PathVariable Integer idApostila
@@ -109,6 +113,7 @@ public class ApostilaController {
     }
 
     @PutMapping("/atualizar-oculto/{id}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<ApostilaResponseDto> atualizarOcultoApostila(
             @PathVariable Integer idApostila
     ){
@@ -124,6 +129,7 @@ public class ApostilaController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity deletarApostila(
             @PathVariable Integer idApostila
     ){

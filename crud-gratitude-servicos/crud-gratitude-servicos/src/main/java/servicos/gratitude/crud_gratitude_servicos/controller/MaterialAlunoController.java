@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -35,6 +36,7 @@ public class MaterialAlunoController {
     private final MatriculaService matriculaService;
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<MaterialAlunoResponseDto> cadastrarMaterialAluno(
             @Valid @RequestBody MaterialAlunoRequestDto request
     ){
@@ -77,6 +79,7 @@ public class MaterialAlunoController {
     }
 
     @GetMapping("listar-por-matricula/{fkUsuario}/{fkCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<MaterialAlunoResponseDto>> listarMateriaisPorMatricula(
             @PathVariable Integer fkUsuario,
             @PathVariable Integer fkCurso
@@ -99,6 +102,7 @@ public class MaterialAlunoController {
     }
 
     @GetMapping("listar-por-matricula-e-finalizacao/{fkUsuario}/{fkCurso}/{isFinalizado}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<MaterialAlunoResponseDto>> listarMateriaisPorMatricula(
             @PathVariable Boolean isFinalizado,
             @PathVariable Integer fkUsuario,
@@ -122,6 +126,7 @@ public class MaterialAlunoController {
     }
 
     @PutMapping("atualizar-finalizado/{idMaterialAluno}/{idUsuario}/{idCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<MaterialAlunoResponseDto> atualizarFinalizado(
             @PathVariable Integer idMaterialAluno,
             @PathVariable Integer fkUsuario,
@@ -148,6 +153,7 @@ public class MaterialAlunoController {
     }
 
     @PutMapping("atualizar-ultimo-acesso/{idMaterialAuno}/{idUsuario}/{idCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<MaterialAlunoResponseDto> atualizarUltimoAcesso(
             @Valid @RequestBody MaterialAlunoUpdateDto update,
             @PathVariable Integer idMaterialAluno,
@@ -175,6 +181,7 @@ public class MaterialAlunoController {
     }
 
     @DeleteMapping("/{idMaterialAluno}/{idUsuario}/{idCurso}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity deletarMaterialAluno(
             @PathVariable Integer idMaterialAluno,
             @PathVariable Integer fkUsuario,

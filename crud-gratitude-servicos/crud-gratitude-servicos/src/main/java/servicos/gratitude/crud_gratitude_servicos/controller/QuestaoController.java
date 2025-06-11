@@ -1,5 +1,6 @@
 package servicos.gratitude.crud_gratitude_servicos.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Path;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ public class QuestaoController {
     private final AlternativaService alternativaService;
 
     @GetMapping
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<QuestaoResponseDto> cadastrarQuestao(
             @Valid @RequestBody QuestaoRequestDto request
     ){
@@ -69,6 +71,7 @@ public class QuestaoController {
     }
 
     @PostMapping("/{fkAvaliacao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<List<QuestaoResponseDto>> listarTodasPorAvaliacao(
             @PathVariable Integer fkAvaliacao
     ){
@@ -85,6 +88,7 @@ public class QuestaoController {
     }
 
     @PostMapping("/{fkAvaliacao}/{idQuestao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<QuestaoResponseDto> listarPorId(
             @PathVariable Integer fkAvaliacao,
             @PathVariable Integer idQuestao
@@ -102,6 +106,7 @@ public class QuestaoController {
     }
 
     @PutMapping("/{fkAvaliacao}/{idQuestao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<QuestaoResponseDto> atualizarQuestao(
             @PathVariable Integer fkAvaliacao,
             @PathVariable Integer idQuestao,
@@ -122,6 +127,7 @@ public class QuestaoController {
     }
 
     @PutMapping("definir-resposta/{fkAvaliacao}/{idQuestao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity<QuestaoResponseDto> definirResposta(
             @Valid @RequestBody QuestaoRespostaDto update,
             @PathVariable Integer fkAvaliacao,
@@ -149,6 +155,7 @@ public class QuestaoController {
     }
 
     @DeleteMapping("/{fkAvaliacao}/{idQuestao}")
+    @SecurityRequirement(name = "Bearer")
     public ResponseEntity deletarQuestao(
             @PathVariable Integer fkAvaliacao,
             @PathVariable Integer idQuestao
