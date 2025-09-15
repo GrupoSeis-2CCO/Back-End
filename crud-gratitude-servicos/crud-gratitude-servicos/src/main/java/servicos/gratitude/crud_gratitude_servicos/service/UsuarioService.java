@@ -28,9 +28,9 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     public Usuario cadastrar(Usuario usuario){
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }
-
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
