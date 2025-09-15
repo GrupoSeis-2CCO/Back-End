@@ -31,10 +31,11 @@ public class UsuarioAutenticationMapper {
     public static UsuarioTokenDto of(Usuario usuario, String token){
         UsuarioTokenDto usuarioTokenDTO = new UsuarioTokenDto();
 
-        usuarioTokenDTO.setIdUsuario(usuarioTokenDTO.getIdUsuario());
-        usuarioTokenDTO.setEmail(usuarioTokenDTO.getEmail());
-        usuarioTokenDTO.setNome(usuarioTokenDTO.getNome());
+        usuarioTokenDTO.setIdUsuario(usuario.getIdUsuario());
+        usuarioTokenDTO.setEmail(usuario.getEmail());
+        usuarioTokenDTO.setNome(usuario.getNome());
         usuarioTokenDTO.setToken(token);
+        usuarioTokenDTO.setIdCargo(usuario.getFkCargo().getIdCargo()); // Preencha o cargo/tipo aqui
 
         return usuarioTokenDTO;
     }
